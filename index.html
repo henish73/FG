@@ -293,53 +293,29 @@
 
                     // 2. Admin Email Notification & On-Page Confirmation (after a delay)
                     setTimeout(() => {
-                        modalFormMessage.innerHTML = '<p><i class="fas fa-envelope"></i> Finalizing your inquiry submission...</p>';
+                        modalFormMessage.innerHTML = '<p><i class="fas fa-spinner fa-spin"></i> Finalizing your inquiry submission...</p>';
 
-                        // Email to Admin ONLY
-                        const adminMailtoSubject = `Popup Inquiry & WhatsApp: ${userName}`;
-                        const adminMailtoBody = `New inquiry from the website popup modal:
+                        const formData = new FormData();
+                        formData.append('name', userName);
+                        formData.append('email', userEmail);
+                        formData.append('whatsappUrl', whatsappUrl); // Include the WhatsApp URL
 
-Name: ${userName}
-Email: ${userEmail}
+                        fetch('submit_popup_inquiry.php', {
+                            method: 'POST',
+                            body: formData
+                        })
+                        .then(response => response.json())
+                        .then(phpResponse => {
+                            let responseHTML = '';
+                            if (phpResponse.status === 'success') {
+                                responseHTML = `<p><i class="fas fa-check-circle text-success"></i> Thank you, ${userName}! You're connected on WhatsApp.</p>\n                                                   <p>Your inquiry has been successfully submitted to our database: ${phpResponse.message}</p>\n                                                   <p><small>You can expect a follow-up email from us (via our Hostinger system at ${adminEmailForPopup}) shortly.</small></p>`;\n                                \n                                // Attempt admin mailto as a secondary notification\n                                const adminMailtoSubject = \`DB ✔️ - Popup Inquiry & WhatsApp: \${userName}\`;
+                                const adminMailtoBody = \`New inquiry from popup (SAVED TO DATABASE):\n\nName: \${userName}\nEmail: \${userEmail}\n\nUser was directed to WhatsApp: \${whatsappUrl}\n\nACTION REQUIRED (Database record exists):\n- Check WhatsApp.\n- Follow up via email \${userEmail} as needed.\n- Ensure Hostinger email process runs.\`;
+                                const adminMailtoLink = \`mailto:\${adminEmailForPopup}?subject=\${encodeURIComponent(adminMailtoSubject)}&body=\${encodeURIComponent(adminMailtoBody)}\`;
+                                try { \n                                    window.open(adminMailtoLink, \'_blank\'); \n                                    responseHTML += '<p><small><i class="fas fa-info-circle"></i> Admin email draft opened (secondary notification). Data is in DB.</small></p>';\n                                } catch (e) { \n                                    console.warn('Admin mailto failed for popup'); \n                                    responseHTML += '<p><small class="text-warning"><i class="fas fa-exclamation-triangle"></i> Admin email draft failed to open. Data is in DB.</small></p>';\n                                }\n                                modalSubmitButton.innerHTML = '<i class="fas fa-check-double"></i> Inquiry Sent!';\n
+                            } else { // PHP script returned an error\n                                responseHTML = \`<p><i class="fas fa-exclamation-triangle text-danger"></i> Submission Error: \${phpResponse.message}</p>\n                                                   <p>You are connected on WhatsApp. Please also manually email us at \${adminEmailForPopup} if the issue persists.</p>\`;
+                                modalSubmitButton.innerHTML = '<i class="fas fa-info-circle"></i> Check WhatsApp / Email Us';\n                            }\n                            modalFormMessage.innerHTML = responseHTML;\n                            modalFormMessage.className = phpResponse.status === 'success' ? 'form-message-success prominent-feedback' : 'form-message-error';\n                        })\n                        .catch(error => {\n                            console.error('Fetch Error for popup inquiry:', error);\n                            modalFormMessage.innerHTML = '<p><i class="fas fa-server text-danger"></i> Network Error.</p><p>You are connected on WhatsApp. Please also manually email us at \${adminEmailForPopup} if the issue persists.</p>';\n                            modalFormMessage.className = 'form-message-error';\n                            modalSubmitButton.innerHTML = '<i class="fas fa-info-circle"></i> Check WhatsApp / Email Us';\n                        });\n
 
-This user has also been directed to WhatsApp for immediate chat (${whatsappUrl}).
-
-ACTION REQUIRED:
-- Check WhatsApp for a message from ${userName}.
-- Follow up via email (${userEmail}) if no WhatsApp contact or as needed.
-- Ensure user receives standard follow-up from Hostinger system.
-
---
-FRENCH.GTA Website Popup`;
-                        const adminMailtoLink = `mailto:${adminEmailForPopup}?subject=${encodeURIComponent(adminMailtoSubject)}&body=${encodeURIComponent(adminMailtoBody)}`;
-                        let adminEmailOpened = false;
-                        try {
-                            window.open(adminMailtoLink, '_blank');
-                            adminEmailOpened = true;
-                        } catch (e) {
-                            console.warn('Could not open admin mailto link', e);
-                            adminEmailOpened = false;
-                        }
-
-                        // On-Page Success Message for User
-                        let successMessageHTML = `<p><i class="fas fa-check-circle text-success"></i> Thank you, ${userName}! You're connected on WhatsApp.</p>
-                                                   <p>Your inquiry has been received. Our admin team has also been notified.</p>
-                                                   <p><small>You can expect a follow-up email from us (via our Hostinger system at ${adminEmailForPopup}) shortly. Please check your spam folder too!</small></p>`;
-                        if (adminEmailOpened) {
-                            successMessageHTML += '<p><small><i class="fas fa-info-circle"></i> An email draft to our admin has been prepared in your email client. Please click send if it opened.</small></p>';
-                        } else {
-                            successMessageHTML += '<p><small class="text-warning"><i class="fas fa-exclamation-triangle"></i> We couldn\'t auto-open an email draft for our admin, but your inquiry is still logged with us.</small></p>';
-                        }
-                        modalFormMessage.innerHTML = successMessageHTML;
-                        modalFormMessage.className = 'form-message-success prominent-feedback'; // Add a class for styling if needed
-                        modalSubmitButton.innerHTML = '<i class="fas fa-check-double"></i> Inquiry Sent!';
-                        // Keep button disabled
-                        // indexInquiryForm.reset(); // Optional: reset form fields
-
-                    }, 2500); // 2.5 second delay before trying to open admin email & showing final message
-                });
-            }
-            
+                    }, 2500); \n                });\n            }\n            
             if (demoModalCloseBtn) {
                 demoModalCloseBtn.addEventListener('click', () => {
                     if (demoModal) demoModal.style.display = 'none';

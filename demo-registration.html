@@ -352,86 +352,109 @@
             const dateDisplay = `${monthNames[month - 1]} ${day}, ${year}`;
             const displayTime = formatTimeForDisplay(data.time);
 
-            // Hide calendar and form, show confirmation
+            // Hide calendar and form, show initial confirmation message
             if(calendarInterface) calendarInterface.style.display = 'none';
             if(formSection) formSection.style.display = 'none';
-            if(timeSlotsEl) timeSlotsEl.style.display = 'none'; // Also hide time slots if they were separate
+            if(timeSlotsEl) timeSlotsEl.style.display = 'none';
 
             bookingSummaryEl.innerHTML = `
-                <h2><i class="fas fa-check-circle" style="color: var(--brand-success);"></i> Thank You, ${data.firstName}!</h2>
-                <p class="lead">Your demo class request has been received.</p>
-                <div class="booking-summary-details card">
-                    <h4>Booking Details:</h4>
-                    <p><strong>Name:</strong> ${data.firstName} ${data.lastName}</p>
-                    <p><strong>Email:</strong> ${data.email}</p>
-                    <p><strong>Date:</strong> ${dateDisplay}</p>
-                    <p><strong>Time:</strong> ${displayTime} (1 hour session)</p>
-                    <p><strong>Your Stated French Level:</strong> ${data.frenchLevel || 'Not specified'}</p>
-                    <p><strong>Notes:</strong> ${data.notes || 'None'}</p>
-                    <hr>
-                    <p><strong>Next Steps:</strong></p>
-                    <ol>
-                        <li>You will receive an <strong>official confirmation email</strong> from <strong>${ADMIN_EMAIL}</strong> (via our Hostinger system) with the <strong>Google Meet link</strong> and preparation tips within the next few hours.</li>
-                        <li>Please check your spam/junk folder if you don't see it.</li>
-                        <li>Our team has also been notified.</li>
-                    </ol>
-                </div>
+                <h2><i class="fas fa-spinner fa-spin"></i> Processing Your Booking...</h2>
+                <p class="lead">Please wait while we save your demo class request.</p>
             `;
             confirmationSection.style.display = 'block';
             confirmationSection.scrollIntoView({ behavior: 'smooth' });
 
-            // Admin Mailto Notification Logic
-            const adminSubject = `New Demo Booking: ${data.firstName} ${data.lastName} - ${dateDisplay} at ${displayTime}`;
-            const adminBody = `
-New Demo Class Booking:
+            // Prepare data for PHP script
+            const formData = new FormData();
+            formData.append('firstName', data.firstName);
+            formData.append('lastName', data.lastName);
+            formData.append('email', data.email);
+            formData.append('frenchLevel', data.frenchLevel);
+            formData.append('notes', data.notes || '');
+            formData.append('date', data.date); // Original YYYY-MM-DD from selectedDate
+            formData.append('time', data.time); // Original HH:MM from selectedTime
+            formData.append('googleMeetLink', GOOGLE_MEET_LINK); // Add the static Google Meet link
+
+            fetch('submit_demo_booking.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(phpResponse => {
+                let userMessageHTML = '';
+                if (phpResponse.status === 'success') {
+                    userMessageHTML = `
+                        <h2><i class="fas fa-check-circle" style="color: var(--brand-success);"></i> Thank You, ${data.firstName}!</h2>
+                        <p class="lead">Your demo class request has been successfully submitted!</p>
+                        <div class="booking-summary-details card">
+                            <h4>Booking Details:</h4>
+                            <p><strong>Name:</strong> ${data.firstName} ${data.lastName}</p>
+                            <p><strong>Email:</strong> ${data.email}</p>
+                            <p><strong>Date:</strong> ${dateDisplay}</p>
+                            <p><strong>Time:</strong> ${displayTime} (1 hour session)</p>
+                            <p><strong>Your Stated French Level:</strong> ${data.frenchLevel || 'Not specified'}</p>
+                            <p><strong>Notes:</strong> ${data.notes || 'None'}</p>
+                            <p><strong>Meet Link Ref:</strong> (Sent via email)</p>
+                            <hr>
+                            <p><strong>Next Steps:</strong></p>
+                            <ol>
+                                <li>You will receive an <strong>official confirmation email</strong> from <strong>${ADMIN_EMAIL}</strong> (via our Hostinger system) with the <strong>Google Meet link</strong> and preparation tips within the next few hours.</li>
+                                <li>Please check your spam/junk folder if you don't see it.</li>
+                                <li>Our team has also been notified via the database.</li>
+                            </ol>
+                        </div>
+                    `;
+
+                    // Admin Mailto Notification Logic (secondary)
+                    const adminSubject = `DB ✔️ - New Demo Booking: ${data.firstName} ${data.lastName} - ${dateDisplay} at ${displayTime}`;
+                    const adminBody = `
+New Demo Class Booking (SAVED TO DATABASE):
 ---------------------------------
 Name: ${data.firstName} ${data.lastName}
 Email: ${data.email}
 Requested Date: ${dateDisplay} (${data.date})
-Requested Time: ${displayTime} (EST)
+Requested Time: ${displayTime} (${data.time} EST)
 Selected Level: ${data.frenchLevel || 'Not specified'}
 Notes: ${data.notes || 'None'}
 ---------------------------------
 Google Meet Link for this demo: ${GOOGLE_MEET_LINK}
 ---------------------------------
-ACTION REQUIRED:
-1. Confirm this booking in your calendar.
-2. Ensure the student (${data.email}) receives the official HTML confirmation email (with Google Meet link, preparation tips, etc.) via the Hostinger email process.
-3. Log this booking.
+ACTION REQUIRED (Database record exists):
+1. Verify booking in admin panel / database.
+2. Ensure student (${data.email}) receives official HTML confirmation email via Hostinger process.
 
 --
-FRENCH.GTA Demo Booking System
-            `.trim();
+FRENCH.GTA Demo Booking System`.trim();
+                    const adminMailtoLink = `mailto:${ADMIN_EMAIL}?subject=${encodeURIComponent(adminSubject)}&body=${encodeURIComponent(adminBody)}`;
+                    try { window.open(adminMailtoLink, '_blank'); } catch (e) { console.warn('Admin mailto failed'); }
 
-            const adminMailtoLink = `mailto:${ADMIN_EMAIL}?subject=${encodeURIComponent(adminSubject)}&body=${encodeURIComponent(adminBody)}`;
-            const adminNotificationStatusEl = document.createElement('div');
-            adminNotificationStatusEl.style.marginTop = '15px';
-            adminNotificationStatusEl.style.padding = '10px';
-            adminNotificationStatusEl.style.borderLeft = '3px solid var(--brand-info)';
-            adminNotificationStatusEl.style.backgroundColor = '#eef6fc';
-            adminNotificationStatusEl.className = 'admin-notification-status';
+                } else { // PHP script returned an error
+                    userMessageHTML = `
+                        <h2><i class="fas fa-exclamation-triangle" style="color: var(--brand-danger);"></i> Booking Submission Failed</h2>
+                        <p class="lead">We encountered an error trying to save your booking: ${phpResponse.message}</p>
+                        <p>Please try booking again. If the problem persists, contact us directly at ${ADMIN_EMAIL} or via WhatsApp.</p>
+                        <div class="booking-summary-details card" style="opacity:0.7;">
+                            <h4>Your Attempted Booking:</h4>
+                            <p><strong>Name:</strong> ${data.firstName} ${data.lastName}</p>
+                            <p><strong>Date:</strong> ${dateDisplay}, <strong>Time:</strong> ${displayTime}</p>
+                        </div>
+                    `;
+                }
+                bookingSummaryEl.innerHTML = userMessageHTML;
+            })
+            .catch(error => {
+                console.error('Fetch Error for demo booking:', error);
+                bookingSummaryEl.innerHTML = `
+                    <h2><i class="fas fa-server" style="color: var(--brand-danger);"></i> Network Error</h2>
+                    <p class="lead">A network error occurred while trying to submit your booking. Please check your internet connection and try again.</p>
+                    <p>If the problem persists, contact us directly at ${ADMIN_EMAIL} or via WhatsApp.</p>
+                `;
+            });
 
-            try {
-                window.open(adminMailtoLink, '_blank');
-                adminNotificationStatusEl.innerHTML = `
-                    <p><i class="fas fa-info-circle"></i> An email draft to our admin (<strong>${ADMIN_EMAIL}</strong>) should have opened in your email client with your booking details.</p>
-                     <p><strong>Please click 'Send' in your email application to ensure our admin team receives it.</strong> Your booking is confirmed on our end as shown above regardless.</p>`;
-                
-            } catch (e) {
-                console.error('Could not open admin mailto link', e);
-                adminNotificationStatusEl.style.borderColor = 'var(--brand-warning)';
-                adminNotificationStatusEl.style.backgroundColor = '#fffbe6';
-                adminNotificationStatusEl.innerHTML = `
-                    <p><i class="fas fa-exclamation-triangle"></i> We couldn't automatically open an email draft for our admin. However, <strong>your booking request has been successfully recorded as shown above.</strong></p>
-                     <p>Our team will process it based on the information displayed. To be absolutely sure, you can manually email us at <strong>${ADMIN_EMAIL}</strong> with your booked slot details (Name, Date, Time).</p>`;
-            }
-            bookingSummaryEl.appendChild(adminNotificationStatusEl); // Append status below summary
-
-            // Clear form (optional, as it's hidden)
             document.getElementById('demoBookingForm').reset();
             selectedDate = null;
             selectedTime = null;
-            bookingData = null;
+            // bookingData is local to the submit event listener, no need to nullify here if it's not global for this function
         }
 
         function bookAnotherDemo() {
