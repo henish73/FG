@@ -261,34 +261,64 @@ document.addEventListener('DOMContentLoaded', function () {
         // --- Sticky Header Animation with Enhanced Error Handling ---
         let lastScrollTop = 0;
         let headerElement = null;
+        let headerAnimationEnabled = true;
+
+        function safeSetTransform(element, transformValue) {
+            try {
+                if (element && 
+                    element.style && 
+                    typeof element.style.transform !== 'undefined' &&
+                    element.isConnected !== false) {
+                    element.style.transform = transformValue;
+                    return true;
+                }
+            } catch (error) {
+                console.warn('Transform operation failed:', error);
+                headerAnimationEnabled = false;
+                return false;
+            }
+            return false;
+        }
 
         function initHeaderAnimation() {
-            headerElement = document.querySelector('header');
-            if (headerElement && headerElement.style) {
-                window.addEventListener('scroll', () => {
-                    try {
-                        // Re-check header element if it's null
-                        if (!headerElement || !headerElement.style) {
+            try {
+                headerElement = document.querySelector('header');
+                if (headerElement && headerElement.style && headerAnimationEnabled) {
+                    window.addEventListener('scroll', () => {
+                        try {
+                            // Re-check header element if it's null or disconnected
+                            if (!headerElement || 
+                                !headerElement.style || 
+                                headerElement.isConnected === false) {
+                                headerElement = document.querySelector('header');
+                                if (!headerElement || !headerElement.style) return;
+                            }
+
+                            if (!headerAnimationEnabled) return;
+
+                            let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+                            if (currentScroll > lastScrollTop) {
+                                // Scrolling Down
+                                safeSetTransform(headerElement, 'translateY(-100%)');
+                            } else {
+                                // Scrolling Up
+                                safeSetTransform(headerElement, 'translateY(0)');
+                            }
+                            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+                        } catch (error) {
+                            console.warn('Header scroll animation error:', error);
+                            // Disable animation if errors persist
+                            headerAnimationEnabled = false;
+                            // Try to reset header position
                             headerElement = document.querySelector('header');
-                            if (!headerElement || !headerElement.style) return;
+                            safeSetTransform(headerElement, 'translateY(0)');
                         }
-
-                        let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-
-                        if (currentScroll > lastScrollTop) {
-                            // Scrolling Down
-                            headerElement.style.transform = 'translateY(-100%)';
-                        } else {
-                            // Scrolling Up
-                            headerElement.style.transform = 'translateY(0)';
-                        }
-                        lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
-                    } catch (error) {
-                        console.warn('Header animation error:', error);
-                        // Try to re-initialize header reference
-                        headerElement = document.querySelector('header');
-                    }
-                }, { passive: true });
+                    }, { passive: true });
+                }
+            } catch (error) {
+                console.warn('Header animation initialization failed:', error);
+                headerAnimationEnabled = false;
             }
         }
 
@@ -297,8 +327,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Re-initialize after header is loaded
         setTimeout(() => {
+            headerAnimationEnabled = true;
             initHeaderAnimation();
         }, 1000);
+
+        // Additional re-initialization after longer delay for slow connections
+        setTimeout(() => {
+            headerAnimationEnabled = true;
+            initHeaderAnimation();
+        }, 3000);
 
         // --- Set current year in footer ---
         const currentYearSpan = document.getElementById('currentYear');
