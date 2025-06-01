@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refer a Friend | FRENCH.GTA</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+
+    <main class="main-content card">
+        <h1>Refer a Friend and Get $30 OFF!</h1>
+        <p>Share the gift of language! Refer a friend to FRENCH.GTA, and both you and your friend will receive a $30 discount on your next course enrollment.</p>
+        <h2>How It Works</h2>
+        <ol>
+            <li>Fill out the referral form below with your details and your friend's details.</li>
+            <li>We will contact your friend and invite them to join FRENCH.GTA.</li>
+            <li>When your friend enrolls in a course, both of you will receive a $30 discount on your next payment.</li>
+        </ol>
+        <h2>Referral Form</h2>
+        <form id="referralForm" class="form">
+            <div class="form-group">
+                <label for="your_name">Your Name:</label>
+                <input type="text" id="your_name" name="your_name" required>
+            </div>
+            <div class="form-group">
+                <label for="your_email">Your Email:</label>
+                <input type="email" id="your_email" name="your_email" required>
+            </div>
+            <div class="form-group">
+                <label for="friend_name">Friend's Name:</label>
+                <input type="text" id="friend_name" name="friend_name" required>
+            </div>
+            <div class="form-group">
+                <label for="friend_email">Friend's Email:</label>
+                <input type="email" id="friend_email" name="friend_email" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message to Your Friend (optional):</label>
+                <textarea id="message" name="message" placeholder="Hi! I thought you might be interested in learning French with me at FRENCH.GTA!"></textarea>
+            </div>
+            <button type="submit" class="cta-button">Send Referral</button>
+        </form>
+        <div id="referralResponse" class="response-message" style="margin-top: 1rem;"></div>
+        <p class="text-center" style="margin-top:2rem; font-size:0.95rem; color:#555;">We respect your privacy. Your friend's email will only be used to send this invitation and will not be added to any mailing list without their consent.</p>
+    </main>
+    <div id="footer-placeholder"></div>
+    <script>
+        const referralForm = document.getElementById('referralForm');
+        const referralResponse = document.getElementById('referralResponse');
+        const adminEmailAddress = 'frenchgta.ca@gmail.com'; // Admin email for referral notifications
+
+        if (referralForm) {
+            referralForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                if (!referralForm.checkValidity()) {
+                    referralForm.reportValidity();
+                    if (referralResponse) {
+                        referralResponse.textContent = 'Please fill out all required fields.';
+                        referralResponse.className = 'response-message text-danger';
+                    }
+                    return;
+                }
+
+                const yourName = referralForm.your_name.value;
+                const yourEmail = referralForm.your_email.value;
+                const friendName = referralForm.friend_name.value;
+                const friendEmail = referralForm.friend_email.value;
+                const messageToFriend = referralForm.message.value || `Hi ${friendName}! Your friend ${yourName} thought you might be interested in learning French with FRENCH.GTA. Check us out!`;
+
+                // Option 1: Mailto link for the admin to process the referral
+                let adminMailtoSubject = `New Referral: ${yourName} referred ${friendName}`;
+                let adminMailtoBody = `Referral Details:\n\n`;
+                adminMailtoBody += `Referrer Name: ${yourName}\n`;
+                adminMailtoBody += `Referrer Email: ${yourEmail}\n\n`;
+                adminMailtoBody += `Friend's Name: ${friendName}\n`;
+                adminMailtoBody += `Friend's Email: ${friendEmail}\n\n`;
+                adminMailtoBody += `Message to Friend (from ${yourName}):\n${messageToFriend}\n\n`;
+                adminMailtoBody += `Please process this referral and inform both parties about the discount upon friend's enrollment.`;
+
+                const adminMailtoLink = `mailto:${adminEmailAddress}` +
+                                 `?subject=${encodeURIComponent(adminMailtoSubject)}` +
+                                 `&body=${encodeURIComponent(adminMailtoBody)}`;
+
+                // Option 2: Mailto link for the referrer to email their friend (and CC admin)
+                // let friendMailtoSubject = `A French learning invitation from ${yourName}`;
+                // let friendMailtoBody = `${messageToFriend}\n\nLearn more at [Your Website Link]`; // Replace [Your Website Link]
+                // const friendMailtoLink = `mailto:${friendEmail}` +
+                //                  `?cc=${adminEmailAddress}` +
+                //                  `&subject=${encodeURIComponent(friendMailtoSubject)}` +
+                //                  `&body=${encodeURIComponent(friendMailtoBody)}`;
+
+                if (referralResponse) {
+                    // Using Option 1 (send to admin)
+                    referralResponse.innerHTML = 'Thank you for the referral! Please <a href="' + adminMailtoLink + '" target="_blank">click here to send the referral details to us</a>. We will contact your friend. If your email client does not open, please manually send the details to ' + adminEmailAddress + '.';
+                    // To use Option 2 (referrer emails friend, CCs admin):
+                    // referralResponse.innerHTML = 'Thank you! Please <a href="' + friendMailtoLink + '" target="_blank">click here to send an invitation to your friend</a> (we will be CC'd). If your email client does not open, please manually send an email to ' + friendEmail + ' (and CC ' + adminEmailAddress + ') with the message.';
+                    referralResponse.className = 'response-message text-success';
+                }
+                // referralForm.reset(); // Keep form data for user to see in email
+            });
+        }
+    </script>
+</body>
+</html> 

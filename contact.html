@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact FRENCH.GTA | Inquire About French Courses</title>
+    <meta name="description" content="Contact FRENCH.GTA to inquire about our French language courses, corporate training, or any other questions you may have. We're here to help!">
+    <meta name="keywords" content="contact FRENCH.GTA, inquiry form, French courses, corporate training, contact us, Toronto, GTA, French language school">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="img/french.gta logo.jpg" type="image/x-icon">
+    <script src="script.js" defer></script>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div id="header-placeholder"></div>
+
+    <main class="main-content contact-container">
+        <h1>Contact Us</h1>
+        <p>Have questions about our French courses, corporate training, or anything else? We'd love to hear from you!</p>
+
+        <form id="inquiryForm" class="form">
+            <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Your Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Your Phone</label>
+                <input type="text" id="phone" name="phone" placeholder="Enter your phone number">
+            </div>
+
+            <div class="form-group">
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" name="subject" placeholder="Enter the subject">
+            </div>
+
+            <div class="form-group">
+                <label for="level">Your Level</label>
+                <select id="level" name="level">
+                    <option value="Beginner">Beginner</option>
+                    <option value="Intermediate">Intermediate</option>
+                    <option value="Advanced">Advanced</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+            </div>
+
+            <button type="submit" class="cta-button">Submit</button>
+        </form>
+
+        <div id="responseMessage" class="response-message"></div>
+
+        <a href="https://wa.me/+13653062049?text=Hi%20FRENCH.GTA%2C%20I%20have%20a%20question%20about%20your%20services." 
+           target="_blank" class="cta-button">
+           Chat with us on WhatsApp
+        </a>
+    </main>
+
+    <section class="main-content card text-center" style="max-width: 600px; margin: 2rem auto;">
+        <h2>Other Ways to Contact Us</h2>
+        <p><strong>Phone:</strong> <a href="tel:+13653062049">+1-365-306-2049</a></p>
+        <p><strong>Email:</strong> <a href="mailto:frenchgta.ca@gmail.com">frenchgta.ca@gmail.com</a></p>
+        <p><strong>Address:</strong> 123 French GTA Street, Mississauga, Ontario, Canada</p>
+    </section>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+        const inquiryForm = document.getElementById('inquiryForm');
+        const responseMessage = document.getElementById('responseMessage');
+        const yourEmailAddress = 'frenchgta.ca@gmail.com'; // For mailto fallback/admin notification
+        const submitButton = inquiryForm ? inquiryForm.querySelector('button[type="submit"]') : null;
+
+        if (inquiryForm && submitButton) {
+            inquiryForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                const originalButtonText = submitButton.innerHTML;
+                submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+                submitButton.disabled = true;
+                responseMessage.innerHTML = ''; // Clear previous messages
+                responseMessage.className = 'response-message'; // Reset class
+
+                if (!inquiryForm.checkValidity()) {
+                    inquiryForm.reportValidity();
+                    responseMessage.innerHTML = '<i class="fas fa-exclamation-circle text-danger"></i> Please fill out all required fields.';
+                    responseMessage.className = 'response-message text-danger';
+                    submitButton.innerHTML = originalButtonText;
+                    submitButton.disabled = false;
+                    return;
+                }
+
+                const formData = new FormData(inquiryForm);
+                // FormData automatically picks up name, email, phone, subject, level, message from form inputs
+
+                fetch('submit_contact.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        responseMessage.innerHTML = `<p><i class="fas fa-check-circle text-success"></i> ${data.message}</p>` + 
+                                                  `<p>We will review your message and get back to you at <strong>${formData.get('email')}</strong> as soon as possible.</p>` +
+                                                  `<p><small>An official confirmation email will be sent from our system shortly.</small></p>`;
+                        responseMessage.className = 'response-message text-success prominent-feedback';
+                        inquiryForm.style.display = 'none'; // Hide form
+                        submitButton.innerHTML = '<i class="fas fa-check"></i> Submitted Successfully!';
+                        // Keep button disabled
+
+                        // Attempt admin mailto as a secondary notification
+                        const name = formData.get('name');
+                        const email = formData.get('email');
+                        const phone = formData.get('phone');
+                        const subjectText = formData.get('subject');
+                        const level = formData.get('level');
+                        const messageText = formData.get('message');
+                        
+                        let adminMailtoSubject = `DB ✔️ - Contact Inquiry: ${subjectText || 'General Inquiry'} from ${name}`;
+                        let adminMailtoBody = `A new inquiry has been submitted AND SAVED TO DATABASE:\n\nDETAILS:\n--------------------------\nName: ${name}\nEmail: ${email}\nPhone: ${phone || 'Not provided'}\nSelected Level: ${level || 'Not specified'}\nSubject: ${subjectText || 'N/A'}\n--------------------------\nMESSAGE:\n${messageText}\n--------------------------\nACTION REQUIRED (Database record exists):\n- Follow up with ${name} at ${email}.\n- Ensure official HTML confirmation email is sent to user via Hostinger process.\n\n--\nFRENCH.GTA Website`;
+                        const adminMailtoLink = `mailto:${yourEmailAddress}` +
+                                                 `?subject=${encodeURIComponent(adminMailtoSubject)}` +
+                                                 `&body=${encodeURIComponent(adminMailtoBody)}`;
+                        try {
+                            window.open(adminMailtoLink, '_blank');
+                            const adminMailtoNote = document.createElement('p');
+                            adminMailtoNote.innerHTML = '<small style="margin-top:10px; display:block;"><i class="fas fa-info-circle"></i> An email draft to our admin (for secondary notification) should have opened. Your data IS saved in the database.</small>';
+                            responseMessage.appendChild(adminMailtoNote);
+                        } catch (error) { /* Silently fail on mailto if needed, data is saved */ }
+
+                    } else {
+                        responseMessage.innerHTML = `<i class="fas fa-exclamation-triangle text-danger"></i> Error: ${data.message}` + 
+                                                  `<p><small>If the problem persists, please contact us directly via WhatsApp or the email address below.</small></p>`;
+                        responseMessage.className = 'response-message text-danger';
+                        submitButton.innerHTML = originalButtonText; // Restore button to allow re-try
+                        submitButton.disabled = false;
+                    }
+                })
+                .catch(error => {
+                    console.error('Fetch Error:', error);
+                    responseMessage.innerHTML = '<i class="fas fa-server text-danger"></i> A network error occurred. Please check your connection and try again.' + 
+                                              '<p><small>If the problem persists, please contact us directly.</small></p>';
+                    responseMessage.className = 'response-message text-danger';
+                    submitButton.innerHTML = originalButtonText;
+                    submitButton.disabled = false;
+                });
+            });
+        }
+    </script>
+</body>
+</html>
