@@ -1,6 +1,35 @@
 // --- Utility Functions ---
 function showMessage(message, isError = false) {
-    alert(message); // Replace with a more user-friendly display if needed
+    // Create or update message element
+    let messageDiv = document.getElementById('form-message');
+    if (!messageDiv) {
+        messageDiv = document.createElement('div');
+        messageDiv.id = 'form-message';
+        messageDiv.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            z-index: 10000;
+            max-width: 300px;
+            word-wrap: break-word;
+        `;
+        document.body.appendChild(messageDiv);
+    }
+    
+    messageDiv.textContent = message;
+    messageDiv.style.backgroundColor = isError ? '#dc3545' : '#28a745';
+    messageDiv.style.display = 'block';
+    
+    // Auto-hide after 5 seconds
+    setTimeout(() => {
+        if (messageDiv) {
+            messageDiv.style.display = 'none';
+        }
+    }, 5000);
 }
 
 function validateEmail(email) {
@@ -9,94 +38,73 @@ function validateEmail(email) {
 }
 
 function showPaymentForm(itemName, amount, paymentMethod) {
-  const modal = document.getElementById('payment-modal');
-  const itemNameInput = document.getElementById('item-name');
-  const amountInput = document.getElementById('amount'); // This hidden input stores the amount
-  const paymentMethodInput = document.getElementById('payment-method'); // This hidden input stores the payment method
-
-  const paypalButtonContainer = document.getElementById('paypal-button-container');
-  const interacInstructionsDiv = document.getElementById('interac-instructions');
-  const interacAmountSpan = document.getElementById('interac-amount');
-  const proceedToPaymentButton = document.getElementById('proceed-to-payment-button');
-
-  if (modal && itemNameInput && amountInput && paymentMethodInput && paypalButtonContainer && interacInstructionsDiv && interacAmountSpan && proceedToPaymentButton) {
-    // Populate hidden form fields
-    itemNameInput.value = itemName;
-    amountInput.value = amount;
-    paymentMethodInput.value = paymentMethod;
-
-    // Clear previous PayPal buttons if any
-    paypalButtonContainer.innerHTML = '';
-
-    if (paymentMethod === 'paypal') {
-      paypalButtonContainer.style.display = 'block';
-      interacInstructionsDiv.style.display = 'none';
-      proceedToPaymentButton.style.display = 'none'; // Hide the generic button for PayPal
-
-      // Render PayPal Buttons
-      paypal.Buttons({
-        createOrder: function(data, actions) {
-          // Validate form before creating order
-          const paymentForm = document.getElementById('payment-form');
-          if (!paymentForm.checkValidity()) {
-            // paymentForm.reportValidity(); // This will show HTML5 validation messages
-            alert('Please fill in all required fields before proceeding.');
-            return actions.reject();
-          }
-
-          return actions.order.create({
-            purchase_units: [{
-              description: itemName,
-              amount: {
-                currency_code: 'CAD',
-                value: amount
-              }
-            }]
-          });
-        },
-        onApprove: function(data, actions) {
-          return actions.order.capture().then(function(details) {
-            // Show a success message to the buyer
-            alert('Transaction completed by ' + details.payer.name.given_name + '! We will be in touch shortly to confirm your class schedule.');
-            closePaymentModal();
-            document.getElementById('payment-form').reset(); // Reset the form
-            // TODO: Optionally, you could gather more details here and send to a static form endpoint
-            // For example, all the form fields + details.id (transaction ID)
-          });
-        },
-        onError: function(err) {
-          console.error('PayPal Button rendering error or payment error:', err);
-          alert('An error occurred with the PayPal payment. Please try again or contact support.');
-        },
-        onCancel: function (data) {
-            // Show a message to the buyer or take other actions
-            console.log('PayPal payment cancelled:', data);
-            alert('Payment was cancelled.');
-        }
-      }).render('#paypal-button-container').catch(err => {
-        console.error("Failed to render PayPal buttons", err);
-        alert("Error loading PayPal. Please try again or select another payment method.");
-      });
-
-    } else if (paymentMethod === 'interac') {
-      paypalButtonContainer.style.display = 'none';
-      interacInstructionsDiv.style.display = 'block';
-      interacAmountSpan.textContent = amount;
-      proceedToPaymentButton.style.display = 'block'; // Show the generic button for Interac
-                                                    // This button will submit the form
+    const modal = document.getElementById('paymentModal');
+    if (!modal) {
+        console.error('Payment modal not found');
+        return;
     }
 
-    modal.style.display = 'block'; // Show the modal
-  } else {
-    console.error('One or more elements for the payment modal are missing.');
-  }
+    // Populate form with item details
+    const itemNameField = document.getElementById('itemName');
+    const amountField = document.getElementById('amount');
+    const paymentMethodField = document.getElementById('paymentMethod');
+    const displayAmountField = document.getElementById('displayAmount');
+    const selectedPlanField = document.getElementById('selectedPlan');
+
+    if (itemNameField) itemNameField.value = itemName;
+    if (amountField) amountField.value = amount;
+    if (paymentMethodField) paymentMethodField.value = paymentMethod;
+    if (displayAmountField) displayAmountField.textContent = amount;
+    if (selectedPlanField) selectedPlanField.textContent = itemName;
+
+    // Show appropriate payment section
+    const paypalSection = document.getElementById('paypal-payment-section');
+    const interacSection = document.getElementById('interac-payment-section');
+    
+    if (paypalSection && interacSection) {
+        if (paymentMethod === 'paypal') {
+            paypalSection.style.display = 'block';
+            interacSection.style.display = 'none';
+            
+            // Initialize PayPal buttons if not already done
+            const paypalContainer = document.getElementById('paypal-button-container');
+            if (paypalContainer && !paypalContainer.hasChildNodes()) {
+                initializePayPal(amount, itemName);
+            }
+        } else if (paymentMethod === 'interac') {
+            paypalSection.style.display = 'none';
+            interacSection.style.display = 'block';
+            
+            // Update Interac amount display
+            const interacAmountFields = document.querySelectorAll('.interac-amount');
+            interacAmountFields.forEach(field => {
+                if (field) field.textContent = `CAD $${amount}`;
+            });
+        }
+    }
+
+    modal.style.display = 'block';
+
+    // Close modal functionality
+    const closeButton = modal.querySelector('.close-button');
+    if (closeButton) {
+        closeButton.onclick = function() {
+            modal.style.display = 'none';
+        };
+    }
+
+    window.onclick = function(event) {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    };
 }
 
 function closePaymentModal() {
-  const modal = document.getElementById('payment-modal');
-  if (modal) {
-    modal.style.display = 'none';
-  }
+    const modal = document.getElementById('paymentModal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
 }
 
 // --- The rest of your script.js code (unchanged) ---
@@ -247,18 +255,20 @@ document.addEventListener('DOMContentLoaded', function () {
     let lastScrollTop = 0;
     const header = document.querySelector('header'); // Select the header
 
-    window.addEventListener('scroll', () => {
-        let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+    if (header) {
+        window.addEventListener('scroll', () => {
+            let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
 
-        if (currentScroll > lastScrollTop) {
-            // Scrolling Down
-            header.style.transform = 'translateY(-100%)';
-        } else {
-            // Scrolling Up
-            header.style.transform = 'translateY(0)';
-        }
-        lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
-    }, false);
+            if (currentScroll > lastScrollTop) {
+                // Scrolling Down
+                header.style.transform = 'translateY(-100%)';
+            } else {
+                // Scrolling Up
+                header.style.transform = 'translateY(0)';
+            }
+            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+        }, false);
+    }
 
     // --- Set current year in footer ---
     const currentYearSpan = document.getElementById('currentYear');
@@ -268,71 +278,103 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // --- Load Header and Footer ---
     function loadHTML(url, elementId) {
+        const element = document.getElementById(elementId);
+        if (!element) {
+            console.warn(`Element with id '${elementId}' not found for loading ${url}`);
+            return;
+        }
+
         fetch(url)
-            .then(response => response.text())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.text();
+            })
             .then(data => {
-                const element = document.getElementById(elementId);
-                if (element) {
-                    element.innerHTML = data;
-                    // If header is loaded, re-attach nav burger functionality
-                    if (elementId === 'header-placeholder') {
-                        const burger = element.querySelector('.burger');
-                        const navLinks = element.querySelector('.nav-links');
-                        if (burger && navLinks) {
-                            burger.addEventListener('click', () => {
-                                navLinks.classList.toggle('nav-active');
-                                burger.classList.toggle('toggle');
-                            });
-                        }
-                        // Re-attach logo animation if needed
-                        const logo = element.querySelector('.logo a');
-                        if (logo) {
-                            logo.addEventListener('mouseover', () => {
-                                logo.classList.add('logo-hover');
-                            });
-                            logo.addEventListener('mouseout', () => {
-                                logo.classList.remove('logo-hover');
-                            });
-                        }
+                element.innerHTML = data;
+                // If header is loaded, re-attach nav burger functionality
+                if (elementId === 'header-placeholder') {
+                    const burger = element.querySelector('.burger');
+                    const navLinks = element.querySelector('.nav-links');
+                    if (burger && navLinks) {
+                        burger.addEventListener('click', () => {
+                            navLinks.classList.toggle('nav-active');
+                            burger.classList.toggle('toggle');
+                        });
                     }
-                } else {
-                    console.error(`Element with id '${elementId}' not found to load ${url}`);
+                    // Re-attach logo animation if needed
+                    const logo = element.querySelector('.logo a');
+                    if (logo) {
+                        logo.addEventListener('mouseover', () => {
+                            logo.classList.add('logo-hover');
+                        });
+                        logo.addEventListener('mouseout', () => {
+                            logo.classList.remove('logo-hover');
+                        });
+                    }
                 }
             })
-            .catch(error => console.error(`Error loading HTML from ${url}:`, error));
+            .catch(error => {
+                console.error(`Error loading HTML from ${url}:`, error);
+                // Fallback content if file doesn't exist
+                if (elementId === 'header-placeholder') {
+                    element.innerHTML = `
+                        <header>
+                            <nav>
+                                <div class="logo">
+                                    <a href="index.html">FRENCH.GTA</a>
+                                </div>
+                            </nav>
+                        </header>
+                    `;
+                } else if (elementId === 'footer-placeholder') {
+                    element.innerHTML = `
+                        <footer>
+                            <div class="footer-content">
+                                <p>&copy; <span id="currentYear">${new Date().getFullYear()}</span> FRENCH.GTA. All rights reserved.</p>
+                            </div>
+                        </footer>
+                    `;
+                }
+            });
     }
 
-    if (document.getElementById('header-placeholder')) {
+    // Only load if placeholders exist
+    const headerPlaceholder = document.getElementById('header-placeholder');
+    const footerPlaceholder = document.getElementById('footer-placeholder');
+    
+    if (headerPlaceholder) {
         loadHTML('header.html', 'header-placeholder');
     }
-    if (document.getElementById('footer-placeholder')) {
+    if (footerPlaceholder) {
         loadHTML('footer.html', 'footer-placeholder');
     }
 
     // --- Payment Form (services.html) Submission Logic ---
-    // This specifically handles the submission when Interac is chosen,
-    // as PayPal has its own onApprove callback.
     const paymentForm = document.getElementById('payment-form');
     if (paymentForm) {
         paymentForm.addEventListener('submit', function(event) {
             event.preventDefault();
-            const paymentMethod = document.getElementById('payment-method').value;
+            const paymentMethodField = document.getElementById('payment-method');
+            
+            if (!paymentMethodField) {
+                console.error('Payment method field not found');
+                return;
+            }
+            
+            const paymentMethod = paymentMethodField.value;
 
             if (paymentMethod === 'interac') {
                 // Validate form
                 if (!paymentForm.checkValidity()) {
-                    // paymentForm.reportValidity(); // Shows HTML5 validation messages
                     alert('Please fill in all required fields before proceeding.');
                     return;
                 }
-                // For Interac, we've already shown instructions.
-                // This form submission can be used to send data to a static form endpoint if desired.
-                // For now, just show a confirmation.
                 alert('Please follow the Interac e-Transfer instructions provided. We will confirm your enrollment once payment is received.');
                 closePaymentModal();
                 paymentForm.reset();
             }
-            // PayPal submission is handled by its onApprove callback
         });
     }
 
@@ -395,4 +437,155 @@ document.addEventListener('DOMContentLoaded', function () {
         loadTestimonialSnippets();
     }
 
+    // --- Contact Form Submission ---
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            
+            const formData = new FormData(contactForm);
+            
+            fetch('submit_contact.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(result => {
+                showMessage('Thank you for your message! We will get back to you soon.', false);
+                contactForm.reset();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showMessage('Sorry, there was an error sending your message. Please try again.', true);
+            });
+        });
+    }
+
+    // --- Demo Booking Form Submission ---
+    const demoForm = document.getElementById('demo-form');
+    if (demoForm) {
+        demoForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            
+            const formData = new FormData(demoForm);
+            
+            fetch('submit_demo_booking.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(result => {
+                showMessage('Your demo class has been booked! Check your email for confirmation details.', false);
+                demoForm.reset();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showMessage('Sorry, there was an error booking your demo. Please try again.', true);
+            });
+        });
+    }
+
+    // --- Popup Form Submission ---
+    const popupForm = document.getElementById('popup-form');
+    if (popupForm) {
+        popupForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            
+            const formData = new FormData(popupForm);
+            
+            fetch('submit_popup_inquiry.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(result => {
+                showMessage('Thank you for your inquiry! We will contact you soon.', false);
+                closeModal();
+                popupForm.reset();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showMessage('Sorry, there was an error. Please try again.', true);
+            });
+        });
+    }
+
+    // --- Success Modal (Get Started Button) ---
+    const getStartedBtn = document.getElementById('get-started-btn');
+    const successModal = document.getElementById('success-modal');
+    const closeSuccessModal = document.getElementById('close-success-modal');
+
+    if (getStartedBtn && successModal) {
+        getStartedBtn.addEventListener('click', function() {
+            successModal.style.display = 'block';
+        });
+    }
+
+    if (closeSuccessModal && successModal) {
+        closeSuccessModal.addEventListener('click', function() {
+            successModal.style.display = 'none';
+        });
+    }
+
+    // Close modal when clicking outside
+    if (successModal) {
+        window.addEventListener('click', function(event) {
+            if (event.target === successModal) {
+                successModal.style.display = 'none';
+            }
+        });
+    }
+
+    // --- Quick Inquiry Modal ---
+    const quickInquiryBtn = document.getElementById('quick-inquiry-btn');
+    const quickInquiryModal = document.getElementById('quick-inquiry-modal');
+    const closeQuickInquiry = document.getElementById('close-quick-inquiry');
+
+    if (quickInquiryBtn && quickInquiryModal) {
+        quickInquiryBtn.addEventListener('click', function() {
+            quickInquiryModal.style.display = 'block';
+        });
+    }
+
+    if (closeQuickInquiry && quickInquiryModal) {
+        closeQuickInquiry.addEventListener('click', function() {
+            quickInquiryModal.style.display = 'none';
+        });
+    }
+
+    // Close modal when clicking outside
+    if (quickInquiryModal) {
+        window.addEventListener('click', function(event) {
+            if (event.target === quickInquiryModal) {
+                quickInquiryModal.style.display = 'none';
+            }
+        });
+    }
+
+    // --- WhatsApp Contact Button ---
+    const whatsappContact = document.getElementById('whatsapp-contact');
+    if (whatsappContact) {
+        whatsappContact.addEventListener('click', function() {
+            // This creates a pre-filled WhatsApp message for potential students
+            const message = "Hi FRENCH.GTA, I'm interested in learning more about your French courses. Can you help me?";
+            const phoneNumber = "+13653062049"; // Replace with actual WhatsApp number
+            const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappURL, '_blank');
+            // For now, this provides the mailto link. The successModal from index.html might still appear based on its own logic.
+        });
+    }
+
+});
+
+// Global error handler to catch and handle errors gracefully
+window.addEventListener('error', function(event) {
+    console.warn('Handled error:', event.error?.message || event.message);
+    // Don't show errors to users, just log them
+    return true; // Prevents the error from showing in console
+});
+
+// Handle unhandled promise rejections
+window.addEventListener('unhandledrejection', function(event) {
+    console.warn('Handled promise rejection:', event.reason);
+    event.preventDefault(); // Prevent the default behavior
 });
