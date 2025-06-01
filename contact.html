@@ -3,92 +3,249 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact FRENCH.GTA | Inquire About French Courses</title>
+    <title>Contact FRENCH.GTA | Get Your French Learning Questions Answered</title>
     <meta name="description" content="Contact FRENCH.GTA to inquire about our French language courses, corporate training, or any other questions you may have. We're here to help!">
     <meta name="keywords" content="contact FRENCH.GTA, inquiry form, French courses, corporate training, contact us, Toronto, GTA, French language school">
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="img/french.gta logo.jpg" type="image/x-icon">
     <script src="script.js" defer></script>
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <div id="header-placeholder"></div>
 
-    <main class="main-content contact-container">
-        <h1>Contact Us</h1>
-        <p>Have questions about our French courses, corporate training, or anything else? We'd love to hear from you!</p>
-
-        <form id="inquiryForm" class="form">
-            <div class="form-group">
-                <label for="name">Your Name</label>
-                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="contact-hero">
+            <div class="hero-content">
+                <h1>💬 Let's Talk About Your French Goals</h1>
+                <p class="hero-subtitle">Have questions? Ready to start? We're here to help you succeed.</p>
+                
+                <div class="quick-contact-options">
+                    <a href="tel:+13653062049" class="quick-contact-btn">
+                        <i class="fas fa-phone"></i>
+                        <span>Call Now</span>
+                        <small>+1-365-306-2049</small>
+                    </a>
+                    <a href="https://wa.me/+13653062049?text=Hi%20FRENCH.GTA%2C%20I%20have%20a%20question%20about%20your%20services." target="_blank" class="quick-contact-btn">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>WhatsApp</span>
+                        <small>Instant response</small>
+                    </a>
+                    <a href="mailto:frenchgta.ca@gmail.com" class="quick-contact-btn">
+                        <i class="fas fa-envelope"></i>
+                        <span>Email</span>
+                        <small>frenchgta.ca@gmail.com</small>
+                    </a>
+                </div>
             </div>
+        </section>
 
-            <div class="form-group">
-                <label for="email">Your Email</label>
-                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        <!-- Contact Form Section -->
+        <section class="contact-form-section">
+            <div class="form-container">
+                <div class="form-header">
+                    <h2>📝 Send Us a Message</h2>
+                    <p>Fill out the form below and we'll get back to you within 24 hours</p>
+                </div>
+
+                <form id="inquiryForm" class="professional-form">
+                    <div class="form-grid">
+                        <!-- Left Column -->
+                        <div class="form-column">
+                            <div class="input-group">
+                                <label for="name">
+                                    <i class="fas fa-user"></i>
+                                    Full Name *
+                                </label>
+                                <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="email">
+                                    <i class="fas fa-envelope"></i>
+                                    Email Address *
+                                </label>
+                                <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="phone">
+                                    <i class="fas fa-phone"></i>
+                                    Phone Number
+                                </label>
+                                <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567">
+                            </div>
+                        </div>
+
+                        <!-- Right Column -->
+                        <div class="form-column">
+                            <div class="input-group">
+                                <label for="subject">
+                                    <i class="fas fa-tag"></i>
+                                    Inquiry Type *
+                                </label>
+                                <select id="subject" name="subject" required>
+                                    <option value="">Choose your inquiry type</option>
+                                    <option value="Course Information">Course Information</option>
+                                    <option value="Pricing & Plans">Pricing & Plans</option>
+                                    <option value="Demo Class">Demo Class Booking</option>
+                                    <option value="TEF Preparation">TEF Preparation</option>
+                                    <option value="Corporate Training">Corporate Training</option>
+                                    <option value="Technical Support">Technical Support</option>
+                                    <option value="General Question">General Question</option>
+                                </select>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="level">
+                                    <i class="fas fa-chart-line"></i>
+                                    Current French Level
+                                </label>
+                                <select id="level" name="level">
+                                    <option value="">Select your level</option>
+                                    <option value="Complete Beginner">Complete Beginner (A0)</option>
+                                    <option value="Beginner">Beginner (A1-A2)</option>
+                                    <option value="Intermediate">Intermediate (B1-B2)</option>
+                                    <option value="Advanced">Advanced (C1-C2)</option>
+                                    <option value="Not Sure">Not Sure - Need Assessment</option>
+                                </select>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="timeline">
+                                    <i class="fas fa-clock"></i>
+                                    When do you want to start?
+                                </label>
+                                <select id="timeline" name="timeline">
+                                    <option value="">Select timeframe</option>
+                                    <option value="Immediately">Immediately</option>
+                                    <option value="Within 1 week">Within 1 week</option>
+                                    <option value="Within 1 month">Within 1 month</option>
+                                    <option value="Within 3 months">Within 3 months</option>
+                                    <option value="Just exploring">Just exploring options</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Full Width Message -->
+                    <div class="input-group full-width">
+                        <label for="message">
+                            <i class="fas fa-comment-dots"></i>
+                            Your Message *
+                        </label>
+                        <textarea id="message" name="message" placeholder="Tell us about your French learning goals, any specific questions you have, or how we can help you..." rows="5" required></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i>
+                            Send Message
+                        </button>
+                        <p class="form-note">
+                            <i class="fas fa-shield-check"></i>
+                            Your information is secure and will never be shared
+                        </p>
+                    </div>
+                </form>
+
+                <div id="responseMessage" class="response-message"></div>
             </div>
+        </section>
 
-            <div class="form-group">
-                <label for="phone">Your Phone</label>
-                <input type="text" id="phone" name="phone" placeholder="Enter your phone number">
+        <!-- Additional Contact Methods -->
+        <section class="contact-methods">
+            <div class="container">
+                <h2>💝 Other Ways to Connect With Us</h2>
+                
+                <div class="contact-grid">
+                    <div class="contact-method">
+                        <div class="method-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <h3>Call Us</h3>
+                        <p>Speak directly with our team</p>
+                        <a href="tel:+13653062049" class="method-link">+1-365-306-2049</a>
+                        <small>Mon-Fri: 9AM-7PM EST</small>
+                    </div>
+
+                    <div class="contact-method">
+                        <div class="method-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <h3>WhatsApp</h3>
+                        <p>Quick questions & instant support</p>
+                        <a href="https://wa.me/+13653062049?text=Hi%20FRENCH.GTA%2C%20I%20have%20a%20question%20about%20your%20services." target="_blank" class="method-link">Message Us</a>
+                        <small>Usually respond within minutes</small>
+                    </div>
+
+                    <div class="contact-method">
+                        <div class="method-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3>Email</h3>
+                        <p>Detailed inquiries & documentation</p>
+                        <a href="mailto:frenchgta.ca@gmail.com" class="method-link">frenchgta.ca@gmail.com</a>
+                        <small>Response within 24 hours</small>
+                    </div>
+
+                    <div class="contact-method">
+                        <div class="method-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <h3>Free Demo</h3>
+                        <p>Experience our teaching style</p>
+                        <a href="demo-registration.html" class="method-link">Book Demo Class</a>
+                        <small>No commitment required</small>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <div class="form-group">
-                <label for="subject">Subject</label>
-                <input type="text" id="subject" name="subject" placeholder="Enter the subject">
+        <!-- FAQ Quick Answers -->
+        <section class="quick-faq">
+            <div class="container">
+                <h2>❓ Quick Answers to Common Questions</h2>
+                
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <h4>How quickly can I start learning?</h4>
+                        <p>You can start as early as tomorrow! We offer flexible scheduling and can accommodate urgent needs.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>Do you offer trial classes?</h4>
+                        <p>Yes! We offer FREE demo classes so you can experience our teaching style before committing.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>What if I'm a complete beginner?</h4>
+                        <p>Perfect! Most of our students start as complete beginners. Our A1-A2 program is designed specifically for you.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>How much do courses cost?</h4>
+                        <p>Our programs start at $179/month. <a href="services.html#plans">View all pricing options →</a></p>
+                    </div>
+                </div>
             </div>
-
-            <div class="form-group">
-                <label for="level">Your Level</label>
-                <select id="level" name="level">
-                    <option value="Beginner">Beginner</option>
-                    <option value="Intermediate">Intermediate</option>
-                    <option value="Advanced">Advanced</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="message">Message:</label>
-                <textarea id="message" name="message" placeholder="Your Message" required></textarea>
-            </div>
-
-            <button type="submit" class="cta-button">Submit</button>
-        </form>
-
-        <div id="responseMessage" class="response-message"></div>
-
-        <a href="https://wa.me/+13653062049?text=Hi%20FRENCH.GTA%2C%20I%20have%20a%20question%20about%20your%20services." 
-           target="_blank" class="cta-button">
-           Chat with us on WhatsApp
-        </a>
+        </section>
     </main>
-
-    <section class="main-content card text-center" style="max-width: 600px; margin: 2rem auto;">
-        <h2>Other Ways to Contact Us</h2>
-        <p><strong>Phone:</strong> <a href="tel:+13653062049">+1-365-306-2049</a></p>
-        <p><strong>Email:</strong> <a href="mailto:frenchgta.ca@gmail.com">frenchgta.ca@gmail.com</a></p>
-        <p><strong>Address:</strong> 123 French GTA Street, Mississauga, Ontario, Canada</p>
-    </section>
 
     <div id="footer-placeholder"></div>
 
     <script>
         const inquiryForm = document.getElementById('inquiryForm');
         const responseMessage = document.getElementById('responseMessage');
-        const yourEmailAddress = 'frenchgta.ca@gmail.com'; // For mailto fallback/admin notification
+        const yourEmailAddress = 'frenchgta.ca@gmail.com';
         const submitButton = inquiryForm ? inquiryForm.querySelector('button[type="submit"]') : null;
 
         if (inquiryForm && submitButton) {
             inquiryForm.addEventListener('submit', function(event) {
                 event.preventDefault();
                 const originalButtonText = submitButton.innerHTML;
-                submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+                submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
                 submitButton.disabled = true;
-                responseMessage.innerHTML = ''; // Clear previous messages
-                responseMessage.className = 'response-message'; // Reset class
+                responseMessage.innerHTML = '';
+                responseMessage.className = 'response-message';
 
                 if (!inquiryForm.checkValidity()) {
                     inquiryForm.reportValidity();
@@ -100,7 +257,6 @@
                 }
 
                 const formData = new FormData(inquiryForm);
-                // FormData automatically picks up name, email, phone, subject, level, message from form inputs
 
                 fetch('submit_contact.php', {
                     method: 'POST',
@@ -109,46 +265,35 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.status === 'success') {
-                        responseMessage.innerHTML = `<p><i class="fas fa-check-circle text-success"></i> ${data.message}</p>` + 
-                                                  `<p>We will review your message and get back to you at <strong>${formData.get('email')}</strong> as soon as possible.</p>` +
-                                                  `<p><small>An official confirmation email will be sent from our system shortly.</small></p>`;
-                        responseMessage.className = 'response-message text-success prominent-feedback';
-                        inquiryForm.style.display = 'none'; // Hide form
-                        submitButton.innerHTML = '<i class="fas fa-check"></i> Submitted Successfully!';
-                        // Keep button disabled
-
-                        // Attempt admin mailto as a secondary notification
-                        const name = formData.get('name');
-                        const email = formData.get('email');
-                        const phone = formData.get('phone');
-                        const subjectText = formData.get('subject');
-                        const level = formData.get('level');
-                        const messageText = formData.get('message');
-                        
-                        let adminMailtoSubject = `DB ✔️ - Contact Inquiry: ${subjectText || 'General Inquiry'} from ${name}`;
-                        let adminMailtoBody = `A new inquiry has been submitted AND SAVED TO DATABASE:\n\nDETAILS:\n--------------------------\nName: ${name}\nEmail: ${email}\nPhone: ${phone || 'Not provided'}\nSelected Level: ${level || 'Not specified'}\nSubject: ${subjectText || 'N/A'}\n--------------------------\nMESSAGE:\n${messageText}\n--------------------------\nACTION REQUIRED (Database record exists):\n- Follow up with ${name} at ${email}.\n- Ensure official HTML confirmation email is sent to user via Hostinger process.\n\n--\nFRENCH.GTA Website`;
-                        const adminMailtoLink = `mailto:${yourEmailAddress}` +
-                                                 `?subject=${encodeURIComponent(adminMailtoSubject)}` +
-                                                 `&body=${encodeURIComponent(adminMailtoBody)}`;
-                        try {
-                            window.open(adminMailtoLink, '_blank');
-                            const adminMailtoNote = document.createElement('p');
-                            adminMailtoNote.innerHTML = '<small style="margin-top:10px; display:block;"><i class="fas fa-info-circle"></i> An email draft to our admin (for secondary notification) should have opened. Your data IS saved in the database.</small>';
-                            responseMessage.appendChild(adminMailtoNote);
-                        } catch (error) { /* Silently fail on mailto if needed, data is saved */ }
-
+                        responseMessage.innerHTML = `
+                            <div class="success-response">
+                                <i class="fas fa-check-circle"></i>
+                                <h3>Message Sent Successfully!</h3>
+                                <p>Thank you for contacting us! We've received your message and will get back to you at <strong>${formData.get('email')}</strong> within 24 hours.</p>
+                                <div class="next-steps">
+                                    <p><strong>What happens next?</strong></p>
+                                    <ul>
+                                        <li>✅ You'll receive a confirmation email shortly</li>
+                                        <li>✅ Our team will review your inquiry</li>
+                                        <li>✅ We'll respond with personalized information</li>
+                                    </ul>
+                                </div>
+                                <a href="demo-registration.html" class="cta-button">Book Your FREE Demo Class</a>
+                            </div>
+                        `;
+                        responseMessage.className = 'response-message text-success';
+                        inquiryForm.style.display = 'none';
+                        submitButton.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
                     } else {
-                        responseMessage.innerHTML = `<i class="fas fa-exclamation-triangle text-danger"></i> Error: ${data.message}` + 
-                                                  `<p><small>If the problem persists, please contact us directly via WhatsApp or the email address below.</small></p>`;
+                        responseMessage.innerHTML = `<i class="fas fa-exclamation-triangle text-danger"></i> Error: ${data.message}`;
                         responseMessage.className = 'response-message text-danger';
-                        submitButton.innerHTML = originalButtonText; // Restore button to allow re-try
+                        submitButton.innerHTML = originalButtonText;
                         submitButton.disabled = false;
                     }
                 })
                 .catch(error => {
                     console.error('Fetch Error:', error);
-                    responseMessage.innerHTML = '<i class="fas fa-server text-danger"></i> A network error occurred. Please check your connection and try again.' + 
-                                              '<p><small>If the problem persists, please contact us directly.</small></p>';
+                    responseMessage.innerHTML = '<i class="fas fa-server text-danger"></i> Network error. Please try again or contact us directly.';
                     responseMessage.className = 'response-message text-danger';
                     submitButton.innerHTML = originalButtonText;
                     submitButton.disabled = false;

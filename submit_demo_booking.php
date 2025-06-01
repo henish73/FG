@@ -1,1 +1,127 @@
-<?php\nheader('Content-Type: application/json');\n\n// --- IMPORTANT: REPLACE WITH YOUR ACTUAL DATABASE CREDENTIALS ---\n\$db_host = 'localhost'; \n\$db_name = 'u637147602_frenchgta_data'; // From your screenshot OR your actual DB name\n\$db_user = 'YOUR_DATABASE_USERNAME';    \n\$db_pass = 'YOUR_DATABASE_PASSWORD';    \n// ----------------------------------------------------------------\n\n\$response = ['status' => 'error', 'message' => 'An unexpected error occurred.'];\n\nif ($_SERVER["REQUEST_METHOD"] == "POST") {\n    // Get and sanitize input data from FormData object\n    \$firstName = isset($_POST['firstName']) ? trim($_POST['firstName']) : '';\n    \$lastName = isset($_POST['lastName']) ? trim($_POST['lastName']) : '';\n    \$email = isset($_POST['email']) ? trim($_POST['email']) : '';\n    \$frenchLevel = isset($_POST['frenchLevel']) ? trim($_POST['frenchLevel']) : '';\n    \$notes = isset($_POST['notes']) ? trim($_POST['notes']) : null; // Optional\n    \$bookingDate = isset($_POST['date']) ? trim($_POST['date']) : ''; // 'date' is from bookingData object key\n    \$bookingTime = isset($_POST['time']) ? trim($_POST['time']) : ''; // 'time' is from bookingData object key\n    \$googleMeetLink = isset($_POST['googleMeetLink']) ? trim($_POST['googleMeetLink']) : null; // Sent from JS\n\n    // Basic validation\n    if (empty(\$firstName) || empty(\$lastName)) {\n        \$response['message'] = 'First and last name are required.';\n        echo json_encode(\$response);\n        exit;\n    }\n    if (empty(\$email) || !filter_var(\$email, FILTER_VALIDATE_EMAIL)) {\n        \$response['message'] = 'A valid email is required.';\n        echo json_encode(\$response);\n        exit;\n    }\n    if (empty(\$frenchLevel)) {\n        \$response['message'] = 'French level selection is required.';\n        echo json_encode(\$response);\n        exit;\n    }\n    if (empty(\$bookingDate) || !preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", \$bookingDate)) {\n        \$response['message'] = 'A valid booking date (YYYY-MM-DD) is required.';\n        echo json_encode(\$response);\n        exit;\n    }\n    if (empty(\$bookingTime) || !preg_match("/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/", \$bookingTime)) {\n        \$response['message'] = 'A valid booking time (HH:MM) is required.';\n        echo json_encode(\$response);\n        exit;\n    }\n\n    // Create connection\n    \$conn = new mysqli(\$db_host, \$db_user, \$db_pass, \$db_name);\n\n    if (\$conn->connect_error) {\n        error_log("Connection failed: " . \$conn->connect_error);\n        \$response['message'] = 'Could not connect to the database.';\n        echo json_encode(\$response);\n        exit;\n    }\n    if (!\$conn->set_charset("utf8mb4")) {\n        error_log("Error loading character set utf8mb4: " . \$conn->error);\n    }\n\n    \$stmt = \$conn->prepare("INSERT INTO demo_bookings (first_name, last_name, email, french_level, notes, booking_date, booking_time, google_meet_link) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");\n    \n    if (\$stmt === false) {\n        error_log("MySQLi prepare failed: " . \$conn->error . " SQL: INSERT INTO demo_bookings ...");\n        \$response['message'] = 'Error preparing database statement.';\n        echo json_encode(\$response);\n        \$conn->close();\n        exit;\n    }\n    \n    \$stmt->bind_param("ssssssss", \$firstName, \$lastName, \$email, \$frenchLevel, \$notes, \$bookingDate, \$bookingTime, \$googleMeetLink);\n\n    if (\$stmt->execute()) {\n        \$response['status'] = 'success';\n        \$response['message'] = 'Thank you! Your demo class booking has been successfully submitted to our database.';\n    } else {\n        error_log("MySQLi execute failed: " . \$stmt->error);\n        \$response['message'] = 'Error saving your booking. Please try again.';\n    }\n\n    \$stmt->close();\n    \$conn->close();\n\n} else {\n    \$response['message'] = 'Invalid request method.';\n}\n\necho json_encode(\$response);\n?> 
+<?php
+header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: POST');
+header('Access-Control-Allow-Headers: Content-Type');
+
+// Admin email configuration
+$admin_email = 'frenchgta.ca@gmail.com';
+$site_name = 'FRENCH.GTA';
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    http_response_code(405);
+    echo json_encode(['status' => 'error', 'message' => 'Method not allowed']);
+    exit;
+}
+
+// Get form data
+$first_name = isset($_POST['firstName']) ? trim($_POST['firstName']) : '';
+$last_name = isset($_POST['lastName']) ? trim($_POST['lastName']) : '';
+$email = isset($_POST['email']) ? trim($_POST['email']) : '';
+$french_level = isset($_POST['frenchLevel']) ? trim($_POST['frenchLevel']) : '';
+$notes = isset($_POST['notes']) ? trim($_POST['notes']) : '';
+$date = isset($_POST['date']) ? trim($_POST['date']) : '';
+$time = isset($_POST['time']) ? trim($_POST['time']) : '';
+
+// Validate required fields
+if (empty($first_name) || empty($last_name) || empty($email) || empty($date) || empty($time)) {
+    echo json_encode(['status' => 'error', 'message' => 'All required fields must be filled']);
+    exit;
+}
+
+// Validate email format
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    echo json_encode(['status' => 'error', 'message' => 'Invalid email format']);
+    exit;
+}
+
+// Format the date and time for display
+$formatted_date = date('F j, Y', strtotime($date));
+$formatted_time = date('g:i A', strtotime($time));
+
+// Prepare email content for admin
+$subject = "New Demo Class Booking - $first_name $last_name";
+$admin_message = "
+New demo class booking received:
+
+Student Information:
+- Name: $first_name $last_name
+- Email: $email
+- French Level: $french_level
+
+Booking Details:
+- Date: $formatted_date
+- Time: $formatted_time
+- Notes: " . ($notes ? $notes : 'None provided') . "
+
+Timestamp: " . date('Y-m-d H:i:s') . "
+
+Please confirm this booking and add it to your calendar.
+
+---
+$site_name Demo Booking System
+";
+
+// Prepare confirmation email for student
+$student_subject = "Demo Class Booking Confirmation - $site_name";
+$student_message = "
+Dear $first_name,
+
+Thank you for booking a demo French class with $site_name!
+
+Your booking details:
+- Date: $formatted_date
+- Time: $formatted_time
+- Duration: 1 hour
+- French Level: $french_level
+
+What to expect:
+- A friendly introduction to our teaching method
+- Assessment of your current French level
+- Personalized learning recommendations
+- Q&A about our programs
+
+We'll send you the meeting link 24 hours before your session.
+
+If you need to reschedule or have any questions, please contact us at $admin_email or via WhatsApp.
+
+Looking forward to meeting you!
+
+Best regards,
+The $site_name Team
+";
+
+// Email headers
+$headers = "From: $site_name <noreply@frenchgta.ca>\r\n";
+$headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+
+$student_headers = "From: $site_name <noreply@frenchgta.ca>\r\n";
+$student_headers .= "Reply-To: $admin_email\r\n";
+$student_headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+
+// Send emails
+$admin_email_sent = mail($admin_email, $subject, $admin_message, $headers);
+$student_email_sent = mail($email, $student_subject, $student_message, $student_headers);
+
+// Log the booking
+$log_entry = date('Y-m-d H:i:s') . " - Demo Booking: $first_name $last_name ($email) - $formatted_date at $formatted_time\n";
+file_put_contents('demo_bookings.log', $log_entry, FILE_APPEND | LOCK_EX);
+
+if ($admin_email_sent && $student_email_sent) {
+    echo json_encode([
+        'status' => 'success', 
+        'message' => 'Demo class booked successfully! Confirmation emails sent.',
+        'booking_details' => [
+            'name' => "$first_name $last_name",
+            'date' => $formatted_date,
+            'time' => $formatted_time,
+            'level' => $french_level
+        ]
+    ]);
+} else {
+    echo json_encode([
+        'status' => 'partial_success', 
+        'message' => 'Booking recorded but there was an issue sending confirmation emails. We will contact you directly.'
+    ]);
+}
+?> 

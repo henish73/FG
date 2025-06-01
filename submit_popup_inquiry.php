@@ -1,1 +1,79 @@
-<?php\nheader('Content-Type: application/json');\n\n// --- IMPORTANT: REPLACE WITH YOUR ACTUAL DATABASE CREDENTIALS ---\n\$db_host = 'localhost'; \n\$db_name = 'u637147602_frenchgta_data'; // From your screenshot OR your actual DB name\n\$db_user = 'YOUR_DATABASE_USERNAME';    \n\$db_pass = 'YOUR_DATABASE_PASSWORD';    \n// ----------------------------------------------------------------\n\n\$response = ['status' => 'error', 'message' => 'An unexpected error occurred.'];\n\nif ($_SERVER["REQUEST_METHOD"] == "POST") {\n    // Get and sanitize input data from FormData object\n    \$name = isset($_POST['name']) ? trim($_POST['name']) : ''; // 'name' is from #modal-name\n    \$email = isset($_POST['email']) ? trim($_POST['email']) : ''; // 'email' is from #modal-email\n    \$whatsapp_url_triggered = isset($_POST['whatsappUrl']) ? trim($_POST['whatsappUrl']) : null; // Sent from JS\n\n    // Basic validation\n    if (empty(\$name)) {\n        \$response['message'] = 'Name is required.';\n        echo json_encode(\$response);\n        exit;\n    }\n    if (empty(\$email) || !filter_var(\$email, FILTER_VALIDATE_EMAIL)) {\n        \$response['message'] = 'A valid email is required.';\n        echo json_encode(\$response);\n        exit;\n    }\n\n    // Create connection\n    \$conn = new mysqli(\$db_host, \$db_user, \$db_pass, \$db_name);\n\n    if (\$conn->connect_error) {\n        error_log("Connection failed: " . \$conn->connect_error);\n        \$response['message'] = 'Could not connect to the database.';\n        echo json_encode(\$response);\n        exit;\n    }\n    if (!\$conn->set_charset("utf8mb4")) {\n        error_log("Error loading character set utf8mb4: " . \$conn->error);\n    }\n\n    \$stmt = \$conn->prepare("INSERT INTO popup_inquiries (name, email, whatsapp_url_triggered) VALUES (?, ?, ?)");\n    \n    if (\$stmt === false) {\n        error_log("MySQLi prepare failed: " . \$conn->error . " SQL: INSERT INTO popup_inquiries ...");\n        \$response['message'] = 'Error preparing database statement.';\n        echo json_encode(\$response);\n        \$conn->close();\n        exit;\n    }\n    \n    \$stmt->bind_param("sss", \$name, \$email, \$whatsapp_url_triggered);\n\n    if (\$stmt->execute()) {\n        \$response['status'] = 'success';\n        \$response['message'] = 'Thank you! Your quick inquiry has been submitted to our database.';\n    } else {\n        error_log("MySQLi execute failed: " . \$stmt->error);\n        \$response['message'] = 'Error saving your inquiry. Please try again.';\n    }\n\n    \$stmt->close();\n    \$conn->close();\n\n} else {\n    \$response['message'] = 'Invalid request method.';\n}\n\necho json_encode(\$response);\n?> 
+<?php
+header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: POST');
+header('Access-Control-Allow-Headers: Content-Type');
+
+// Admin email configuration
+$admin_email = 'frenchgta.ca@gmail.com';
+$site_name = 'FRENCH.GTA';
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    http_response_code(405);
+    echo json_encode(['status' => 'error', 'message' => 'Method not allowed']);
+    exit;
+}
+
+// Get form data
+$name = isset($_POST['name']) ? trim($_POST['name']) : '';
+$email = isset($_POST['email']) ? trim($_POST['email']) : '';
+$whatsapp_url = isset($_POST['whatsappUrl']) ? trim($_POST['whatsappUrl']) : '';
+
+// Validate required fields
+if (empty($name) || empty($email)) {
+    echo json_encode(['status' => 'error', 'message' => 'Name and email are required']);
+    exit;
+}
+
+// Validate email format
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    echo json_encode(['status' => 'error', 'message' => 'Invalid email format']);
+    exit;
+}
+
+// Prepare email content
+$subject = "New Popup Inquiry from $name - $site_name";
+$message = "
+New inquiry received from the website popup form:
+
+Name: $name
+Email: $email
+Timestamp: " . date('Y-m-d H:i:s') . "
+WhatsApp Connection: $whatsapp_url
+
+This inquiry was submitted through the popup form on the website.
+The user has been directed to WhatsApp for immediate connection.
+
+Please follow up as needed.
+
+---
+$site_name Website
+";
+
+// Email headers
+$headers = "From: $site_name <noreply@frenchgta.ca>\r\n";
+$headers .= "Reply-To: $email\r\n";
+$headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+
+// Attempt to send email
+$email_sent = mail($admin_email, $subject, $message, $headers);
+
+// Database connection (optional - you can add database logging here)
+// For now, we'll just use email notification
+
+if ($email_sent) {
+    // Log the inquiry (you can add database logging here if needed)
+    $log_entry = date('Y-m-d H:i:s') . " - Popup Inquiry: $name ($email)\n";
+    file_put_contents('inquiries.log', $log_entry, FILE_APPEND | LOCK_EX);
+    
+    echo json_encode([
+        'status' => 'success', 
+        'message' => 'Inquiry submitted successfully and admin notified'
+    ]);
+} else {
+    echo json_encode([
+        'status' => 'error', 
+        'message' => 'Failed to send notification email'
+    ]);
+}
+?> 

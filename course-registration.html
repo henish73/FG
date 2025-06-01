@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎓 Course Registration | FRENCH.GTA</title>
+    <meta name="description" content="Register for French courses at FRENCH.GTA. Choose your program, payment method (PayPal or Interac), and start your French learning journey today.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="img/french.gta logo.jpg" type="image/x-icon">
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div id="header-placeholder"></div>
+
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="registration-hero">
+            <div class="hero-content">
+                <h1>🎓 Course Registration</h1>
+                <p class="hero-subtitle">Complete your registration and start your French learning journey</p>
+                
+                <div class="registration-benefits">
+                    <div class="benefit-item">
+                        <i class="fas fa-shield-check"></i>
+                        <span>Secure Payment</span>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-calendar-check"></i>
+                        <span>Instant Access</span>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>Expert Instructors</span>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-heart"></i>
+                        <span>Personal Support</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Registration Form -->
+        <section class="registration-form-section">
+            <div class="form-container">
+                <form id="courseRegistrationForm" class="registration-form">
+                    
+                    <!-- Step 1: Course Selection -->
+                    <div class="form-step active" id="step1">
+                        <div class="step-header">
+                            <h2><span class="step-number">1</span> Choose Your Course</h2>
+                            <p>Select the French program that best fits your goals</p>
+                        </div>
+
+                        <div class="course-selection-grid">
+                            <!-- Group Learning Plan -->
+                            <div class="course-option" data-course="group-learning" data-price="249" data-original="399">
+                                <div class="course-badge popular-badge">⭐ MOST POPULAR</div>
+                                <h3>Group Learning</h3>
+                                <div class="course-subtitle">Perfect for Steady Progress</div>
+                                <div class="price-display">
+                                    <div class="original-price">CAD $399</div>
+                                    <div class="current-price">CAD $249<span>/month</span></div>
+                                    <div class="savings-badge">Save $150!</div>
+                                </div>
+                                <div class="course-details">
+                                    <p>5 Days/Week • 20 Classes • Small Groups (Max 3)</p>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-check"></i> Expert instructors</li>
+                                        <li><i class="fas fa-check"></i> Study materials included</li>
+                                        <li><i class="fas fa-check"></i> Flexible rescheduling</li>
+                                        <li><i class="fas fa-check"></i> Progress tracking</li>
+                                    </ul>
+                                </div>
+                                <div class="select-course-btn">
+                                    <button type="button" class="cta-button">Select This Course</button>
+                                </div>
+                            </div>
+
+                            <!-- Flexible Learning Plan -->
+                            <div class="course-option" data-course="flexible-learning" data-price="179" data-original="299">
+                                <div class="course-badge value-badge">💎 GREAT VALUE</div>
+                                <h3>Flexible Learning</h3>
+                                <div class="course-subtitle">Steady & Manageable</div>
+                                <div class="price-display">
+                                    <div class="original-price">CAD $299</div>
+                                    <div class="current-price">CAD $179<span>/month</span></div>
+                                    <div class="savings-badge">Save $120!</div>
+                                </div>
+                                <div class="course-details">
+                                    <p>3 Days/Week • 12 Classes • Small Groups (Max 3)</p>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-check"></i> 12 live classes per month</li>
+                                        <li><i class="fas fa-check"></i> All materials included</li>
+                                        <li><i class="fas fa-check"></i> Flexible rescheduling</li>
+                                        <li><i class="fas fa-check"></i> Progress tracking</li>
+                                    </ul>
+                                </div>
+                                <div class="select-course-btn">
+                                    <button type="button" class="cta-button">Select This Course</button>
+                                </div>
+                            </div>
+
+                            <!-- One-on-One Intensive -->
+                            <div class="course-option" data-course="one-on-one-intensive" data-price="399" data-original="599">
+                                <div class="course-badge premium-badge">✨ PERSONALIZED</div>
+                                <h3>One-on-One Intensive</h3>
+                                <div class="course-subtitle">Maximum Personal Attention</div>
+                                <div class="price-display">
+                                    <div class="original-price">CAD $599</div>
+                                    <div class="current-price">CAD $399<span>/month</span></div>
+                                    <div class="savings-badge">Save $200!</div>
+                                </div>
+                                <div class="course-details">
+                                    <p>5 Days/Week • 20 Private Sessions</p>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-star"></i> 20 private 1:1 sessions</li>
+                                        <li><i class="fas fa-star"></i> Customized learning plan</li>
+                                        <li><i class="fas fa-star"></i> TEF/DELF preparation</li>
+                                        <li><i class="fas fa-star"></i> Weekly progress reports</li>
+                                    </ul>
+                                </div>
+                                <div class="select-course-btn">
+                                    <button type="button" class="cta-button cta-premium">Select This Course</button>
+                                </div>
+                            </div>
+
+                            <!-- Personal Learning -->
+                            <div class="course-option" data-course="personal-learning" data-price="349" data-original="499">
+                                <h3>Personal Learning</h3>
+                                <div class="course-subtitle">Individual Focus</div>
+                                <div class="price-display">
+                                    <div class="original-price">CAD $499</div>
+                                    <div class="current-price">CAD $349<span>/month</span></div>
+                                    <div class="savings-badge">Save $150!</div>
+                                </div>
+                                <div class="course-details">
+                                    <p>3 Days/Week • 12 Private Sessions</p>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-check"></i> 12 private 1:1 sessions</li>
+                                        <li><i class="fas fa-check"></i> Customized approach</li>
+                                        <li><i class="fas fa-check"></i> Flexible scheduling</li>
+                                        <li><i class="fas fa-check"></i> Personal progress tracking</li>
+                                    </ul>
+                                </div>
+                                <div class="select-course-btn">
+                                    <button type="button" class="cta-button">Select This Course</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="step-actions">
+                            <button type="button" id="continueToStep2" class="cta-button large" disabled>
+                                Continue to Personal Details <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Personal Information -->
+                    <div class="form-step" id="step2">
+                        <div class="step-header">
+                            <h2><span class="step-number">2</span> Personal Information</h2>
+                            <p>Tell us about yourself so we can personalize your learning experience</p>
+                        </div>
+
+                        <div class="selected-course-summary" id="selectedCourseSummary">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="firstName"><i class="fas fa-user"></i> First Name *</label>
+                                <input type="text" id="firstName" name="firstName" placeholder="Your first name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="lastName"><i class="fas fa-user"></i> Last Name *</label>
+                                <input type="text" id="lastName" name="lastName" placeholder="Your last name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email"><i class="fas fa-envelope"></i> Email Address *</label>
+                                <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone"><i class="fas fa-phone"></i> Phone Number *</label>
+                                <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567" required>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="frenchLevel"><i class="fas fa-chart-line"></i> Current French Level</label>
+                                <select id="frenchLevel" name="frenchLevel" required>
+                                    <option value="">Select your current level</option>
+                                    <option value="complete-beginner">Complete Beginner (A0) - No French knowledge</option>
+                                    <option value="a1">Elementary (A1) - Basic phrases and expressions</option>
+                                    <option value="a2">Pre-Intermediate (A2) - Simple conversations</option>
+                                    <option value="b1">Intermediate (B1) - Comfortable with basic topics</option>
+                                    <option value="b2">Upper-Intermediate (B2) - Complex discussions</option>
+                                    <option value="c1">Advanced (C1) - Fluent in most situations</option>
+                                    <option value="c2">Proficient (C2) - Near-native level</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="learningGoals"><i class="fas fa-target"></i> Learning Goals</label>
+                                <select id="learningGoals" name="learningGoals" required>
+                                    <option value="">What's your main goal?</option>
+                                    <option value="immigration">Canadian Immigration (TEF/TCF)</option>
+                                    <option value="work">Work and Career Advancement</option>
+                                    <option value="travel">Travel and Cultural Interest</option>
+                                    <option value="education">Academic Studies</option>
+                                    <option value="family">Family Communication</option>
+                                    <option value="personal">Personal Development</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="timeline"><i class="fas fa-clock"></i> When would you like to start?</label>
+                                <select id="timeline" name="timeline" required>
+                                    <option value="">Select your preferred start time</option>
+                                    <option value="immediately">Immediately - This week</option>
+                                    <option value="next-week">Next week</option>
+                                    <option value="within-month">Within this month</option>
+                                    <option value="next-month">Next month</option>
+                                    <option value="flexible">I'm flexible</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="specialRequests"><i class="fas fa-comment"></i> Special Requests or Questions (Optional)</label>
+                                <textarea id="specialRequests" name="specialRequests" rows="3" 
+                                         placeholder="Any specific learning needs, schedule preferences, or questions you'd like to share..."></textarea>
+                            </div>
+                        </div>
+
+                        <div class="step-actions">
+                            <button type="button" id="backToStep1" class="btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Back to Course Selection
+                            </button>
+                            <button type="button" id="continueToStep3" class="cta-button large">
+                                Continue to Payment <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Payment Method -->
+                    <div class="form-step" id="step3">
+                        <div class="step-header">
+                            <h2><span class="step-number">3</span> Choose Payment Method</h2>
+                            <p>Select your preferred payment option to complete registration</p>
+                        </div>
+
+                        <div class="order-summary" id="orderSummary">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+
+                        <div class="payment-methods">
+                            <!-- PayPal Option -->
+                            <div class="payment-option" data-method="paypal">
+                                <div class="payment-header">
+                                    <div class="payment-icon paypal-icon">
+                                        <i class="fab fa-paypal"></i>
+                                    </div>
+                                    <div class="payment-info">
+                                        <h3>Pay with PayPal</h3>
+                                        <p>Secure payment with PayPal account or credit card</p>
+                                    </div>
+                                    <div class="payment-check">
+                                        <input type="radio" name="paymentMethod" value="paypal" id="paypalOption">
+                                        <label for="paypalOption"></label>
+                                    </div>
+                                </div>
+                                <div class="payment-details" id="paypalDetails" style="display: none;">
+                                    <div class="payment-benefits">
+                                        <div class="benefit">
+                                            <i class="fas fa-shield-check"></i>
+                                            <span>100% Secure and Protected</span>
+                                        </div>
+                                        <div class="benefit">
+                                            <i class="fas fa-user-check"></i>
+                                            <span>Login with PayPal or pay as guest</span>
+                                        </div>
+                                        <div class="benefit">
+                                            <i class="fas fa-credit-card"></i>
+                                            <span>Credit cards, debit cards accepted</span>
+                                        </div>
+                                        <div class="benefit">
+                                            <i class="fas fa-undo"></i>
+                                            <span>Easy cancellation anytime</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Interac Option -->
+                            <div class="payment-option" data-method="interac">
+                                <div class="payment-header">
+                                    <div class="payment-icon interac-icon">
+                                        <i class="fas fa-university"></i>
+                                    </div>
+                                    <div class="payment-info">
+                                        <h3>Interac e-Transfer</h3>
+                                        <p>Direct bank transfer - Popular in Canada</p>
+                                    </div>
+                                    <div class="payment-check">
+                                        <input type="radio" name="paymentMethod" value="interac" id="interacOption">
+                                        <label for="interacOption"></label>
+                                    </div>
+                                </div>
+                                <div class="payment-details" id="interacDetails" style="display: none;">
+                                    <div class="interac-instructions">
+                                        <div class="instruction-header">
+                                            <h4>📧 e-Transfer Instructions</h4>
+                                            <p>Send your payment using Interac e-Transfer with these details:</p>
+                                        </div>
+                                        <div class="transfer-info">
+                                            <div class="info-item">
+                                                <strong>Email:</strong> <span class="highlight">phenish125@gmail.com</span>
+                                            </div>
+                                            <div class="info-item">
+                                                <strong>Amount:</strong> <span id="interacAmount" class="highlight">CAD $249</span>
+                                            </div>
+                                            <div class="info-item">
+                                                <strong>Security Question:</strong> <span class="highlight">French Learning</span>
+                                            </div>
+                                            <div class="info-item">
+                                                <strong>Answer:</strong> <span class="highlight">Success</span>
+                                            </div>
+                                            <div class="info-item">
+                                                <strong>Message:</strong> <span class="highlight">[Your Course] - [Your Name]</span>
+                                            </div>
+                                        </div>
+                                        <div class="interac-note">
+                                            <i class="fas fa-info-circle"></i>
+                                            <p>After sending the e-Transfer, complete your registration below. We'll confirm your payment and send course details within 24 hours.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="step-actions">
+                            <button type="button" id="backToStep2" class="btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Back to Personal Info
+                            </button>
+                            <button type="button" id="completeRegistration" class="cta-button large" disabled>
+                                <i class="fas fa-credit-card"></i> Complete Registration
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Success Section -->
+        <section class="success-section" id="successSection" style="display: none;">
+            <div class="success-container">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h2>🎉 Registration Completed!</h2>
+                <div id="successMessage">
+                    <!-- Will be populated by JavaScript based on payment method -->
+                </div>
+                
+                <div class="next-steps">
+                    <h3>📋 What happens next:</h3>
+                    <ul class="next-steps-list" id="nextStepsList">
+                        <!-- Will be populated by JavaScript -->
+                    </ul>
+                </div>
+                
+                <div class="success-actions">
+                    <a href="services.html" class="cta-button">
+                        <i class="fas fa-compass"></i> View All Courses
+                    </a>
+                    <a href="demo-registration.html" class="btn-secondary">
+                        <i class="fas fa-play-circle"></i> Book Free Demo
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+        // Course Registration JavaScript
+        let selectedCourse = null;
+        let currentStep = 1;
+        let registrationData = {};
+
+        // Course data
+        const courses = {
+            'group-learning': {
+                name: 'Group Learning Program',
+                price: 249,
+                original: 399,
+                description: '5 Days/Week • 20 Classes • Small Groups (Max 3)',
+                paypalItemName: 'Group Learning Program - Monthly'
+            },
+            'flexible-learning': {
+                name: 'Flexible Learning Program',
+                price: 179,
+                original: 299,
+                description: '3 Days/Week • 12 Classes • Small Groups (Max 3)',
+                paypalItemName: 'Flexible Learning Program - Monthly'
+            },
+            'one-on-one-intensive': {
+                name: 'One-on-One Intensive Program',
+                price: 399,
+                original: 599,
+                description: '5 Days/Week • 20 Private Sessions',
+                paypalItemName: 'One-on-One Intensive Program - Monthly'
+            },
+            'personal-learning': {
+                name: 'Personal Learning Program',
+                price: 349,
+                original: 499,
+                description: '3 Days/Week • 12 Private Sessions',
+                paypalItemName: 'Personal Learning Program - Monthly'
+            }
+        };
+
+        // Initialize form
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeForm();
+        });
+
+        function initializeForm() {
+            // Course selection handlers
+            document.querySelectorAll('.course-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    selectCourse(this);
+                });
+            });
+
+            // Step navigation
+            document.getElementById('continueToStep2').addEventListener('click', goToStep2);
+            document.getElementById('backToStep1').addEventListener('click', goToStep1);
+            document.getElementById('continueToStep3').addEventListener('click', goToStep3);
+            document.getElementById('backToStep2').addEventListener('click', goToStep2);
+            document.getElementById('completeRegistration').addEventListener('click', completeRegistration);
+
+            // Payment method selection
+            document.querySelectorAll('input[name="paymentMethod"]').forEach(radio => {
+                radio.addEventListener('change', handlePaymentMethodChange);
+            });
+
+            // Form validation
+            document.getElementById('courseRegistrationForm').addEventListener('input', validateCurrentStep);
+        }
+
+        function selectCourse(courseElement) {
+            // Remove previous selections
+            document.querySelectorAll('.course-option').forEach(el => el.classList.remove('selected'));
+            
+            // Add selection to clicked course
+            courseElement.classList.add('selected');
+            
+            // Store selected course data
+            selectedCourse = courseElement.dataset.course;
+            
+            // Enable continue button
+            document.getElementById('continueToStep2').disabled = false;
+        }
+
+        function goToStep1() {
+            showStep(1);
+        }
+
+        function goToStep2() {
+            if (selectedCourse) {
+                updateCourseSummary();
+                showStep(2);
+            }
+        }
+
+        function goToStep3() {
+            if (validateStep2()) {
+                updateOrderSummary();
+                showStep(3);
+            }
+        }
+
+        function showStep(stepNumber) {
+            // Hide all steps
+            document.querySelectorAll('.form-step').forEach(step => {
+                step.classList.remove('active');
+            });
+            
+            // Show current step
+            document.getElementById(`step${stepNumber}`).classList.add('active');
+            currentStep = stepNumber;
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        function updateCourseSummary() {
+            if (!selectedCourse) return;
+            
+            const course = courses[selectedCourse];
+            const summaryHtml = `
+                <div class="course-summary-card">
+                    <h3>Selected Course: ${course.name}</h3>
+                    <div class="summary-pricing">
+                        <span class="summary-original">CAD $${course.original}</span>
+                        <span class="summary-current">CAD $${course.price}/month</span>
+                        <span class="summary-savings">Save $${course.original - course.price}!</span>
+                    </div>
+                    <p>${course.description}</p>
+                </div>
+            `;
+            document.getElementById('selectedCourseSummary').innerHTML = summaryHtml;
+        }
+
+        function updateOrderSummary() {
+            if (!selectedCourse) return;
+            
+            const course = courses[selectedCourse];
+            const summaryHtml = `
+                <div class="order-summary-card">
+                    <h3>📋 Order Summary</h3>
+                    <div class="order-item">
+                        <div class="item-details">
+                            <h4>${course.name}</h4>
+                            <p>${course.description}</p>
+                        </div>
+                        <div class="item-pricing">
+                            <div class="original-price">CAD $${course.original}</div>
+                            <div class="current-price">CAD $${course.price}/month</div>
+                            <div class="savings">Save $${course.original - course.price}!</div>
+                        </div>
+                    </div>
+                    <div class="order-total">
+                        <div class="total-line">
+                            <span>Monthly Payment:</span>
+                            <span class="total-amount">CAD $${course.price}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.getElementById('orderSummary').innerHTML = summaryHtml;
+            
+            // Update Interac amount
+            document.getElementById('interacAmount').textContent = `CAD $${course.price}`;
+        }
+
+        function validateStep2() {
+            const requiredFields = ['firstName', 'lastName', 'email', 'phone', 'frenchLevel', 'learningGoals', 'timeline'];
+            return requiredFields.every(field => {
+                const element = document.getElementById(field);
+                return element && element.value.trim() !== '';
+            });
+        }
+
+        function validateCurrentStep() {
+            if (currentStep === 2) {
+                document.getElementById('continueToStep3').disabled = !validateStep2();
+            }
+        }
+
+        function handlePaymentMethodChange(event) {
+            const method = event.target.value;
+            
+            // Hide all payment details
+            document.querySelectorAll('.payment-details').forEach(detail => {
+                detail.style.display = 'none';
+            });
+            
+            // Show selected payment details
+            document.getElementById(`${method}Details`).style.display = 'block';
+            
+            // Enable complete registration button
+            document.getElementById('completeRegistration').disabled = false;
+            
+            // Update button text based on method
+            const button = document.getElementById('completeRegistration');
+            if (method === 'paypal') {
+                button.innerHTML = '<i class="fas fa-credit-card"></i> Pay with PayPal';
+            } else if (method === 'interac') {
+                button.innerHTML = '<i class="fas fa-check"></i> Complete Registration';
+            }
+        }
+
+        function completeRegistration() {
+            const selectedPaymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
+            if (!selectedPaymentMethod) return;
+            
+            const method = selectedPaymentMethod.value;
+            const course = courses[selectedCourse];
+            
+            // Collect form data
+            registrationData = {
+                course: selectedCourse,
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                frenchLevel: document.getElementById('frenchLevel').value,
+                learningGoals: document.getElementById('learningGoals').value,
+                timeline: document.getElementById('timeline').value,
+                specialRequests: document.getElementById('specialRequests').value,
+                paymentMethod: method
+            };
+            
+            if (method === 'paypal') {
+                // Redirect to PayPal
+                const paypalUrl = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=phenish125@gmail.com&item_name=${encodeURIComponent(course.paypalItemName)}&amount=${course.price}&currency_code=CAD&return=https://french.gta/course-registration.html?success=paypal&cancel_return=https://french.gta/course-registration.html`;
+                window.open(paypalUrl, '_blank');
+                
+                // Show success message for PayPal
+                showSuccessMessage('paypal');
+            } else if (method === 'interac') {
+                // Show success message for Interac
+                showSuccessMessage('interac');
+            }
+        }
+
+        function showSuccessMessage(paymentMethod) {
+            document.querySelector('.registration-form-section').style.display = 'none';
+            document.getElementById('successSection').style.display = 'block';
+            
+            const course = courses[selectedCourse];
+            let successHtml, nextStepsHtml;
+            
+            if (paymentMethod === 'paypal') {
+                successHtml = `
+                    <div class="success-details">
+                        <h3>Payment Processing</h3>
+                        <p>Your PayPal payment window has opened. Complete your payment to finalize your registration for <strong>${course.name}</strong>.</p>
+                    </div>
+                `;
+                nextStepsHtml = `
+                    <li><i class="fas fa-credit-card"></i> Complete your PayPal payment in the new window</li>
+                    <li><i class="fas fa-envelope"></i> You'll receive a confirmation email with course details</li>
+                    <li><i class="fas fa-user-plus"></i> Our team will contact you within 24 hours to schedule your first class</li>
+                    <li><i class="fas fa-graduation-cap"></i> Start your French learning journey!</li>
+                `;
+            } else {
+                successHtml = `
+                    <div class="success-details">
+                        <h3>Registration Received!</h3>
+                        <p>Thank you for registering for <strong>${course.name}</strong>. Please send your Interac e-Transfer to complete your enrollment.</p>
+                        <div class="interac-reminder">
+                            <h4>💳 e-Transfer Details:</h4>
+                            <p><strong>Email:</strong> phenish125@gmail.com</p>
+                            <p><strong>Amount:</strong> CAD $${course.price}</p>
+                            <p><strong>Security Question:</strong> French Learning</p>
+                            <p><strong>Answer:</strong> Success</p>
+                            <p><strong>Message:</strong> ${course.name} - ${registrationData.firstName} ${registrationData.lastName}</p>
+                        </div>
+                    </div>
+                `;
+                nextStepsHtml = `
+                    <li><i class="fas fa-university"></i> Send your Interac e-Transfer using the details above</li>
+                    <li><i class="fas fa-clock"></i> We'll confirm your payment within 24 hours</li>
+                    <li><i class="fas fa-envelope"></i> You'll receive course details and schedule information</li>
+                    <li><i class="fas fa-graduation-cap"></i> Start your French learning journey!</li>
+                `;
+            }
+            
+            document.getElementById('successMessage').innerHTML = successHtml;
+            document.getElementById('nextStepsList').innerHTML = nextStepsHtml;
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Handle URL parameters for PayPal return
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('success') === 'paypal') {
+                // Show PayPal success message
+                document.querySelector('.registration-form-section').style.display = 'none';
+                document.getElementById('successSection').style.display = 'block';
+                
+                const successHtml = `
+                    <div class="success-details">
+                        <h3>🎉 Payment Successful!</h3>
+                        <p>Your PayPal payment has been processed successfully. Welcome to FRENCH.GTA!</p>
+                    </div>
+                `;
+                const nextStepsHtml = `
+                    <li><i class="fas fa-check-circle"></i> Payment confirmed and course activated</li>
+                    <li><i class="fas fa-envelope"></i> Check your email for course details and welcome information</li>
+                    <li><i class="fas fa-calendar"></i> Our team will contact you within 24 hours to schedule your first class</li>
+                    <li><i class="fas fa-graduation-cap"></i> Get ready to start your French learning journey!</li>
+                `;
+                
+                document.getElementById('successMessage').innerHTML = successHtml;
+                document.getElementById('nextStepsList').innerHTML = nextStepsHtml;
+            }
+        });
+    </script>
+</body>
+</html> 

@@ -179,11 +179,12 @@
         const availableSlots = { // Admin defines available slots here (YYYY-MM-DD: [HH:MM, HH:MM])
             // Example: "2024-03-15": ["10:00", "14:00", "18:00"], (Add more dates and times)
             // THIS IS THE DEMO DATA - REPLACE WITH ACTUALS
-            "2024-07-29": ["10:00", "11:30", "14:00", "16:30"],
-            "2024-07-30": ["09:00", "10:30", "15:00"],
-            "2024-08-01": ["10:00", "14:00"],
-            "2024-08-02": ["11:00", "15:30"],
-            "2024-08-05": ["10:00", "11:30", "14:00", "16:30", "18:00"]
+            "2025-06-01": ["09:00", "10:30", "15:00"],
+            "2025-06-02": ["10:00", "11:30", "14:00", "16:30"],
+            "2025-06-03": ["09:00", "10:30", "15:00"],
+            "2025-06-04": ["10:00", "14:00"],
+            "2025-06-05": ["11:00", "15:30"],
+            "2025-06-06": ["10:00", "11:30", "14:00", "16:30", "18:00"]
             // Ensure dates are in the future and times are reasonable for demo classes
         };
         const ADMIN_EMAIL = 'frenchgta.ca@gmail.com';
@@ -195,29 +196,33 @@
         let bookingData = null; // To store name, email, etc.
 
         function generateCalendar(month, year) {
-            calendarEl.innerHTML = ''; // Clear previous calendar
-            monthYearEl.textContent = `${monthNames[month]} ${year}`;
-            currentMonth = month;
-            currentYear = year;
+            const calendarGrid = document.getElementById('calendarGrid');
+            const currentMonth = document.getElementById('currentMonth');
+            
+            if (!calendarGrid || !currentMonth) {
+                console.error('Calendar elements not found');
+                return;
+            }
+            
+            calendarGrid.innerHTML = ''; // Clear previous calendar
+            currentMonth.textContent = `${monthNames[month]} ${year}`;
 
             const firstDay = new Date(year, month, 1).getDay();
             const daysInMonth = new Date(year, month + 1, 0).getDate();
 
             // Add day headers (Sun, Mon, ...)
-            const headerRow = document.createElement('div');
-            headerRow.classList.add('calendar-header');
             dayNames.forEach(day => {
                 const dayEl = document.createElement('div');
+                dayEl.classList.add('calendar-day-header');
                 dayEl.textContent = day;
-                headerRow.appendChild(dayEl);
+                calendarGrid.appendChild(dayEl);
             });
-            calendarEl.appendChild(headerRow);
 
             // Add empty cells for days before the first of the month
             for (let i = 0; i < firstDay; i++) {
                 const emptyCell = document.createElement('div');
                 emptyCell.classList.add('calendar-day', 'empty');
-                calendarEl.appendChild(emptyCell);
+                calendarGrid.appendChild(emptyCell);
             }
 
             // Add day cells
@@ -235,13 +240,16 @@
                 if (availableSlots[dateKey] && availableSlots[dateKey].length > 0 && currentDate >= today) {
                     dayCell.classList.add('available');
                     dayCell.addEventListener('click', () => selectDate(dateKey, dayCell));
+                } else if (currentDate < today) {
+                    dayCell.classList.add('past');
                 } else {
                     dayCell.classList.add('unavailable');
                 }
+                
                 if (selectedDate === dateKey) {
                     dayCell.classList.add('selected');
                 }
-                calendarEl.appendChild(dayCell);
+                calendarGrid.appendChild(dayCell);
             }
         }
 
@@ -269,20 +277,34 @@
             document.querySelectorAll('.calendar-day.selected').forEach(cell => cell.classList.remove('selected'));
             dayCell.classList.add('selected');
             displayTimeSlots(dateKey);
-            document.getElementById('bookingFormSection').style.display = 'none'; // Hide form if a new date is selected
-            document.getElementById('confirmationSection').style.display = 'none'; // Hide confirmation if a new date is selected
+            
+            // Update the selected date display
+            const selectedDateDisplay = document.getElementById('selectedDateDisplay');
+            if (selectedDateDisplay) {
+                const [year, month, day] = dateKey.split('-').map(Number);
+                const dateDisplay = `${monthNames[month - 1]} ${day}, ${year}`;
+                selectedDateDisplay.textContent = `Selected: ${dateDisplay}`;
+            }
+            
+            // Hide form and confirmation if a new date is selected
+            const bookingFormSection = document.getElementById('bookingFormSection');
+            const confirmationSection = document.getElementById('confirmationSection');
+            if (bookingFormSection) bookingFormSection.style.display = 'none';
+            if (confirmationSection) confirmationSection.style.display = 'none';
         }
 
         function displayTimeSlots(dateKey) {
-            timeSlotsEl.innerHTML = ''; // Clear previous time slots
+            const timeSlotsGrid = document.getElementById('timeSlotsGrid');
+            if (!timeSlotsGrid) return;
+            
+            timeSlotsGrid.innerHTML = ''; // Clear previous time slots
             const slots = availableSlots[dateKey];
+            
             if (!slots || slots.length === 0) {
-                timeSlotsEl.innerHTML = '<p>No slots available for this date.</p>';
+                timeSlotsGrid.innerHTML = '<div class="no-slots"><i class="fas fa-clock"></i><p>No slots available for this date.</p></div>';
                 return;
             }
 
-            const slotsContainer = document.createElement('div');
-            slotsContainer.className = 'time-slots-container';
             slots.forEach(time => {
                 const slotButton = document.createElement('button');
                 slotButton.classList.add('time-slot-button');
@@ -291,10 +313,8 @@
                 if (selectedTime === time) {
                     slotButton.classList.add('selected');
                 }
-                slotsContainer.appendChild(slotButton);
+                timeSlotsGrid.appendChild(slotButton);
             });
-            timeSlotsEl.appendChild(slotsContainer);
-            timeSlotsEl.style.display = 'block';
         }
 
         function formatTimeForDisplay(timeStr) { // timeStr is HH:MM
@@ -308,14 +328,86 @@
             selectedTime = time;
             document.querySelectorAll('.time-slot-button.selected').forEach(btn => btn.classList.remove('selected'));
             slotButton.classList.add('selected');
-            document.getElementById('bookingFormSection').style.display = 'block';
-            document.getElementById('bookingFormSection').scrollIntoView({ behavior: 'smooth' });
-            // Pre-fill summary in form, if needed, or do it on submit
+            
+            // Update the selected slot display
+            updateSelectedSlotDisplay();
+            
+            const bookingFormSection = document.getElementById('bookingFormSection');
+            if (bookingFormSection) {
+                bookingFormSection.style.display = 'block';
+                bookingFormSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function updateSelectedSlotDisplay() {
+            const selectedSlotDisplay = document.getElementById('selectedSlotDisplay');
+            if (selectedSlotDisplay && selectedDate && selectedTime) {
+                const [year, month, day] = selectedDate.split('-').map(Number);
+                const dateDisplay = `${monthNames[month - 1]} ${day}, ${year}`;
+                const timeDisplay = formatTimeForDisplay(selectedTime);
+                
+                selectedSlotDisplay.innerHTML = `
+                    <div class="selected-slot">
+                        <div class="slot-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="slot-details">
+                            <strong>${dateDisplay}</strong><br>
+                            <span style="color: var(--brand-primary);">${timeDisplay}</span><br>
+                            <small style="color: var(--neutral-600);">1 hour demo session</small>
+                        </div>
+                    </div>
+                `;
+            }
         }
 
         document.addEventListener('DOMContentLoaded', () => {
             const today = new Date();
-            generateCalendar(today.getMonth(), today.getFullYear());
+            currentMonth = today.getMonth();
+            currentYear = today.getFullYear();
+            generateCalendar(currentMonth, currentYear);
+
+            // Set up month navigation
+            const prevBtn = document.getElementById('prevMonth');
+            const nextBtn = document.getElementById('nextMonth');
+            
+            if (prevBtn) {
+                prevBtn.addEventListener('click', () => {
+                    currentMonth--;
+                    if (currentMonth < 0) {
+                        currentMonth = 11;
+                        currentYear--;
+                    }
+                    generateCalendar(currentMonth, currentYear);
+                });
+            }
+            
+            if (nextBtn) {
+                nextBtn.addEventListener('click', () => {
+                    currentMonth++;
+                    if (currentMonth > 11) {
+                        currentMonth = 0;
+                        currentYear++;
+                    }
+                    generateCalendar(currentMonth, currentYear);
+                });
+            }
+
+            // Set up back to slots button
+            const backToSlotsBtn = document.getElementById('backToSlots');
+            if (backToSlotsBtn) {
+                backToSlotsBtn.addEventListener('click', () => {
+                    const bookingFormSection = document.getElementById('bookingFormSection');
+                    if (bookingFormSection) {
+                        bookingFormSection.style.display = 'none';
+                    }
+                    // Scroll back to calendar
+                    const bookingInterface = document.querySelector('.booking-interface');
+                    if (bookingInterface) {
+                        bookingInterface.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            }
 
             const bookingForm = document.getElementById('demoBookingForm');
             if (bookingForm) {
@@ -331,7 +423,7 @@
                         lastName: document.getElementById('lastName').value,
                         email: document.getElementById('email').value,
                         frenchLevel: document.getElementById('frenchLevel').value,
-                        notes: document.getElementById('notes').value,
+                        notes: document.getElementById('notes') ? document.getElementById('notes').value : '',
                         date: selectedDate,
                         time: selectedTime
                     };
@@ -341,135 +433,168 @@
             }
         });
 
-        function displayConfirmationAndNotifyAdmin(data) {
+        function displayConfirmationAndNotifyAdmin(bookingData) {
             const confirmationSection = document.getElementById('confirmationSection');
-            const bookingSummaryEl = document.getElementById('bookingSummary');
-            const formSection = document.getElementById('bookingFormSection');
-            const calendarInterface = document.querySelector('.booking-interface');
+            const bookingInterface = document.querySelector('.booking-interface');
+            const bookingFormSection = document.getElementById('bookingFormSection');
+            
+            if (bookingInterface) bookingInterface.style.display = 'none';
+            if (bookingFormSection) bookingFormSection.style.display = 'none';
+            if (confirmationSection) confirmationSection.style.display = 'block';
 
-            // Format date and time for display
-            const [year, month, day] = data.date.split('-').map(Number);
-            const dateDisplay = `${monthNames[month - 1]} ${day}, ${year}`;
-            const displayTime = formatTimeForDisplay(data.time);
+            // Update confirmation display
+            const confirmationContainer = confirmationSection.querySelector('.confirmation-container');
+            if (confirmationContainer) {
+                const [year, month, day] = bookingData.date.split('-').map(Number);
+                const dateDisplay = `${monthNames[month - 1]} ${day}, ${year}`;
+                const timeDisplay = formatTimeForDisplay(bookingData.time);
+                
+                confirmationContainer.innerHTML = `
+                    <div class="confirmation-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h2>Booking Confirmed!</h2>
+                    <p>Thank you, ${bookingData.firstName}! Your demo class has been successfully booked.</p>
+                    
+                    <div class="booking-summary">
+                        <h4>Your Demo Class Details</h4>
+                        <div class="detail-item">
+                            <i class="fas fa-user"></i>
+                            <span><strong>Student:</strong> ${bookingData.firstName} ${bookingData.lastName}</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span><strong>Date:</strong> ${dateDisplay}</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-clock"></i>
+                            <span><strong>Time:</strong> ${timeDisplay}</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span><strong>Level:</strong> ${bookingData.frenchLevel}</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-envelope"></i>
+                            <span><strong>Email:</strong> ${bookingData.email}</span>
+                        </div>
+                    </div>
 
-            // Hide calendar and form, show initial confirmation message
-            if(calendarInterface) calendarInterface.style.display = 'none';
-            if(formSection) formSection.style.display = 'none';
-            if(timeSlotsEl) timeSlotsEl.style.display = 'none';
+                    <div class="next-steps">
+                        <h3>What Happens Next?</h3>
+                        <ul class="next-steps-list">
+                            <li>
+                                <i class="fas fa-email"></i>
+                                <span>You'll receive a confirmation email within 5 minutes</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-video"></i>
+                                <span>We'll send you the meeting link 24 hours before your session</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-phone"></i>
+                                <span>Our team may contact you to confirm details</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-heart"></i>
+                                <span>Get ready for an amazing French learning experience!</span>
+                            </li>
+                        </ul>
+                    </div>
 
-            bookingSummaryEl.innerHTML = `
-                <h2><i class="fas fa-spinner fa-spin"></i> Processing Your Booking...</h2>
-                <p class="lead">Please wait while we save your demo class request.</p>
-            `;
-            confirmationSection.style.display = 'block';
-            confirmationSection.scrollIntoView({ behavior: 'smooth' });
+                    <div class="confirmation-actions">
+                        <button onclick="bookAnotherDemo()" class="cta-button cta-button-secondary">
+                            <i class="fas fa-plus"></i> Book Another Demo
+                        </button>
+                        <a href="services.html" class="cta-button">
+                            <i class="fas fa-graduation-cap"></i> Explore Our Courses
+                        </a>
+                    </div>
+                `;
+            }
 
-            // Prepare data for PHP script
+            // Submit to PHP backend
             const formData = new FormData();
-            formData.append('firstName', data.firstName);
-            formData.append('lastName', data.lastName);
-            formData.append('email', data.email);
-            formData.append('frenchLevel', data.frenchLevel);
-            formData.append('notes', data.notes || '');
-            formData.append('date', data.date); // Original YYYY-MM-DD from selectedDate
-            formData.append('time', data.time); // Original HH:MM from selectedTime
-            formData.append('googleMeetLink', GOOGLE_MEET_LINK); // Add the static Google Meet link
+            formData.append('firstName', bookingData.firstName);
+            formData.append('lastName', bookingData.lastName);
+            formData.append('email', bookingData.email);
+            formData.append('frenchLevel', bookingData.frenchLevel);
+            formData.append('notes', bookingData.notes || '');
+            formData.append('date', bookingData.date);
+            formData.append('time', bookingData.time);
 
             fetch('submit_demo_booking.php', {
                 method: 'POST',
                 body: formData
             })
             .then(response => response.json())
-            .then(phpResponse => {
-                let userMessageHTML = '';
-                if (phpResponse.status === 'success') {
-                    userMessageHTML = `
-                        <h2><i class="fas fa-check-circle" style="color: var(--brand-success);"></i> Thank You, ${data.firstName}!</h2>
-                        <p class="lead">Your demo class request has been successfully submitted!</p>
-                        <div class="booking-summary-details card">
-                            <h4>Booking Details:</h4>
-                            <p><strong>Name:</strong> ${data.firstName} ${data.lastName}</p>
-                            <p><strong>Email:</strong> ${data.email}</p>
-                            <p><strong>Date:</strong> ${dateDisplay}</p>
-                            <p><strong>Time:</strong> ${displayTime} (1 hour session)</p>
-                            <p><strong>Your Stated French Level:</strong> ${data.frenchLevel || 'Not specified'}</p>
-                            <p><strong>Notes:</strong> ${data.notes || 'None'}</p>
-                            <p><strong>Meet Link Ref:</strong> (Sent via email)</p>
-                            <hr>
-                            <p><strong>Next Steps:</strong></p>
-                            <ol>
-                                <li>You will receive an <strong>official confirmation email</strong> from <strong>${ADMIN_EMAIL}</strong> (via our Hostinger system) with the <strong>Google Meet link</strong> and preparation tips within the next few hours.</li>
-                                <li>Please check your spam/junk folder if you don't see it.</li>
-                                <li>Our team has also been notified via the database.</li>
-                            </ol>
+            .then(data => {
+                console.log('Booking submission result:', data);
+                if (data.status === 'success') {
+                    // Add success indicator to confirmation
+                    const successIndicator = document.createElement('div');
+                    successIndicator.className = 'success-indicator';
+                    successIndicator.innerHTML = `
+                        <div style="background: var(--brand-accent); color: white; padding: 1rem; border-radius: var(--radius-lg); margin: 1rem 0; text-align: center;">
+                            <i class="fas fa-check-double"></i> Booking confirmed and admin notified!
                         </div>
                     `;
-
-                    // Admin Mailto Notification Logic (secondary)
-                    const adminSubject = `DB ✔️ - New Demo Booking: ${data.firstName} ${data.lastName} - ${dateDisplay} at ${displayTime}`;
-                    const adminBody = `
-New Demo Class Booking (SAVED TO DATABASE):
----------------------------------
-Name: ${data.firstName} ${data.lastName}
-Email: ${data.email}
-Requested Date: ${dateDisplay} (${data.date})
-Requested Time: ${displayTime} (${data.time} EST)
-Selected Level: ${data.frenchLevel || 'Not specified'}
-Notes: ${data.notes || 'None'}
----------------------------------
-Google Meet Link for this demo: ${GOOGLE_MEET_LINK}
----------------------------------
-ACTION REQUIRED (Database record exists):
-1. Verify booking in admin panel / database.
-2. Ensure student (${data.email}) receives official HTML confirmation email via Hostinger process.
-
---
-FRENCH.GTA Demo Booking System`.trim();
-                    const adminMailtoLink = `mailto:${ADMIN_EMAIL}?subject=${encodeURIComponent(adminSubject)}&body=${encodeURIComponent(adminBody)}`;
-                    try { window.open(adminMailtoLink, '_blank'); } catch (e) { console.warn('Admin mailto failed'); }
-
-                } else { // PHP script returned an error
-                    userMessageHTML = `
-                        <h2><i class="fas fa-exclamation-triangle" style="color: var(--brand-danger);"></i> Booking Submission Failed</h2>
-                        <p class="lead">We encountered an error trying to save your booking: ${phpResponse.message}</p>
-                        <p>Please try booking again. If the problem persists, contact us directly at ${ADMIN_EMAIL} or via WhatsApp.</p>
-                        <div class="booking-summary-details card" style="opacity:0.7;">
-                            <h4>Your Attempted Booking:</h4>
-                            <p><strong>Name:</strong> ${data.firstName} ${data.lastName}</p>
-                            <p><strong>Date:</strong> ${dateDisplay}, <strong>Time:</strong> ${displayTime}</p>
+                    confirmationContainer.appendChild(successIndicator);
+                } else {
+                    // Add warning indicator
+                    const warningIndicator = document.createElement('div');
+                    warningIndicator.className = 'warning-indicator';
+                    warningIndicator.innerHTML = `
+                        <div style="background: var(--brand-warning); color: white; padding: 1rem; border-radius: var(--radius-lg); margin: 1rem 0; text-align: center;">
+                            <i class="fas fa-exclamation-triangle"></i> Booking saved but please also contact us directly at frenchgta.ca@gmail.com
                         </div>
                     `;
+                    confirmationContainer.appendChild(warningIndicator);
                 }
-                bookingSummaryEl.innerHTML = userMessageHTML;
             })
             .catch(error => {
-                console.error('Fetch Error for demo booking:', error);
-                bookingSummaryEl.innerHTML = `
-                    <h2><i class="fas fa-server" style="color: var(--brand-danger);"></i> Network Error</h2>
-                    <p class="lead">A network error occurred while trying to submit your booking. Please check your internet connection and try again.</p>
-                    <p>If the problem persists, contact us directly at ${ADMIN_EMAIL} or via WhatsApp.</p>
+                console.error('Error submitting booking:', error);
+                // Add error indicator but don't break the user experience
+                const errorIndicator = document.createElement('div');
+                errorIndicator.className = 'error-indicator';
+                errorIndicator.innerHTML = `
+                    <div style="background: var(--brand-danger); color: white; padding: 1rem; border-radius: var(--radius-lg); margin: 1rem 0; text-align: center;">
+                        <i class="fas fa-exclamation-circle"></i> Please also email us at frenchgta.ca@gmail.com to confirm your booking
+                    </div>
                 `;
+                confirmationContainer.appendChild(errorIndicator);
             });
 
-            document.getElementById('demoBookingForm').reset();
-            selectedDate = null;
-            selectedTime = null;
-            // bookingData is local to the submit event listener, no need to nullify here if it's not global for this function
+            // Scroll to confirmation
+            confirmationSection.scrollIntoView({ behavior: 'smooth' });
         }
 
         function bookAnotherDemo() {
             // Reset UI to initial state
-            document.getElementById('confirmationSection').style.display = 'none';
-            document.querySelector('.booking-interface').style.display = 'block';
-            if(timeSlotsEl) timeSlotsEl.style.display = 'none'; // Hide time slots
-            if(document.getElementById('bookingFormSection')) document.getElementById('bookingFormSection').style.display = 'none'; // Hide form
+            const confirmationSection = document.getElementById('confirmationSection');
+            const bookingInterface = document.querySelector('.booking-interface');
+            const timeSlotsGrid = document.getElementById('timeSlotsGrid');
+            const bookingFormSection = document.getElementById('bookingFormSection');
+            
+            if (confirmationSection) confirmationSection.style.display = 'none';
+            if (bookingInterface) bookingInterface.style.display = 'block';
+            if (timeSlotsGrid) timeSlotsGrid.innerHTML = '<div class="no-date-selected"><i class="fas fa-calendar-alt"></i><p>Select a date to see available times</p></div>';
+            if (bookingFormSection) bookingFormSection.style.display = 'none';
+            
+            // Reset selections
+            selectedDate = null;
+            selectedTime = null;
             
             // Regenerate calendar to clear selection and show current month
             const today = new Date();
-            generateCalendar(today.getMonth(), today.getFullYear());
+            currentMonth = today.getMonth();
+            currentYear = today.getFullYear();
+            generateCalendar(currentMonth, currentYear);
 
-            // Scroll to top or calendar
-            document.querySelector('.booking-interface').scrollIntoView({ behavior: 'smooth' });
+            // Scroll to calendar
+            if (bookingInterface) {
+                bookingInterface.scrollIntoView({ behavior: 'smooth' });
+            }
         }
     </script>
 </body>
