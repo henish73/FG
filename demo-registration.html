@@ -156,6 +156,14 @@
                     </button>
                 </div>
                 
+                <div class="whatsapp-booking-section">
+                    <h3>📱 Instant Confirmation via WhatsApp</h3>
+                    <p>For immediate confirmation and to ensure we receive your booking, click below to send your booking details directly to our WhatsApp:</p>
+                    <button id="sendWhatsAppBooking" class="cta-button whatsapp-btn" style="background: #25d366; margin: 1rem 0;">
+                        <i class="fab fa-whatsapp"></i> Send Booking to WhatsApp
+                    </button>
+                </div>
+                
                 <div class="confirmation-actions">
                     <a href="services.html" class="cta-button">
                         <i class="fas fa-compass"></i> Explore Our Programs
@@ -179,8 +187,8 @@
         const availableSlots = { // Admin defines available slots here (YYYY-MM-DD: [HH:MM, HH:MM])
             // Example: "2024-03-15": ["10:00", "14:00", "18:00"], (Add more dates and times)
             // THIS IS THE DEMO DATA - REPLACE WITH ACTUALS
-            "2025-06-01": ["09:00", "10:30", "15:00"],
-            "2025-06-02": ["10:00", "11:30", "14:00", "16:30"],
+            "2025-06-10": ["09:00", "10:30", "15:00"],
+            "2025-06-11": ["10:00", "11:30", "14:00", "16:30"],
             "2025-06-03": ["09:00", "10:30", "15:00"],
             "2025-06-04": ["10:00", "14:00"],
             "2025-06-05": ["11:00", "15:30"],
@@ -502,6 +510,14 @@
                         </ul>
                     </div>
 
+                    <div class="whatsapp-booking-section">
+                        <h3>📱 Instant Confirmation via WhatsApp</h3>
+                        <p>For immediate confirmation and to ensure we receive your booking, click below to send your booking details directly to our WhatsApp:</p>
+                        <button id="sendWhatsAppBooking" class="cta-button whatsapp-btn" style="background: #25d366; margin: 1rem 0;">
+                            <i class="fab fa-whatsapp"></i> Send Booking to WhatsApp
+                        </button>
+                    </div>
+
                     <div class="confirmation-actions">
                         <button onclick="bookAnotherDemo()" class="cta-button cta-button-secondary">
                             <i class="fas fa-plus"></i> Book Another Demo
@@ -567,6 +583,22 @@
 
             // Scroll to confirmation
             confirmationSection.scrollIntoView({ behavior: 'smooth' });
+
+            // Add WhatsApp button functionality
+            const sendWhatsAppBtn = document.getElementById('sendWhatsAppBooking');
+            if (sendWhatsAppBtn) {
+                sendWhatsAppBtn.addEventListener('click', function() {
+                    if (typeof sendDemoBookingToWhatsApp === 'function') {
+                        sendDemoBookingToWhatsApp(bookingData);
+                    } else {
+                        // Fallback if function not loaded
+                        const message = `🎯 NEW DEMO CLASS BOOKING\n\n👤 Student: ${bookingData.firstName} ${bookingData.lastName}\n📧 Email: ${bookingData.email}\n📅 Date: ${bookingData.date}\n⏰ Time: ${bookingData.time}\n🎓 French Level: ${bookingData.frenchLevel}`;
+                        const phoneNumber = "+13653062049";
+                        const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+                        window.open(whatsappURL, '_blank');
+                    }
+                });
+            }
         }
 
         function bookAnotherDemo() {

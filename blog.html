@@ -4,14 +4,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>French GTA BLOGS: Ready to serve you</title>
-    <meta name="description" content="Get Updated with new IRCC news">
-    <meta name="keywords" content="Blog, French GTA, IRCC, Canada, PR, French GTA Blogs, French Classes, Greater toronto area">
+    <title>French Learning Blog | Tips, News & Insights | FRENCH.GTA</title>
+    <meta name="description" content="Stay updated with the latest French learning tips, IRCC immigration news, TEF exam guides, and language learning insights from FRENCH.GTA experts.">
+    <meta name="keywords" content="French blog, French learning tips, TEF exam preparation, IRCC news, Canada immigration, French classes Toronto, French GTA blog, French language learning, bilingual career">
+    
+    <!-- Open Graph tags for social sharing -->
+    <meta property="og:title" content="French Learning Blog | FRENCH.GTA">
+    <meta property="og:description" content="Expert insights on French learning, TEF preparation, and Canadian immigration through French proficiency.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://frenchgta.ca/blog.html">
+    <meta property="og:image" content="img/french.gta logo.jpg">
+    
+    <!-- Twitter Card tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="French Learning Blog | FRENCH.GTA">
+    <meta name="twitter:description" content="Expert insights on French learning, TEF preparation, and Canadian immigration.">
+    
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="img/french.gta logo.jpg" type="image/x-icon">
+    <link rel="canonical" href="https://frenchgta.ca/blog.html">
     <script src="script.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "name": "FRENCH.GTA Blog",
+        "description": "French learning tips, TEF exam preparation, and Canadian immigration insights",
+        "url": "https://frenchgta.ca/blog.html",
+        "publisher": {
+            "@type": "Organization",
+            "name": "FRENCH.GTA",
+            "url": "https://frenchgta.ca"
+        }
+    }
+    </script>
 </head>
 
 <body>
@@ -19,46 +50,293 @@
 
     <main class="main-content blog-container">
         <section class="hero blog-hero">
-            <h1>Our Blog</h1>
-            <p>Stay updated with the latest news, tips, and insights.</p>
+            <div class="hero-content">
+                <h1>📚 French Learning Blog</h1>
+                <p class="hero-subtitle">Expert insights, tips, and news to accelerate your French journey</p>
+                
+                <!-- Blog Categories/Tags -->
+                <div class="blog-categories">
+                    <button class="category-btn active" data-category="all">All Posts</button>
+                    <button class="category-btn" data-category="learning-tips">Learning Tips</button>
+                    <button class="category-btn" data-category="tef-exam">TEF Exam</button>
+                    <button class="category-btn" data-category="immigration">Immigration</button>
+                    <button class="category-btn" data-category="success-stories">Success Stories</button>
+                </div>
+                
+                <!-- Search Bar -->
+                <div class="blog-search">
+                    <div class="search-container">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="blogSearch" placeholder="Search blog posts...">
+                    </div>
+                </div>
+            </div>
         </section>
 
-        <!-- Blog List: Manually add your blog post items here -->
+        <!-- Featured/Latest Posts -->
+        <section class="featured-posts">
+            <h2>🌟 Featured Articles</h2>
+            <div class="featured-grid">
+                <article class="featured-post" data-category="tef-exam">
+                    <div class="post-image">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="post-content">
+                        <div class="post-meta">
+                            <span class="category">TEF Exam</span>
+                            <span class="date">January 15, 2024</span>
+                        </div>
+                        <h3>How to Prepare for the TEF Canada Exam & Ace Your Canadian Immigration Goals</h3>
+                        <p>Master the TEF Canada with our comprehensive preparation guide. Learn section-by-section strategies, expert tips, and proven methods for Canadian immigration success.</p>
+                        <a href="blog/tef-canada-exam-guide-2024.html" class="read-more">Read Full Article <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+                
+                <article class="featured-post" data-category="immigration">
+                    <div class="post-image">
+                        <i class="fas fa-flag"></i>
+                    </div>
+                    <div class="post-content">
+                        <div class="post-meta">
+                            <span class="category">Immigration</span>
+                            <span class="date">Coming Soon</span>
+                        </div>
+                        <h3>French Proficiency for Canadian Immigration: What You Need to Know</h3>
+                        <p>Discover how French language skills can boost your CRS score and improve your chances of Canadian permanent residence.</p>
+                        <a href="blog_post_french-canadian-immigration-2024.html" class="read-more">Read Full Article <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Blog List -->
         <section class="blog-list">
-            <!-- Example Blog Item (copy and modify for each post) -->
-            <!--
-            <div class="blog-item">
-                <h2>Blog Post Title</h2>
-                <p>Summary of the blog post (e.g., first 200 characters)...</p>
-                <a href="blog_post_your-slug-here.html" class="read-more">Read More</a>
+            <h2>📝 All Articles</h2>
+            
+            <!-- New TEF Canada Blog Post -->
+            <article class="blog-item" data-category="tef-exam">
+                <div class="post-header">
+                    <div class="post-meta">
+                        <span class="category">TEF Exam</span>
+                        <span class="read-time"><i class="fas fa-clock"></i> 15 min read</span>
+                        <span class="date">January 15, 2024</span>
+                    </div>
+                    <div class="post-tags">
+                        <span class="tag">TEF Canada</span>
+                        <span class="tag">Immigration</span>
+                        <span class="tag">CRS Score</span>
+                        <span class="tag">Expert Guide</span>
+                    </div>
+                </div>
+                <h3>How to Prepare for the TEF Canada Exam & Ace Your Canadian Immigration Goals</h3>
+                <p>Comprehensive guide to mastering the TEF Canada exam for Canadian immigration. Learn everything about the four sections, strategic preparation tips, scoring system, and how FRENCH.GTA can help you achieve your target CLB levels for Express Entry success.</p>
+                <div class="post-footer">
+                    <a href="blog/tef-canada-exam-guide-2024.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    <div class="post-social">
+                        <button class="share-btn" onclick="sharePost('How to Prepare for the TEF Canada Exam & Ace Your Canadian Immigration Goals', 'blog/tef-canada-exam-guide-2024.html')">
+                            <i class="fas fa-share-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- Existing Blog Posts -->
+            <article class="blog-item" data-category="tef-exam">
+                <div class="post-header">
+                    <div class="post-meta">
+                        <span class="category">TEF Exam</span>
+                        <span class="read-time"><i class="fas fa-clock"></i> 5 min read</span>
+                    </div>
+                    <div class="post-tags">
+                        <span class="tag">TEF</span>
+                        <span class="tag">Preparation</span>
+                        <span class="tag">Study Tips</span>
+                    </div>
+                </div>
+                <h3>How to Prepare for the TEF Exam</h3>
+                <p>Learn the best strategies and tips to excel in the TEF exam and boost your Canadian immigration prospects. From understanding the test format to mastering each section.</p>
+                <div class="post-footer">
+                    <a href="blog_post_how-to-prepare-for-tef-exam.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    <div class="post-social">
+                        <button class="share-btn" onclick="sharePost('How to Prepare for the TEF Exam', 'blog_post_how-to-prepare-for-tef-exam.html')">
+                            <i class="fas fa-share-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            </article>
+            
+            <article class="blog-item" data-category="learning-tips">
+                <div class="post-header">
+                    <div class="post-meta">
+                        <span class="category">Learning Tips</span>
+                        <span class="read-time"><i class="fas fa-clock"></i> 4 min read</span>
+                    </div>
+                    <div class="post-tags">
+                        <span class="tag">Benefits</span>
+                        <span class="tag">Career</span>
+                        <span class="tag">Personal Growth</span>
+                    </div>
+                </div>
+                <h3>Top Benefits of Learning French</h3>
+                <p>Discover how learning French can open doors to new opportunities in your career, education, and personal life. From global business to cultural enrichment.</p>
+                <div class="post-footer">
+                    <a href="blog_post_top-benefits-of-learning-french.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    <div class="post-social">
+                        <button class="share-btn" onclick="sharePost('Top Benefits of Learning French', 'blog_post_top-benefits-of-learning-french.html')">
+                            <i class="fas fa-share-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            </article>
+            
+            <article class="blog-item" data-category="learning-tips">
+                <div class="post-header">
+                    <div class="post-meta">
+                        <span class="category">Learning Tips</span>
+                        <span class="read-time"><i class="fas fa-clock"></i> 6 min read</span>
+                    </div>
+                    <div class="post-tags">
+                        <span class="tag">Online Learning</span>
+                        <span class="tag">Interactive</span>
+                        <span class="tag">Technology</span>
+                    </div>
+                </div>
+                <h3>Interactive Online French Classes</h3>
+                <p>Explore how FRENCH.GTA's interactive online classes make learning French engaging and effective. Modern teaching methods meet traditional French excellence.</p>
+                <div class="post-footer">
+                    <a href="blog_post_interactive-online-french-classes.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    <div class="post-social">
+                        <button class="share-btn" onclick="sharePost('Interactive Online French Classes', 'blog_post_interactive-online-french-classes.html')">
+                            <i class="fas fa-share-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- Placeholder for future posts -->
+            <div class="coming-soon-posts">
+                <h3>🚀 Coming Soon</h3>
+                <div class="upcoming-topics">
+                    <div class="upcoming-item">
+                        <i class="fas fa-lightbulb"></i>
+                        <span>French Grammar Made Simple: Common Mistakes to Avoid</span>
+                    </div>
+                    <div class="upcoming-item">
+                        <i class="fas fa-users"></i>
+                        <span>Student Success Stories: From Beginner to Bilingual</span>
+                    </div>
+                    <div class="upcoming-item">
+                        <i class="fas fa-briefcase"></i>
+                        <span>Career Opportunities with French Proficiency in Canada</span>
+                    </div>
+                    <div class="upcoming-item">
+                        <i class="fas fa-globe-americas"></i>
+                        <span>Latest IRCC Updates: How French Skills Impact Your Application</span>
+                    </div>
+                </div>
             </div>
-            -->
-            <p>No blog posts yet. Check back soon!</p> <!- Default message ->
         </section>
 
-        
-
-        <section class="additional-blogs">
-            <div class="blog-item">
-                <h4>How to Prepare for the TEF Exam</h4>
-                <p>Learn the best strategies and tips to excel in the TEF exam and boost your Canadian immigration prospects.</p>
-                <a href="blog_post_how-to-prepare-for-tef-exam.html" class="read-more">Read More</a>
-            </div>
-            <div class="blog-item">
-                <h4>Top Benefits of Learning French</h4>
-                <p>Discover how learning French can open doors to new opportunities in your career, education, and personal life.</p>
-                <a href="blog_post_top-benefits-of-learning-french.html" class="read-more">Read More</a>
-            </div>
-            <div class="blog-item">
-                <h4>Interactive Online French Classes</h4>
-                <p>Explore how FRENCH.GTA's interactive online classes make learning French engaging and effective.</p>
-                <a href="blog_post_interactive-online-french-classes.html" class="read-more">Read More</a>
+        <!-- Newsletter Signup -->
+        <section class="blog-newsletter">
+            <div class="newsletter-content">
+                <h3>📧 Stay Updated</h3>
+                <p>Get the latest French learning tips and immigration news delivered to your inbox</p>
+                <div class="newsletter-form">
+                    <input type="email" placeholder="Enter your email address" id="newsletterEmail">
+                    <button onclick="subscribeNewsletter()" class="cta-button">
+                        <i class="fas fa-paper-plane"></i> Subscribe
+                    </button>
+                </div>
             </div>
         </section>
     </main>
 
     <div id="footer-placeholder"></div>
 
+    <script>
+        // Blog functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Category filtering
+            const categoryBtns = document.querySelectorAll('.category-btn');
+            const blogItems = document.querySelectorAll('.blog-item');
+            
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const category = this.dataset.category;
+                    
+                    // Update active button
+                    categoryBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Filter blog items
+                    blogItems.forEach(item => {
+                        if (category === 'all' || item.dataset.category === category) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // Search functionality
+            const searchInput = document.getElementById('blogSearch');
+            if (searchInput) {
+                searchInput.addEventListener('input', function() {
+                    const searchTerm = this.value.toLowerCase();
+                    
+                    blogItems.forEach(item => {
+                        const title = item.querySelector('h3').textContent.toLowerCase();
+                        const content = item.querySelector('p').textContent.toLowerCase();
+                        
+                        if (title.includes(searchTerm) || content.includes(searchTerm)) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            }
+        });
+        
+        function sharePost(title, url) {
+            if (navigator.share) {
+                navigator.share({
+                    title: title,
+                    url: window.location.origin + '/' + url
+                });
+            } else {
+                // Fallback to copying URL
+                const fullUrl = window.location.origin + '/' + url;
+                navigator.clipboard.writeText(fullUrl).then(() => {
+                    alert('Link copied to clipboard!');
+                });
+            }
+        }
+        
+        function subscribeNewsletter() {
+            const email = document.getElementById('newsletterEmail').value;
+            if (email && validateEmail(email)) {
+                // Here you would typically send to your newsletter service
+                // For now, we'll use WhatsApp
+                const message = `📧 Newsletter Subscription Request\n\nEmail: ${email}\n\nPlease add me to the FRENCH.GTA newsletter for French learning tips and updates.`;
+                const phoneNumber = "+13653062049";
+                const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+                window.open(whatsappURL, '_blank');
+                
+                document.getElementById('newsletterEmail').value = '';
+                alert('Thank you! We\'ll add you to our newsletter list.');
+            } else {
+                alert('Please enter a valid email address.');
+            }
+        }
+        
+        function validateEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+    </script>
 </body>
 
 </html>

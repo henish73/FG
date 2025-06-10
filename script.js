@@ -121,10 +121,60 @@ function closePaymentModal() {
     }
 }
 
+// WhatsApp Integration Functions
+function createFloatingWhatsAppButton() {
+    // Don't create if already exists
+    if (document.getElementById('whatsapp-float-btn')) return;
+    
+    const whatsappButton = document.createElement('a');
+    whatsappButton.id = 'whatsapp-float-btn';
+    whatsappButton.className = 'whatsapp-float';
+    whatsappButton.innerHTML = '<i class="fab fa-whatsapp"></i>';
+    whatsappButton.onclick = function(e) {
+        e.preventDefault();
+        openGeneralWhatsApp();
+    };
+    
+    document.body.appendChild(whatsappButton);
+}
+
+function openGeneralWhatsApp() {
+    const message = "Hello FRENCH.GTA! 👋 I'm interested in your French courses. Can you help me learn more?";
+    const phoneNumber = "+13653062049"; // Your WhatsApp number
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappURL, '_blank');
+}
+
+function sendDemoBookingToWhatsApp(bookingData) {
+    const [year, month, day] = bookingData.date.split('-').map(Number);
+    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const dateDisplay = `${monthNames[month - 1]} ${day}, ${year}`;
+    
+    const message = `🎯 NEW DEMO CLASS BOOKING
+    
+👤 Student: ${bookingData.firstName} ${bookingData.lastName}
+📧 Email: ${bookingData.email}
+📅 Date: ${dateDisplay}
+⏰ Time: ${bookingData.time}
+🎓 French Level: ${bookingData.frenchLevel}
+${bookingData.notes ? `📝 Notes: ${bookingData.notes}` : ''}
+
+✅ This booking was submitted through the website demo registration form.
+
+Please confirm this demo class slot and send the Google Meet link to the student.`;
+
+    const phoneNumber = "+13653062049"; // Your WhatsApp number
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappURL, '_blank');
+}
+
 // --- The rest of your script.js code (unchanged) ---
 
 document.addEventListener('DOMContentLoaded', function () {
     try {
+        // --- Create Floating WhatsApp Button ---
+        createFloatingWhatsAppButton();
+
         // --- Preloader ---
         const preloader = document.querySelector('.preloader');
         if (preloader) {
