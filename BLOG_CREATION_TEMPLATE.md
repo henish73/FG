@@ -162,11 +162,47 @@ blog/
 ```
 
 ### **Step 3: Create the HTML File**
-1. **Copy TEF Canada template** as starting point
-2. **Update all meta tags** and titles
-3. **Replace content** while keeping structure
-4. **Add internal links** to services, demo registration
-5. **Include FRENCH.GTA mentions** naturally
+1. **Copy**: `blog/tef-canada-exam-guide-2024.html` as starting point
+2. **Rename**: To your new topic
+3. **Find & Replace**: 
+   - TEF Canada → [Your Topic]
+   - Exam preparation → [Your Focus]
+   - Immigration → [Your Context]
+
+### **🎯 IMPORTANT: Blog Posts Without Header**
+
+To ensure your blog posts display **without the header navigation** (like the TEF Canada post), include this CSS in the `<head>` section:
+
+```css
+<style>
+    /* Blog-specific styles without header */
+    body {
+        padding-top: 0 !important;
+        margin: 0;
+        font-family: 'Inter', sans-serif;
+    }
+    
+    /* Hide header completely on blog posts */
+    header,
+    .responsive-header,
+    #header-placeholder {
+        display: none !important;
+    }
+    
+    .blog-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+    
+    /* Add your other blog-specific styles here */
+</style>
+```
+
+This CSS will:
+- ✅ **Hide the header** only on blog posts
+- ✅ **Remove top padding** that was meant for the fixed header
+- ✅ **Keep other pages unchanged** with normal header functionality
 
 ### **Step 4: Add to Blog Index**
 Update `blog.html` with new post entry:

@@ -40,16 +40,84 @@
             font-size: 1.1rem;
             margin-bottom: 1rem;
         }
+        .floating-whatsapp-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #25D366;
+            color: white !important;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            z-index: 9999;
+            transition: all 0.3s ease;
+            font-size: 1.5rem;
+        }
+
+        .floating-whatsapp-btn:hover {
+            background: #128C7E;
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+            color: white !important;
+        }
+
+        .floating-whatsapp-btn:before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: #25D366;
+            animation: whatsapp-pulse 2s infinite;
+            z-index: -1;
+        }
+
+        @keyframes whatsapp-pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 0.7;
+            }
+            100% {
+                transform: scale(1.4);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .floating-whatsapp-btn {
+                width: 50px;
+                height: 50px;
+                bottom: 15px;
+                right: 15px;
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .floating-whatsapp-btn {
+                width: 45px;
+                height: 45px;
+                bottom: 10px;
+                right: 10px;
+                font-size: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
     <div id="header-placeholder"></div>
 
     <main class="main-content course-syllabus">
-        <header class="page-header" style="text-align: center; margin-bottom: 2rem;">
-            <h1>Our French Language Curriculum</h1>
-            <p>Discover the structured path to French fluency with FRENCH.GTA. Our courses are aligned with the Common European Framework of Reference for Languages (CEFR).</p>
-        </header>
+        
 
         <section class="syllabus-intro">
             <h2>Course Approach</h2>
@@ -227,6 +295,12 @@
         </section>
 
     </main>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/+13653062049?text=Hi%20FRENCH.GTA%2C%20Can%20i%20know%20more%20about%20it?" 
+       target="_blank" class="floating-whatsapp-btn">
+       <i class="fab fa-whatsapp"></i>
+    </a>
 
     <div id="footer-placeholder"></div>
 </body>

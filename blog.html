@@ -20,13 +20,14 @@
     <meta name="twitter:title" content="French Learning Blog | FRENCH.GTA">
     <meta name="twitter:description" content="Expert insights on French learning, TEF preparation, and Canadian immigration.">
     
+    <!-- Enhanced CSS System -->
+    <link rel="stylesheet" href="enhanced-global-styles.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="img/french.gta logo.jpg" type="image/x-icon">
     <link rel="canonical" href="https://frenchgta.ca/blog.html">
     <script src="script.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
     
     <!-- Structured Data for SEO -->
     <script type="application/ld+json">
@@ -48,205 +49,190 @@
 <body>
     <div id="header-placeholder"></div>
 
-    <main class="main-content blog-container">
+    <main class="main-content">
+        <!-- Blog Hero Section -->
         <section class="hero blog-hero">
-            <div class="hero-content">
-                <h1>📚 French Learning Blog</h1>
-                <p class="hero-subtitle">Expert insights, tips, and news to accelerate your French journey</p>
-                
-                <!-- Blog Categories/Tags -->
-                <div class="blog-categories">
-                    <button class="category-btn active" data-category="all">All Posts</button>
-                    <button class="category-btn" data-category="learning-tips">Learning Tips</button>
-                    <button class="category-btn" data-category="tef-exam">TEF Exam</button>
-                    <button class="category-btn" data-category="immigration">Immigration</button>
-                    <button class="category-btn" data-category="success-stories">Success Stories</button>
-                </div>
-                
-                <!-- Search Bar -->
-                <div class="blog-search">
-                    <div class="search-container">
-                        <i class="fas fa-search"></i>
-                        <input type="text" id="blogSearch" placeholder="Search blog posts...">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>📚 French Learning Blog</h1>
+                    <p class="hero-subtitle">Expert insights, tips, and news to accelerate your French journey</p>
+                    
+                    <!-- Blog Categories/Tags -->
+                    <div class="blog-categories mb-lg">
+                        <button class="btn btn-small category-btn active" data-category="all">All Posts</button>
+                        <button class="btn btn-small category-btn" data-category="learning-tips">Learning Tips</button>
+                        <button class="btn btn-small category-btn" data-category="tef-exam">TEF Exam</button>
+                        <button class="btn btn-small category-btn" data-category="immigration">Immigration</button>
+                        <button class="btn btn-small category-btn" data-category="success-stories">Success Stories</button>
+                    </div>
+                    
+                    <!-- Search Bar -->
+                    <div class="blog-search">
+                        <div class="search-container">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="blogSearch" placeholder="Search blog posts..." class="form-control">
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Featured/Latest Posts -->
-        <section class="featured-posts">
-            <h2>🌟 Featured Articles</h2>
-            <div class="featured-grid">
-                <article class="featured-post" data-category="tef-exam">
-                    <div class="post-image">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <div class="post-content">
-                        <div class="post-meta">
-                            <span class="category">TEF Exam</span>
-                            <span class="date">January 15, 2024</span>
+        <section class="section-sm">
+            <div class="container">
+                <h2 class="text-center mb-xl">🌟 Featured Articles</h2>
+                <div class="grid grid-auto-fit featured-grid">
+                    <article class="card featured-post" data-category="tef-exam">
+                        <div class="post-image mb-md">
+                            <i class="fas fa-graduation-cap text-primary" style="font-size: 3rem;"></i>
                         </div>
-                        <h3>How to Prepare for the TEF Canada Exam & Ace Your Canadian Immigration Goals</h3>
-                        <p>Master the TEF Canada with our comprehensive preparation guide. Learn section-by-section strategies, expert tips, and proven methods for Canadian immigration success.</p>
-                        <a href="blog/tef-canada-exam-guide-2024.html" class="read-more">Read Full Article <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </article>
-                
-                <article class="featured-post" data-category="immigration">
-                    <div class="post-image">
-                        <i class="fas fa-flag"></i>
-                    </div>
-                    <div class="post-content">
-                        <div class="post-meta">
-                            <span class="category">Immigration</span>
-                            <span class="date">Coming Soon</span>
+                        <div class="post-content">
+                            <div class="post-meta mb-md">
+                                <span class="post-category">TEF Exam</span>
+                                <span class="post-date text-sm">January 15, 2024</span>
+                            </div>
+                            <h3 class="mb-md">How to Prepare for the TEF Canada Exam & Ace Your Canadian Immigration Goals</h3>
+                            <p class="mb-md">Master the TEF Canada with our comprehensive preparation guide. Learn section-by-section strategies, expert tips, and proven methods for Canadian immigration success.</p>
+                            <a href="blog/tef-canada-exam-guide-2024.html" class="btn btn-primary">
+                                Read Full Article <i class="fas fa-arrow-right"></i>
+                            </a>
                         </div>
-                        <h3>French Proficiency for Canadian Immigration: What You Need to Know</h3>
-                        <p>Discover how French language skills can boost your CRS score and improve your chances of Canadian permanent residence.</p>
-                        <a href="blog_post_french-canadian-immigration-2024.html" class="read-more">Read Full Article <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </article>
+                    </article>
+                    
+                    <article class="card featured-post" data-category="immigration">
+                        <div class="post-image mb-md">
+                            <i class="fas fa-flag text-primary" style="font-size: 3rem;"></i>
+                        </div>
+                        <div class="post-content">
+                            <div class="post-meta mb-md">
+                                <span class="post-category">Immigration</span>
+                                <span class="post-date text-sm">January 16, 2024</span>
+                            </div>
+                            <h3 class="mb-md">Benefits of Learning French Language: Your Path to Canadian PR & Global Opportunities</h3>
+                            <p class="mb-md">Discover how French proficiency opens doors to Canadian PR, global travel, and career advancement with strategic Express Entry advantages.</p>
+                            <a href="blog/benefits-learning-french-canadian-pr-2024.html" class="btn btn-primary">
+                                Read Full Article <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+                </div>
             </div>
         </section>
 
         <!-- Blog List -->
-        <section class="blog-list">
-            <h2>📝 All Articles</h2>
-            
-            <!-- New TEF Canada Blog Post -->
-            <article class="blog-item" data-category="tef-exam">
-                <div class="post-header">
-                    <div class="post-meta">
-                        <span class="category">TEF Exam</span>
-                        <span class="read-time"><i class="fas fa-clock"></i> 15 min read</span>
-                        <span class="date">January 15, 2024</span>
-                    </div>
-                    <div class="post-tags">
-                        <span class="tag">TEF Canada</span>
-                        <span class="tag">Immigration</span>
-                        <span class="tag">CRS Score</span>
-                        <span class="tag">Expert Guide</span>
-                    </div>
+        <section class="section-sm">
+            <div class="container">
+                <h2 class="text-center mb-xl">📝 All Articles</h2>
+                
+                <div class="blog-list-container">
+                    <!-- New TEF Canada Blog Post -->
+                    <article class="card blog-item mb-lg" data-category="tef-exam">
+                        <div class="post-header mb-md">
+                            <div class="post-meta mb-sm">
+                                <span class="post-category">TEF Exam</span>
+                                <span class="post-read-time text-sm"><i class="fas fa-clock"></i> 15 min read</span>
+                                <span class="post-date text-sm">January 15, 2024</span>
+                            </div>
+                            <div class="post-tags mb-sm">
+                                <span class="tag">TEF Canada</span>
+                                <span class="tag">Immigration</span>
+                                <span class="tag">CRS Score</span>
+                                <span class="tag">Expert Guide</span>
+                            </div>
+                        </div>
+                        <h3 class="mb-md">How to Prepare for the TEF Canada Exam & Ace Your Canadian Immigration Goals</h3>
+                        <p class="mb-md">Comprehensive guide to mastering the TEF Canada exam for Canadian immigration. Learn everything about the four sections, strategic preparation tips, scoring system, and how FRENCH.GTA can help you achieve your target CLB levels for Express Entry success.</p>
+                        <div class="post-footer">
+                            <a href="blog/tef-canada-exam-guide-2024.html" class="btn btn-primary">
+                                Read More <i class="fas fa-arrow-right"></i>
+                            </a>
+                            <div class="post-social">
+                                <button class="btn btn-small btn-secondary" onclick="sharePost('How to Prepare for the TEF Canada Exam & Ace Your Canadian Immigration Goals', 'blog/tef-canada-exam-guide-2024.html')">
+                                    <i class="fas fa-share-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <!-- New French Benefits Blog Post -->
+                    <article class="card blog-item mb-lg" data-category="learning-tips">
+                        <div class="post-header mb-md">
+                            <div class="post-meta mb-sm">
+                                <span class="post-category">French Language Benefits</span>
+                                <span class="post-read-time text-sm"><i class="fas fa-clock"></i> 12 min read</span>
+                                <span class="post-date text-sm">January 16, 2024</span>
+                            </div>
+                            <div class="post-tags mb-sm">
+                                <span class="tag">Canadian PR</span>
+                                <span class="tag">Global Opportunities</span>
+                                <span class="tag">Career Benefits</span>
+                                <span class="tag">Express Entry</span>
+                            </div>
+                        </div>
+                        <h3 class="mb-md">Benefits of Learning French Language: Your Path to Canadian PR & Global Opportunities</h3>
+                        <p class="mb-md">Discover how learning French opens doors to Canadian PR, global travel, career advancement, and personal growth. Learn about the strategic advantages of French proficiency for Express Entry, Francophone immigration streams, and worldwide opportunities with FRENCH.GTA's expert guidance.</p>
+                        <div class="post-footer">
+                            <a href="blog/benefits-learning-french-canadian-pr-2024.html" class="btn btn-primary">
+                                Read More <i class="fas fa-arrow-right"></i>
+                            </a>
+                            <div class="post-social">
+                                <button class="btn btn-small btn-secondary" onclick="sharePost('Benefits of Learning French Language: Your Path to Canadian PR & Global Opportunities', 'blog/benefits-learning-french-canadian-pr-2024.html')">
+                                    <i class="fas fa-share-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
                 </div>
-                <h3>How to Prepare for the TEF Canada Exam & Ace Your Canadian Immigration Goals</h3>
-                <p>Comprehensive guide to mastering the TEF Canada exam for Canadian immigration. Learn everything about the four sections, strategic preparation tips, scoring system, and how FRENCH.GTA can help you achieve your target CLB levels for Express Entry success.</p>
-                <div class="post-footer">
-                    <a href="blog/tef-canada-exam-guide-2024.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
-                    <div class="post-social">
-                        <button class="share-btn" onclick="sharePost('How to Prepare for the TEF Canada Exam & Ace Your Canadian Immigration Goals', 'blog/tef-canada-exam-guide-2024.html')">
-                            <i class="fas fa-share-alt"></i>
-                        </button>
-                    </div>
-                </div>
-            </article>
-            
-            <!-- Existing Blog Posts -->
-            <article class="blog-item" data-category="tef-exam">
-                <div class="post-header">
-                    <div class="post-meta">
-                        <span class="category">TEF Exam</span>
-                        <span class="read-time"><i class="fas fa-clock"></i> 5 min read</span>
-                    </div>
-                    <div class="post-tags">
-                        <span class="tag">TEF</span>
-                        <span class="tag">Preparation</span>
-                        <span class="tag">Study Tips</span>
-                    </div>
-                </div>
-                <h3>How to Prepare for the TEF Exam</h3>
-                <p>Learn the best strategies and tips to excel in the TEF exam and boost your Canadian immigration prospects. From understanding the test format to mastering each section.</p>
-                <div class="post-footer">
-                    <a href="blog_post_how-to-prepare-for-tef-exam.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
-                    <div class="post-social">
-                        <button class="share-btn" onclick="sharePost('How to Prepare for the TEF Exam', 'blog_post_how-to-prepare-for-tef-exam.html')">
-                            <i class="fas fa-share-alt"></i>
-                        </button>
-                    </div>
-                </div>
-            </article>
-            
-            <article class="blog-item" data-category="learning-tips">
-                <div class="post-header">
-                    <div class="post-meta">
-                        <span class="category">Learning Tips</span>
-                        <span class="read-time"><i class="fas fa-clock"></i> 4 min read</span>
-                    </div>
-                    <div class="post-tags">
-                        <span class="tag">Benefits</span>
-                        <span class="tag">Career</span>
-                        <span class="tag">Personal Growth</span>
-                    </div>
-                </div>
-                <h3>Top Benefits of Learning French</h3>
-                <p>Discover how learning French can open doors to new opportunities in your career, education, and personal life. From global business to cultural enrichment.</p>
-                <div class="post-footer">
-                    <a href="blog_post_top-benefits-of-learning-french.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
-                    <div class="post-social">
-                        <button class="share-btn" onclick="sharePost('Top Benefits of Learning French', 'blog_post_top-benefits-of-learning-french.html')">
-                            <i class="fas fa-share-alt"></i>
-                        </button>
-                    </div>
-                </div>
-            </article>
-            
-            <article class="blog-item" data-category="learning-tips">
-                <div class="post-header">
-                    <div class="post-meta">
-                        <span class="category">Learning Tips</span>
-                        <span class="read-time"><i class="fas fa-clock"></i> 6 min read</span>
-                    </div>
-                    <div class="post-tags">
-                        <span class="tag">Online Learning</span>
-                        <span class="tag">Interactive</span>
-                        <span class="tag">Technology</span>
-                    </div>
-                </div>
-                <h3>Interactive Online French Classes</h3>
-                <p>Explore how FRENCH.GTA's interactive online classes make learning French engaging and effective. Modern teaching methods meet traditional French excellence.</p>
-                <div class="post-footer">
-                    <a href="blog_post_interactive-online-french-classes.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
-                    <div class="post-social">
-                        <button class="share-btn" onclick="sharePost('Interactive Online French Classes', 'blog_post_interactive-online-french-classes.html')">
-                            <i class="fas fa-share-alt"></i>
-                        </button>
-                    </div>
-                </div>
-            </article>
-            
-            <!-- Placeholder for future posts -->
-            <div class="coming-soon-posts">
-                <h3>🚀 Coming Soon</h3>
-                <div class="upcoming-topics">
-                    <div class="upcoming-item">
-                        <i class="fas fa-lightbulb"></i>
-                        <span>French Grammar Made Simple: Common Mistakes to Avoid</span>
-                    </div>
-                    <div class="upcoming-item">
-                        <i class="fas fa-users"></i>
-                        <span>Student Success Stories: From Beginner to Bilingual</span>
-                    </div>
-                    <div class="upcoming-item">
-                        <i class="fas fa-briefcase"></i>
-                        <span>Career Opportunities with French Proficiency in Canada</span>
-                    </div>
-                    <div class="upcoming-item">
-                        <i class="fas fa-globe-americas"></i>
-                        <span>Latest IRCC Updates: How French Skills Impact Your Application</span>
+                
+                <!-- Placeholder for future posts -->
+                <div class="card coming-soon-posts mt-xl">
+                    <h3 class="mb-lg">🚀 Coming Soon</h3>
+                    <div class="grid grid-cols-2 upcoming-topics">
+                        <div class="upcoming-item">
+                            <i class="fas fa-lightbulb text-primary"></i>
+                            <span>How to Prepare for the TEF Exam: Complete Guide</span>
+                        </div>
+                        <div class="upcoming-item">
+                            <i class="fas fa-users text-primary"></i>
+                            <span>Student Success Stories: From Beginner to Bilingual</span>
+                        </div>
+                        <div class="upcoming-item">
+                            <i class="fas fa-briefcase text-primary"></i>
+                            <span>Career Opportunities with French Proficiency in Canada</span>
+                        </div>
+                        <div class="upcoming-item">
+                            <i class="fas fa-globe-americas text-primary"></i>
+                            <span>Latest IRCC Updates: How French Skills Impact Your Application</span>
+                        </div>
+                        <div class="upcoming-item">
+                            <i class="fas fa-heart text-primary"></i>
+                            <span>Top Benefits of Learning French</span>
+                        </div>
+                        <div class="upcoming-item">
+                            <i class="fas fa-laptop text-primary"></i>
+                            <span>Interactive Online French Classes</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Newsletter Signup -->
-        <section class="blog-newsletter">
-            <div class="newsletter-content">
-                <h3>📧 Stay Updated</h3>
-                <p>Get the latest French learning tips and immigration news delivered to your inbox</p>
-                <div class="newsletter-form">
-                    <input type="email" placeholder="Enter your email address" id="newsletterEmail">
-                    <button onclick="subscribeNewsletter()" class="cta-button">
-                        <i class="fas fa-paper-plane"></i> Subscribe
-                    </button>
+        <section class="section-sm">
+            <div class="container">
+                <div class="card blog-newsletter text-center">
+                    <div class="newsletter-content">
+                        <h3 class="mb-md">📧 Stay Updated</h3>
+                        <p class="mb-lg">Get the latest French learning tips and immigration news delivered to your inbox</p>
+                        <div class="newsletter-form">
+                            <div class="form-group">
+                                <input type="email" placeholder="Enter your email address" id="newsletterEmail" class="form-control">
+                            </div>
+                            <button onclick="subscribeNewsletter()" class="btn btn-primary btn-large">
+                                <i class="fas fa-paper-plane"></i> Subscribe
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -340,74 +326,3 @@
 </body>
 
 </html>
-
-<style>
-    /* Filter Form Styling - Removed as filter form is removed */
-
-    /* Basic Blog List Styling (Keep or modify as needed) */
-    .blog-container {
-        max-width: 900px;
-        margin: 0 auto;
-        padding: 2rem;
-    }
-
-    .blog-hero {
-        text-align: center;
-        margin-bottom: 2rem;
-    }
-
-    .blog-item {
-        border: 1px solid #eee;
-        padding: 1.5rem;
-        margin-bottom: 1.5rem;
-        border-radius: 5px;
-    }
-
-    .blog-item h2, .blog-item h4 {
-        margin-top: 0;
-    }
-
-    .read-more {
-        display: inline-block;
-        margin-top: 1rem;
-        color: #033357;
-        text-decoration: none;
-        font-weight: bold;
-    }
-
-    .read-more:hover {
-        text-decoration: underline;
-    }
-
-    /* Ad Section Styling (Keep or modify) */
-    .ad-section {
-        margin: 2rem 0;
-        text-align: center;
-    }
-
-    .ad-grid {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1rem;
-        justify-content: center;
-    }
-
-    .ad-item {
-        border: 1px solid #ddd;
-        padding: 1rem;
-        width: calc(33.333% - 1rem);
-        box-sizing: border-box;
-    }
-
-    .ad-item img {
-        max-width: 100%;
-        height: auto;
-        margin-bottom: 0.5rem;
-    }
-
-    /* Additional Blogs section styling (similar to blog-item) */
-    .additional-blogs .blog-item {
-        background-color: #f9f9f9;
-    }
-
-</style>

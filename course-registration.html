@@ -382,9 +382,108 @@
                 </div>
             </div>
         </section>
+
+        <!-- Single Demo CTA -->
+        <div class="final-cta-section">
+          <div class="cta-container">
+            <h3>🌟 Ready to Begin Your French Journey?</h3>
+            <p class="cta-subtext">Join <strong>184+ students</strong> who chose FRENCH.GTA for their French learning</p>
+            <div class="cta-buttons">
+              <a href="course-registration.html" class="cta-button cta-primary large">
+                <i class="fas fa-graduation-cap"></i> Register for Course Now
+              </a>
+              <a href="demo-registration.html" class="cta-button cta-secondary large">
+                <i class="fas fa-play-circle"></i> Start with FREE Demo First
+              </a>
+              <div class="cta-note">
+                <small>✨ Secure registration • ✨ Multiple payment options • ✨ Instant confirmation</small>
+              </div>
+            </div>
+          </div>
+        </div>
     </main>
 
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/+13653062049?text=Hi%20FRENCH.GTA%2C%20Can%20i%20know%20more%20about%20it?" 
+       target="_blank" class="floating-whatsapp-btn">
+       <i class="fab fa-whatsapp"></i>
+    </a>
+
     <div id="footer-placeholder"></div>
+
+    <style>
+      .floating-whatsapp-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: #25D366;
+        color: white !important;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+        z-index: 9999;
+        transition: all 0.3s ease;
+        font-size: 1.5rem;
+      }
+
+      .floating-whatsapp-btn:hover {
+        background: #128C7E;
+        transform: scale(1.1);
+        box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+        color: white !important;
+      }
+
+      .floating-whatsapp-btn:before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: #25D366;
+        animation: whatsapp-pulse 2s infinite;
+        z-index: -1;
+      }
+
+      @keyframes whatsapp-pulse {
+        0% {
+          transform: scale(1);
+          opacity: 1;
+        }
+        50% {
+          transform: scale(1.2);
+          opacity: 0.7;
+        }
+        100% {
+          transform: scale(1.4);
+          opacity: 0;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .floating-whatsapp-btn {
+          width: 50px;
+          height: 50px;
+          bottom: 15px;
+          right: 15px;
+          font-size: 1.2rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .floating-whatsapp-btn {
+          width: 45px;
+          height: 45px;
+          bottom: 10px;
+          right: 10px;
+          font-size: 1rem;
+        }
+      }
+    </style>
 
     <script>
         // Course Registration JavaScript
@@ -596,6 +695,7 @@
             // Collect form data
             registrationData = {
                 course: selectedCourse,
+                courseName: course.name,
                 firstName: document.getElementById('firstName').value,
                 lastName: document.getElementById('lastName').value,
                 email: document.getElementById('email').value,
@@ -604,20 +704,113 @@
                 learningGoals: document.getElementById('learningGoals').value,
                 timeline: document.getElementById('timeline').value,
                 specialRequests: document.getElementById('specialRequests').value,
-                paymentMethod: method
+                paymentMethod: method,
+                amount: course.price,
+                timestamp: new Date().toISOString()
             };
             
             if (method === 'paypal') {
-                // Redirect to PayPal
-                const paypalUrl = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=phenish125@gmail.com&item_name=${encodeURIComponent(course.paypalItemName)}&amount=${course.price}&currency_code=CAD&return=https://french.gta/course-registration.html?success=paypal&cancel_return=https://french.gta/course-registration.html`;
-                window.open(paypalUrl, '_blank');
-                
-                // Show success message for PayPal
-                showSuccessMessage('paypal');
+                // First store data and send to WhatsApp, then proceed to PayPal
+                storeDataAndProcessPayPal(registrationData, course);
             } else if (method === 'interac') {
+                // For Interac, send to WhatsApp immediately
+                sendRegistrationToWhatsApp(registrationData);
                 // Show success message for Interac
                 showSuccessMessage('interac');
             }
+        }
+
+        function storeDataAndProcessPayPal(regData, course) {
+            // Simulate database storage (in real implementation, this would be an API call)
+            localStorage.setItem('pendingRegistration', JSON.stringify(regData));
+            
+            // Send registration details to WhatsApp
+            sendRegistrationToWhatsApp(regData);
+            
+            // Show processing message briefly
+            showPayPalProcessingMessage(regData, course);
+            
+            // Proceed to PayPal after short delay to ensure WhatsApp opens
+            setTimeout(() => {
+                proceedToPayPal(regData, course);
+            }, 2000);
+        }
+
+        function sendRegistrationToWhatsApp(regData) {
+            const message = `🎓 NEW COURSE REGISTRATION
+
+👤 Student: ${regData.firstName} ${regData.lastName}
+📧 Email: ${regData.email}
+📱 Phone: ${regData.phone}
+🎯 Course: ${regData.courseName}
+💰 Amount: CAD $${regData.amount}/month
+💳 Payment Method: ${regData.paymentMethod.toUpperCase()}
+
+📊 Student Details:
+• French Level: ${regData.frenchLevel}
+• Learning Goals: ${regData.learningGoals}
+• Timeline: ${regData.timeline}
+${regData.specialRequests ? `• Special Requests: ${regData.specialRequests}` : ''}
+
+⏰ Registration Time: ${new Date().toLocaleString()}
+
+${regData.paymentMethod === 'paypal' ? '💳 PayPal payment in progress...' : '💸 Waiting for Interac e-Transfer'}
+
+Please process this registration. Thank you!`;
+
+            const phoneNumber = "+13653062049";
+            const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            
+            // Open WhatsApp in a new tab
+            window.open(whatsappURL, '_blank');
+        }
+
+        function showPayPalProcessingMessage(regData, course) {
+            document.querySelector('.registration-form-section').style.display = 'none';
+            document.getElementById('successSection').style.display = 'block';
+            
+            const processingHtml = `
+                <div class="success-details">
+                    <div class="processing-animation">
+                        <i class="fas fa-spinner fa-spin text-primary" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                    </div>
+                    <h3>📝 Registration Details Sent!</h3>
+                    <p>Your registration details for <strong>${course.name}</strong> have been sent to our team via WhatsApp.</p>
+                    <p>Redirecting you to PayPal for secure payment...</p>
+                    
+                    <div class="registration-summary" style="background: var(--neutral-50); padding: 1.5rem; border-radius: var(--radius-lg); margin: 1rem 0; text-align: left;">
+                        <h4>📋 Registration Summary:</h4>
+                        <p><strong>Student:</strong> ${regData.firstName} ${regData.lastName}</p>
+                        <p><strong>Course:</strong> ${regData.courseName}</p>
+                        <p><strong>Amount:</strong> CAD $${regData.amount}/month</p>
+                        <p><strong>Email:</strong> ${regData.email}</p>
+                    </div>
+                </div>
+            `;
+            
+            const nextStepsHtml = `
+                <li><i class="fas fa-whatsapp text-success"></i> Registration details sent to our WhatsApp</li>
+                <li><i class="fas fa-credit-card text-primary"></i> Complete your PayPal payment in the new window</li>
+                <li><i class="fas fa-envelope"></i> You'll receive confirmation email with course details</li>
+                <li><i class="fas fa-user-plus"></i> Our team will contact you within 24 hours to schedule classes</li>
+            `;
+            
+            document.getElementById('successMessage').innerHTML = processingHtml;
+            document.getElementById('nextStepsList').innerHTML = nextStepsHtml;
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        function proceedToPayPal(regData, course) {
+            // Create PayPal URL with custom return URL that includes registration data
+            const returnUrl = encodeURIComponent(`https://french.gta/course-registration.html?success=paypal&regId=${Date.now()}`);
+            const cancelUrl = encodeURIComponent(`https://french.gta/course-registration.html?cancelled=true`);
+            
+            const paypalUrl = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=phenish125@gmail.com&item_name=${encodeURIComponent(course.paypalItemName)}&amount=${course.price}&currency_code=CAD&return=${returnUrl}&cancel_return=${cancelUrl}&custom=${encodeURIComponent(JSON.stringify({email: regData.email, name: regData.firstName + ' ' + regData.lastName}))}`;
+            
+            // Open PayPal in the same window
+            window.location.href = paypalUrl;
         }
 
         function showSuccessMessage(paymentMethod) {
@@ -630,22 +823,30 @@
             if (paymentMethod === 'paypal') {
                 successHtml = `
                     <div class="success-details">
-                        <h3>Payment Processing</h3>
-                        <p>Your PayPal payment window has opened. Complete your payment to finalize your registration for <strong>${course.name}</strong>.</p>
+                        <h3>🎉 Payment Successful!</h3>
+                        <p>Your PayPal payment has been processed and your registration for <strong>${course.name}</strong> is complete!</p>
+                        
+                        <div class="success-actions" style="margin: 2rem 0;">
+                            <a href="https://wa.me/+13653062049?text=Hi%20FRENCH.GTA%2C%20I%20just%20completed%20my%20PayPal%20payment%20for%20${encodeURIComponent(course.name)}%20course.%20Please%20confirm%20my%20enrollment." target="_blank" class="btn btn-success btn-large">
+                                <i class="fab fa-whatsapp"></i> Confirm Payment via WhatsApp
+                            </a>
+                        </div>
                     </div>
                 `;
                 nextStepsHtml = `
-                    <li><i class="fas fa-credit-card"></i> Complete your PayPal payment in the new window</li>
-                    <li><i class="fas fa-envelope"></i> You'll receive a confirmation email with course details</li>
-                    <li><i class="fas fa-user-plus"></i> Our team will contact you within 24 hours to schedule your first class</li>
-                    <li><i class="fas fa-graduation-cap"></i> Start your French learning journey!</li>
+                    <li><i class="fas fa-check-circle text-success"></i> PayPal payment completed successfully</li>
+                    <li><i class="fas fa-whatsapp text-success"></i> Click above to confirm payment via WhatsApp</li>
+                    <li><i class="fas fa-envelope"></i> Check your email for course details and welcome information</li>
+                    <li><i class="fas fa-calendar"></i> Our team will contact you within 24 hours to schedule your first class</li>
+                    <li><i class="fas fa-graduation-cap"></i> Get ready to start your French learning journey!</li>
                 `;
             } else {
                 successHtml = `
                     <div class="success-details">
-                        <h3>Registration Received!</h3>
-                        <p>Thank you for registering for <strong>${course.name}</strong>. Please send your Interac e-Transfer to complete your enrollment.</p>
-                        <div class="interac-reminder">
+                        <h3>📝 Registration Received!</h3>
+                        <p>Thank you for registering for <strong>${course.name}</strong>. Your details have been sent to our team via WhatsApp.</p>
+                        <p>Please send your Interac e-Transfer to complete your enrollment.</p>
+                        <div class="interac-reminder" style="background: var(--neutral-50); padding: 1.5rem; border-radius: var(--radius-lg); margin: 1rem 0;">
                             <h4>💳 e-Transfer Details:</h4>
                             <p><strong>Email:</strong> phenish125@gmail.com</p>
                             <p><strong>Amount:</strong> CAD $${course.price}</p>
@@ -656,6 +857,7 @@
                     </div>
                 `;
                 nextStepsHtml = `
+                    <li><i class="fas fa-whatsapp text-success"></i> Registration details sent to our WhatsApp</li>
                     <li><i class="fas fa-university"></i> Send your Interac e-Transfer using the details above</li>
                     <li><i class="fas fa-clock"></i> We'll confirm your payment within 24 hours</li>
                     <li><i class="fas fa-envelope"></i> You'll receive course details and schedule information</li>
@@ -670,22 +872,50 @@
             window.scrollTo(0, 0);
         }
 
-        // Handle URL parameters for PayPal return
+        // Enhanced URL parameter handling for PayPal return
         document.addEventListener('DOMContentLoaded', function() {
             const urlParams = new URLSearchParams(window.location.search);
+            
             if (urlParams.get('success') === 'paypal') {
+                // PayPal payment successful
+                const regId = urlParams.get('regId');
+                
+                // Try to get registration data from localStorage
+                const pendingReg = localStorage.getItem('pendingRegistration');
+                let regData = null;
+                
+                if (pendingReg) {
+                    regData = JSON.parse(pendingReg);
+                    // Clear the pending registration
+                    localStorage.removeItem('pendingRegistration');
+                }
+                
                 // Show PayPal success message
                 document.querySelector('.registration-form-section').style.display = 'none';
                 document.getElementById('successSection').style.display = 'block';
                 
+                const courseName = regData ? regData.courseName : 'French Course';
+                const studentName = regData ? `${regData.firstName} ${regData.lastName}` : 'Student';
+                
                 const successHtml = `
                     <div class="success-details">
+                        <div class="success-icon" style="text-align: center; margin-bottom: 2rem;">
+                            <i class="fas fa-check-circle text-success" style="font-size: 4rem;"></i>
+                        </div>
                         <h3>🎉 Payment Successful!</h3>
-                        <p>Your PayPal payment has been processed successfully. Welcome to FRENCH.GTA!</p>
+                        <p>Your PayPal payment has been processed successfully. Welcome to FRENCH.GTA, ${studentName}!</p>
+                        <p>Your enrollment in <strong>${courseName}</strong> is now complete.</p>
+                        
+                        <div class="success-actions" style="margin: 2rem 0;">
+                            <a href="https://wa.me/+13653062049?text=Hi%20FRENCH.GTA%2C%20I%20just%20completed%20my%20PayPal%20payment%20for%20${encodeURIComponent(courseName)}%20course.%20My%20name%20is%20${encodeURIComponent(studentName)}.%20Please%20confirm%20my%20enrollment%20and%20send%20me%20the%20course%20details." target="_blank" class="btn btn-success btn-large">
+                                <i class="fab fa-whatsapp"></i> Confirm Payment via WhatsApp
+                            </a>
+                        </div>
                     </div>
                 `;
                 const nextStepsHtml = `
-                    <li><i class="fas fa-check-circle"></i> Payment confirmed and course activated</li>
+                    <li><i class="fas fa-check-circle text-success"></i> PayPal payment completed successfully</li>
+                    <li><i class="fas fa-whatsapp text-success"></i> Click above to confirm payment via WhatsApp</li>
                     <li><i class="fas fa-envelope"></i> Check your email for course details and welcome information</li>
                     <li><i class="fas fa-calendar"></i> Our team will contact you within 24 hours to schedule your first class</li>
                     <li><i class="fas fa-graduation-cap"></i> Get ready to start your French learning journey!</li>
@@ -693,8 +923,69 @@
                 
                 document.getElementById('successMessage').innerHTML = successHtml;
                 document.getElementById('nextStepsList').innerHTML = nextStepsHtml;
+                
+                // Send PayPal completion notification to WhatsApp if we have the data
+                if (regData) {
+                    setTimeout(() => {
+                        sendPayPalCompletionToWhatsApp(regData);
+                    }, 1000);
+                }
+            } else if (urlParams.get('cancelled') === 'true') {
+                // PayPal payment cancelled
+                document.querySelector('.registration-form-section').style.display = 'none';
+                document.getElementById('successSection').style.display = 'block';
+                
+                const cancelledHtml = `
+                    <div class="success-details">
+                        <div class="cancelled-icon" style="text-align: center; margin-bottom: 2rem;">
+                            <i class="fas fa-times-circle text-warning" style="font-size: 4rem;"></i>
+                        </div>
+                        <h3>⚠️ Payment Cancelled</h3>
+                        <p>Your PayPal payment was cancelled. Don't worry, your registration details have been saved.</p>
+                        
+                        <div class="retry-actions" style="margin: 2rem 0;">
+                            <button onclick="window.location.reload()" class="btn btn-primary btn-large">
+                                <i class="fas fa-redo"></i> Try Payment Again
+                            </button>
+                            <a href="https://wa.me/+13653062049?text=Hi%20FRENCH.GTA%2C%20I%20had%20an%20issue%20with%20my%20PayPal%20payment.%20Can%20you%20help%20me%20complete%20my%20course%20registration%3F" target="_blank" class="btn btn-secondary btn-large">
+                                <i class="fab fa-whatsapp"></i> Get Help via WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                `;
+                const nextStepsHtml = `
+                    <li><i class="fas fa-redo"></i> Click "Try Payment Again" to retry your PayPal payment</li>
+                    <li><i class="fas fa-whatsapp"></i> Contact us via WhatsApp if you need assistance</li>
+                    <li><i class="fas fa-university"></i> Alternatively, you can choose Interac e-Transfer payment method</li>
+                `;
+                
+                document.getElementById('successMessage').innerHTML = cancelledHtml;
+                document.getElementById('nextStepsList').innerHTML = nextStepsHtml;
             }
         });
+
+        function sendPayPalCompletionToWhatsApp(regData) {
+            const message = `✅ PAYPAL PAYMENT COMPLETED
+
+👤 Student: ${regData.firstName} ${regData.lastName}
+📧 Email: ${regData.email}
+🎯 Course: ${regData.courseName}
+💰 Amount: CAD $${regData.amount}/month
+💳 Payment Method: PayPal ✅
+
+Registration is now COMPLETE. Please:
+1. Send course details to student
+2. Schedule first class
+3. Add to course management system
+
+⏰ Payment completed: ${new Date().toLocaleString()}`;
+
+            const phoneNumber = "+13653062049";
+            const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            
+            // Open WhatsApp in a new tab
+            window.open(whatsappURL, '_blank');
+        }
     </script>
 </body>
 </html> 

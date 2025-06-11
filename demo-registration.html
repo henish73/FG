@@ -184,16 +184,22 @@
         const calendarEl = document.getElementById('calendar');
         const monthYearEl = document.getElementById('monthYear');
         const timeSlotsEl = document.getElementById('timeSlots');
-        const availableSlots = { // Admin defines available slots here (YYYY-MM-DD: [HH:MM, HH:MM])
-            // Example: "2024-03-15": ["10:00", "14:00", "18:00"], (Add more dates and times)
-            // THIS IS THE DEMO DATA - REPLACE WITH ACTUALS
-            "2025-06-10": ["09:00", "10:30", "15:00"],
-            "2025-06-11": ["10:00", "11:30", "14:00", "16:30"],
-            "2025-06-03": ["09:00", "10:30", "15:00"],
-            "2025-06-04": ["10:00", "14:00"],
-            "2025-06-05": ["11:00", "15:30"],
-            "2025-06-06": ["10:00", "11:30", "14:00", "16:30", "18:00"]
-            // Ensure dates are in the future and times are reasonable for demo classes
+        const availableSlots = {
+            "2025-01-20": ["10:00", "14:00", "16:00"],
+            "2025-01-21": ["09:00", "11:00", "15:00", "17:00"],
+            "2025-01-22": ["10:00", "14:00"],
+            "2025-01-23": ["09:00", "13:00", "16:00"],
+            "2025-01-24": ["10:00", "11:30", "15:30"],
+            "2025-01-25": ["09:00", "14:00", "16:00"],
+            "2025-01-26": ["10:00", "15:00"],
+            "2025-01-27": ["09:00", "11:00", "14:00", "16:00"],
+            "2025-01-28": ["10:00", "13:00", "17:00"],
+            "2025-01-29": ["09:00", "11:00", "15:00"],
+            "2025-01-30": ["10:00", "14:00", "16:00"],
+            "2025-01-31": ["09:00", "13:00", "17:00"],
+            "2025-02-01": ["10:00", "11:30", "15:30"],
+            "2025-02-02": ["09:00", "14:00", "16:00"],
+            "2025-02-03": ["10:00", "15:00"]
         };
         const ADMIN_EMAIL = 'frenchgta.ca@gmail.com';
         const GOOGLE_MEET_LINK = 'https://meet.google.com/your-demo-link'; // ADMIN: Update this link!

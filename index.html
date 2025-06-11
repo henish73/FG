@@ -55,29 +55,12 @@
         ]
     }
     </script>
+    <script src="script.js" defer></script>
 </head>
 
 <body>
     <!-- Enhanced Header with Perfect Responsive Design -->
-    <header class="responsive-header">
-        <nav class="container">
-            <div class="logo">
-                <a href="#" aria-label="FRENCH.GTA Home">FRENCH.GTA</a>
-            </div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="services.html">Courses</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="testimonials.html">Success Stories</a></li>
-                <li><a href="demo-registration.html" class="nav-cta">Book Demo</a></li>
-            </ul>
-            <div class="burger">
-                <div class="line1"></div>
-                <div class="line2"></div>
-                <div class="line3"></div>
-            </div>
-        </nav>
-    </header>
+    <div id="header-placeholder"></div>
 
     <div class="flag-banner" style="justify-content:center; margin-top:0.5rem;">
         <img src="img/france.svg" alt="France" class="flag-icon">
@@ -122,7 +105,7 @@
                 <div class="hero-content grid-lg-2 grid-1">
                     <div class="hero-text">
                         <h1 class="text-fluid-6xl">Master French.<br>Transform Your Future.</h1>
-                        <p class="text-fluid-lg">Expert French language training for immigration success, career advancement, and personal growth. Join 500+ successful students in Toronto & GTA.</p>
+                        <p class="text-fluid-lg">Expert French language training for immigration success, career advancement, and personal growth. Join 184+ successful students in Toronto & GTA.</p>
                         
                         <!-- Enhanced Social Proof -->
                         <div class="social-proof-mini mb-lg">
@@ -130,9 +113,9 @@
                                 <img src="img/Student review photographs-20250601T203609Z-1-001/Student review photographs/girl1.jpeg" alt="Student Priya" class="img-responsive">
                                 <img src="img/Student review photographs-20250601T203609Z-1-001/Student review photographs/boy1.jpeg" alt="Student Rahul" class="img-responsive">
                                 <img src="img/Student review photographs-20250601T203609Z-1-001/Student review photographs/girl2.jpeg" alt="Student Kavya" class="img-responsive">
-                                <span class="more-count">+347 students</span>
+                                <span class="more-count">+184 students</span>
                             </div>
-                            <p class="text-fluid-sm">⭐⭐⭐⭐⭐ <strong>4.9/5</strong> from 200+ reviews</p>
+                            <p class="text-fluid-sm">⭐⭐⭐⭐⭐ <strong>4.8/5</strong> from 120+ reviews</p>
                         </div>
                         
                         <!-- Enhanced CTA Buttons -->
@@ -155,11 +138,11 @@
                             </div>
                             <div class="trust-item">
                                 <i class="fas fa-users"></i>
-                                <span>500+ Students</span>
+                                <span>184+ Students</span>
                             </div>
                             <div class="trust-item">
                                 <i class="fas fa-trophy"></i>
-                                <span>98% Success Rate</span>
+                                <span>96% Success Rate</span>
                             </div>
                         </div>
                     </div>
@@ -434,7 +417,87 @@
         </section>
     </main>
 
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/+13653062049?text=Hi%20FRENCH.GTA%2C%20Can%20i%20know%20more%20about%20it?" 
+       target="_blank" class="floating-whatsapp-btn">
+       <i class="fab fa-whatsapp"></i>
+    </a>
+
     <div id="footer-placeholder"></div>
+
+    <style>
+      .floating-whatsapp-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: #25D366;
+        color: white !important;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+        z-index: 9999;
+        transition: all 0.3s ease;
+        font-size: 1.5rem;
+      }
+
+      .floating-whatsapp-btn:hover {
+        background: #128C7E;
+        transform: scale(1.1);
+        box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+        color: white !important;
+      }
+
+      .floating-whatsapp-btn:before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: #25D366;
+        animation: whatsapp-pulse 2s infinite;
+        z-index: -1;
+      }
+
+      @keyframes whatsapp-pulse {
+        0% {
+          transform: scale(1);
+          opacity: 1;
+        }
+        50% {
+          transform: scale(1.2);
+          opacity: 0.7;
+        }
+        100% {
+          transform: scale(1.4);
+          opacity: 0;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .floating-whatsapp-btn {
+          width: 50px;
+          height: 50px;
+          bottom: 15px;
+          right: 15px;
+          font-size: 1.2rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .floating-whatsapp-btn {
+          width: 45px;
+          height: 45px;
+          bottom: 10px;
+          right: 10px;
+          font-size: 1rem;
+        }
+      }
+    </style>
 
     <!-- The script block below was part of the original index.html and is preserved -->
     <!-- It handles preloader, modal, burger nav, etc. which are specific to index.html's structure -->

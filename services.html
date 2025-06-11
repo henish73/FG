@@ -41,7 +41,7 @@
         
         <div class="results-proof">
           <div class="proof-item">
-            <span class="proof-number">347+</span>
+            <span class="proof-number">184+</span>
             <span class="proof-label">Students We've Helped</span>
           </div>
           <div class="proof-item">
@@ -49,7 +49,7 @@
             <span class="proof-label">Years of Experience</span>
           </div>
           <div class="proof-item">
-            <span class="proof-number">98%</span>
+            <span class="proof-number">96%</span>
             <span class="proof-label">Student Satisfaction</span>
           </div>
         </div>
@@ -88,7 +88,7 @@
         <div class="trust-badge-mini">
           <div class="trust-item">
             <i class="fas fa-users"></i>
-            <span>347+ Students Served</span>
+            <span>184+ Students Served</span>
           </div>
           <div class="trust-item">
             <i class="fas fa-graduation-cap"></i>
@@ -96,7 +96,7 @@
           </div>
           <div class="trust-item">
             <i class="fas fa-chart-line"></i>
-            <span>98% Success Rate</span>
+            <span>96% Success Rate</span>
           </div>
         </div>
       </div>
@@ -162,7 +162,7 @@
       <div class="course-bottom-cta">
         <div class="cta-container">
           <h3>🚀 Ready to Start Your French Journey?</h3>
-          <p>Join 347+ successful students who transformed their lives with French</p>
+          <p>Join 184+ successful students who transformed their lives with French</p>
           <div class="cta-buttons-row">
             <a href="#plans" class="cta-button cta-primary">
               <i class="fas fa-rocket"></i> See All Plans & Pricing
@@ -382,7 +382,7 @@
         <div class="final-cta-section">
           <div class="cta-container">
             <h3>🌟 Ready to Begin Your French Journey?</h3>
-            <p class="cta-subtext">Join <strong>347+ students</strong> who chose FRENCH.GTA for their French learning</p>
+            <p class="cta-subtext">Join <strong>184+ students</strong> who chose FRENCH.GTA for their French learning</p>
             <div class="cta-buttons">
               <a href="course-registration.html" class="cta-button cta-primary large">
                 <i class="fas fa-graduation-cap"></i> Register for Course Now
@@ -406,15 +406,15 @@
           <h2>💝 Stories from Our Learning Community</h2>
           <div class="social-proof-stats">
             <div class="stat-item">
-              <span class="stat-number">347+</span>
+              <span class="stat-number">184</span>
               <span class="stat-label">Students Supported</span>
             </div>
             <div class="stat-item">
-              <span class="stat-number">98%</span>
+              <span class="stat-number">96%</span>
               <span class="stat-label">Reach Their Goals</span>
             </div>
             <div class="stat-item">
-              <span class="stat-number">4.9★</span>
+              <span class="stat-number">4.8★</span>
               <span class="stat-label">Community Rating</span>
             </div>
           </div>
@@ -581,7 +581,7 @@
           <h3>Want to Read More Success Stories?</h3>
           <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap;">
             <a href="testimonials.html" class="cta-button cta-secondary">
-              <i class="fas fa-heart"></i> Read All 347+ Success Stories
+              <i class="fas fa-heart"></i> Read All 184 Success Stories
             </a>
             <a href="demo-registration.html" class="cta-button cta-primary">
               <i class="fas fa-play-circle"></i> Start Your Success Story Today
@@ -594,12 +594,92 @@
 
   <section class="contact-whatsapp">
     <a href="https://wa.me/+13653062049?text=Hi%20FRENCH.GTA%2C%20Can%20i%20know%20more%20about%20it?" 
-       target="_blank" class="cta-button">
-       Chat with us on WhatsApp
+       target="_blank" class="cta-button large">
+       <i class="fab fa-whatsapp"></i> Chat with us on WhatsApp
     </a>
   </section>
 
+  <!-- Floating WhatsApp Button -->
+  <a href="https://wa.me/+13653062049?text=Hi%20FRENCH.GTA%2C%20Can%20i%20know%20more%20about%20it?" 
+     target="_blank" class="floating-whatsapp-btn">
+     <i class="fab fa-whatsapp"></i>
+  </a>
+
   <div id="footer-placeholder"></div>
+
+  <style>
+    .floating-whatsapp-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #25D366;
+      color: white !important;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+      z-index: 9999;
+      transition: all 0.3s ease;
+      font-size: 1.5rem;
+    }
+
+    .floating-whatsapp-btn:hover {
+      background: #128C7E;
+      transform: scale(1.1);
+      box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+      color: white !important;
+    }
+
+    .floating-whatsapp-btn:before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: #25D366;
+      animation: whatsapp-pulse 2s infinite;
+      z-index: -1;
+    }
+
+    @keyframes whatsapp-pulse {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.2);
+        opacity: 0.7;
+      }
+      100% {
+        transform: scale(1.4);
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .floating-whatsapp-btn {
+        width: 50px;
+        height: 50px;
+        bottom: 15px;
+        right: 15px;
+        font-size: 1.2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .floating-whatsapp-btn {
+        width: 45px;
+        height: 45px;
+        bottom: 10px;
+        right: 10px;
+        font-size: 1rem;
+      }
+    }
+  </style>
 
 </body>
 

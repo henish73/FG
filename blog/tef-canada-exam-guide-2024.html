@@ -56,539 +56,595 @@
       "dateModified": "2024-01-15"
     }
     </script>
+    
+    <style>
+        /* Blog-specific styles without header */
+        body {
+            padding-top: 0 !important;
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        /* Hide header completely on blog posts */
+        header,
+        .responsive-header,
+        #header-placeholder {
+            display: none !important;
+        }
+        
+        .blog-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .blog-meta {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 2rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .blog-meta .post-category {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .blog-meta .post-date {
+            color: #64748b;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .blog-meta .post-read-time {
+            color: #64748b;
+            font-size: 0.875rem;
+        }
+        
+        .blog-navigation {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .blog-navigation a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 500;
+            margin: 0 0.5rem;
+        }
+        
+        .blog-navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb-separator {
+            color: #94a3b8;
+            margin: 0 0.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .blog-container {
+                padding: 1rem;
+            }
+            
+            .blog-meta {
+                padding: 1.5rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <!-- Enhanced Header -->
-    <header class="responsive-header">
-        <nav class="container">
-            <div class="logo">
-                <a href="../index.html" aria-label="FRENCH.GTA Home">FRENCH.GTA</a>
+    <div class="blog-container">
+        <!-- Blog Navigation -->
+        <div class="blog-navigation">
+            <a href="../index.html">🏠 Home</a>
+            <span class="breadcrumb-separator">></span>
+            <a href="../blog.html">📝 Blog</a>
+            <span class="breadcrumb-separator">></span>
+            <span style="color: #64748b;">TEF Canada Exam Guide 2024</span>
+        </div>
+
+        <!-- Blog Meta Information -->
+        <div class="blog-meta">
+            <div class="post-category">
+                <i class="fas fa-tag"></i> TEF Exam Preparation
             </div>
-            <ul class="nav-links">
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="../services.html">Courses</a></li>
-                <li><a href="../blog.html">Blog</a></li>
-                <li><a href="../testimonials.html">Success Stories</a></li>
-                <li><a href="../demo-registration.html" class="nav-cta">Book Demo</a></li>
-            </ul>
-            <div class="burger">
-                <div class="line1"></div>
-                <div class="line2"></div>
-                <div class="line3"></div>
+            <div class="post-date">
+                <i class="fas fa-calendar"></i> Published: January 15, 2024
             </div>
-        </nav>
-    </header>
-
-    <main class="blog-post-main">
-        <!-- Breadcrumb Navigation -->
-        <section class="breadcrumb-section section-padding-sm">
-            <div class="container">
-                <nav class="breadcrumb">
-                    <a href="../index.html">Home</a>
-                    <span class="breadcrumb-separator">></span>
-                    <a href="../blog.html">Blog</a>
-                    <span class="breadcrumb-separator">></span>
-                    <span class="breadcrumb-current">TEF Canada Exam Guide 2024</span>
-                </nav>
+            <div class="post-read-time">
+                <i class="fas fa-clock"></i> 15 min read
             </div>
-        </section>
+        </div>
 
-        <!-- Blog Post Content -->
-        <article class="blog-post section-padding-lg">
-            <div class="container">
-                <div class="blog-post-content grid-lg-3 grid-1">
-                    <!-- Main Content -->
-                    <div class="blog-main-content" style="grid-column: span 2;">
-                        <!-- Post Header -->
-                        <header class="post-header mb-xl">
-                            <div class="post-meta mb-md">
-                                <span class="post-category">
-                                    <i class="fas fa-tag"></i> TEF Exam Preparation
-                                </span>
-                                <span class="post-date">
-                                    <i class="fas fa-calendar"></i> January 15, 2024
-                                </span>
-                                <span class="post-read-time">
-                                    <i class="fas fa-clock"></i> 15 min read
-                                </span>
-                            </div>
-                            
-                            <h1 class="text-fluid-5xl mb-lg">How to Prepare for the TEF Canada Exam & Ace Your Canadian Immigration Goals</h1>
-                            
-                            <div class="post-excerpt mb-xl">
-                                <p class="text-fluid-lg">Dreaming of a new life in Canada? Learn everything you need to know about the TEF Canada exam, why it's crucial for your immigration goals, and how to strategically prepare to ace it with expert guidance.</p>
-                            </div>
-                            
-                            <!-- Featured Image -->
-                            <div class="post-featured-image mb-xl">
-                                <img src="../img/blog/tef-canada-preparation.jpg" 
-                                     alt="Collaborative Journey: French as a Key to Canadian Integration" 
-                                     class="img-responsive"
-                                     onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDgwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHJlY3Qgd2lkdGg9IjgwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNGM0Y0RjYiLz4KICA8dGV4dCB4PSI0MDAiIHk9IjIwMCIgZm9udC1zaXplPSIyNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzZCNzI4MCI+VEVGIENhbmFkYSBFeGFtIFByZXBhcmF0aW9uPC90ZXh0Pgo8L3N2Zz4=';">
-                            </div>
-                        </header>
-
-                        <!-- Table of Contents -->
-                        <div class="table-of-contents mb-xl">
-                            <h3><i class="fas fa-list"></i> Table of Contents</h3>
-                            <ul>
-                                <li><a href="#understanding-tef">Understanding the TEF Canada Exam</a></li>
-                                <li><a href="#why-crucial">Why TEF Canada is Crucial for Immigration</a></li>
-                                <li><a href="#strategic-preparation">Strategic Preparation Guide</a></li>
-                                <li><a href="#listening-section">Compréhension orale (Listening)</a></li>
-                                <li><a href="#reading-section">Compréhension écrite (Reading)</a></li>
-                                <li><a href="#speaking-section">Expression orale (Speaking)</a></li>
-                                <li><a href="#writing-section">Expression écrite (Writing)</a></li>
-                                <li><a href="#resources-support">Choosing Resources & Support</a></li>
-                                <li><a href="#test-day-tips">Test Day Tips</a></li>
-                                <li><a href="#after-exam">After the Exam</a></li>
-                            </ul>
-                        </div>
-
-                        <!-- Post Content -->
-                        <div class="post-content">
-                            <p class="text-fluid-lg">For many aspiring immigrants, the Express Entry system or Provincial Nominee Programs (PNPs) are the primary pathways to Canadian residency. A key component to significantly boosting your profile and increasing your chances of success is proving your French language proficiency through the <strong>TEF Canada (Test d'Évaluation de Français adapté au Canada)</strong>.</p>
-
-                            <p>This comprehensive guide will walk you through everything you need to know about the TEF Canada exam, why it's crucial for your immigration goals, and how to strategically prepare to ace it.</p>
-
-                            <!-- Understanding TEF Canada -->
-                            <section id="understanding-tef" class="content-section mb-xl">
-                                <h2 class="text-fluid-4xl mb-lg">Understanding the TEF Canada Exam</h2>
+        <main class="blog-post-main">
+            <!-- Blog Post Content -->
+            <article class="blog-post section-padding-lg">
+                <div class="container">
+                    <div class="blog-post-content grid-lg-3 grid-1">
+                        <!-- Main Content -->
+                        <div class="blog-main-content" style="grid-column: span 2;">
+                            <!-- Post Header -->
+                            <header class="post-header mb-xl">
+                                <h1 class="text-fluid-5xl mb-lg">How to Prepare for the TEF Canada Exam & Ace Your Canadian Immigration Goals</h1>
                                 
-                                <h3 class="text-fluid-2xl mb-md">What is TEF Canada?</h3>
-                                <p>The TEF Canada is a French language proficiency test recognized by Immigration, Refugees and Citizenship Canada (IRCC) for economic immigration programs and Canadian citizenship applications. It assesses your ability to understand and use French in various real-life situations.</p>
-
-                                <h3 class="text-fluid-2xl mb-md">Who Needs to Take It?</h3>
-                                <p>Primarily, candidates applying for permanent residency through <strong>Express Entry</strong> (including Federal Skilled Worker Program, Federal Skilled Trades Program, and Canadian Experience Class) can benefit immensely from TEF Canada scores. Some PNPs also reward or require French proficiency.</p>
-
-                                <div class="pro-tip-box mb-lg">
-                                    <div class="pro-tip-header">
-                                        <i class="fas fa-lightbulb"></i>
-                                        <h4>Pro Tip</h4>
-                                    </div>
-                                    <p>Even if French isn't required for your immigration stream, strong TEF Canada scores can add up to <strong>50-74 additional CRS points</strong> to your Express Entry profile!</p>
+                                <div class="post-excerpt mb-xl">
+                                    <p class="text-fluid-lg">Dreaming of a new life in Canada? Learn everything you need to know about the TEF Canada exam, why it's crucial for your immigration goals, and how to strategically prepare to ace it with expert guidance.</p>
                                 </div>
-
-                                <h3 class="text-fluid-2xl mb-md">Exam Structure</h3>
-                                <p>The TEF Canada exam consists of four mandatory sections:</p>
-
-                                <div class="exam-sections grid-lg-2 grid-1 mb-lg">
-                                    <div class="exam-section-card">
-                                        <div class="section-header">
-                                            <i class="fas fa-headphones"></i>
-                                            <h4>Compréhension orale (Listening)</h4>
-                                        </div>
-                                        <ul>
-                                            <li><strong>Duration:</strong> 40 minutes</li>
-                                            <li><strong>Questions:</strong> 40 multiple-choice</li>
-                                            <li><strong>Assesses:</strong> Understanding spoken French in various contexts</li>
-                                        </ul>
-                                    </div>
-
-                                    <div class="exam-section-card">
-                                        <div class="section-header">
-                                            <i class="fas fa-book-open"></i>
-                                            <h4>Compréhension écrite (Reading)</h4>
-                                        </div>
-                                        <ul>
-                                            <li><strong>Duration:</strong> 60 minutes</li>
-                                            <li><strong>Questions:</strong> 40 multiple-choice</li>
-                                            <li><strong>Assesses:</strong> Understanding written French texts</li>
-                                        </ul>
-                                    </div>
-
-                                    <div class="exam-section-card">
-                                        <div class="section-header">
-                                            <i class="fas fa-microphone"></i>
-                                            <h4>Expression orale (Speaking)</h4>
-                                        </div>
-                                        <ul>
-                                            <li><strong>Duration:</strong> 15 minutes</li>
-                                            <li><strong>Tasks:</strong> 2 speaking tasks</li>
-                                            <li><strong>Section A:</strong> Formal inquiry (5 mins)</li>
-                                            <li><strong>Section B:</strong> Persuasive argument (10 mins)</li>
-                                        </ul>
-                                    </div>
-
-                                    <div class="exam-section-card">
-                                        <div class="section-header">
-                                            <i class="fas fa-pen"></i>
-                                            <h4>Expression écrite (Writing)</h4>
-                                        </div>
-                                        <ul>
-                                            <li><strong>Duration:</strong> 60 minutes</li>
-                                            <li><strong>Tasks:</strong> 2 writing tasks</li>
-                                            <li><strong>Section A:</strong> News story (80-150 words)</li>
-                                            <li><strong>Section B:</strong> Opinion letter (200 words)</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <h3 class="text-fluid-2xl mb-md">Scoring and CLB Equivalence</h3>
-                                <p>Each section is scored out of <strong>699 points</strong>. These scores are then converted to Canadian Language Benchmark (CLB) levels. For immigration purposes, achieving a <strong>CLB level 7 or higher</strong> in all French abilities can grant you significant additional points in the Comprehensive Ranking System (CRS) for Express Entry.</p>
-                            </section>
-
-                            <!-- Why TEF Canada is Crucial -->
-                            <section id="why-crucial" class="content-section mb-xl">
-                                <h2 class="text-fluid-4xl mb-lg">Why TEF Canada is Crucial for Your Immigration Goals</h2>
                                 
-                                <div class="benefits-grid grid-lg-2 grid-1">
-                                    <div class="benefit-card">
-                                        <i class="fas fa-chart-line"></i>
-                                        <h3>Boost Your CRS Score</h3>
-                                        <p>Strong French skills (CLB 7+) can add up to <strong>50-74 additional CRS points</strong> if French is your second language, or even more if it's your primary language in certain scenarios.</p>
-                                    </div>
-
-                                    <div class="benefit-card">
-                                        <i class="fas fa-door-open"></i>
-                                        <h3>Unlock Francophone Streams</h3>
-                                        <p>Canada has specific immigration streams and draws for French-speaking candidates, such as some PNPs and Francophone Mobility streams.</p>
-                                    </div>
-
-                                    <div class="benefit-card">
-                                        <i class="fas fa-envelope"></i>
-                                        <h3>Increased ITA Chances</h3>
-                                        <p>A higher CRS score directly translates to a better chance of receiving an Invitation to Apply (ITA) for permanent residence.</p>
-                                    </div>
-
-                                    <div class="benefit-card">
-                                        <i class="fas fa-users"></i>
-                                        <h3>Better Integration</h3>
-                                        <p>Demonstrating French proficiency shows your commitment to integrating into Canadian society, especially in bilingual communities.</p>
-                                    </div>
+                                <!-- Featured Image -->
+                                <div class="post-featured-image mb-xl">
+                                    <img src="../img/blog/tef-canada-preparation.jpg" 
+                                         alt="Collaborative Journey: French as a Key to Canadian Integration" 
+                                         class="img-responsive"
+                                         onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDgwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHJlY3Qgd2lkdGg9IjgwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNGM0Y0RjYiLz4KICA8dGV4dCB4PSI0MDAiIHk9IjIwMCIgZm9udC1zaXplPSIyNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzZCNzI4MCI+VEVGIENhbmFkYSBFeGFtIFByZXBhcmF0aW9uPC90ZXh0Pgo8L3N2Zz4=';">
                                 </div>
-                            </section>
+                            </header>
 
-                            <!-- Strategic Preparation -->
-                            <section id="strategic-preparation" class="content-section mb-xl">
-                                <h2 class="text-fluid-4xl mb-lg">Strategic Preparation for TEF Canada – Section by Section</h2>
-                                
-                                <h3 class="text-fluid-2xl mb-md">General Preparation Tips</h3>
-                                <ul class="preparation-checklist">
-                                    <li><i class="fas fa-check"></i> <strong>Assess Your Current Level:</strong> Be honest about your current French proficiency. Take an online placement test or consult a language professional.</li>
-                                    <li><i class="fas fa-check"></i> <strong>Set Clear Goals & Timeline:</strong> Determine your target CLB level and create a realistic study schedule. Consistency is key.</li>
-                                    <li><i class="fas fa-check"></i> <strong>Develop a Study Plan:</strong> Allocate specific time for each section. Don't neglect any of the four skills.</li>
-                                    <li><i class="fas fa-check"></i> <strong>Focus on Canadian French:</strong> While the TEF Canada tests general French, being familiar with Canadian accents and vocabulary can be beneficial.</li>
-                                    <li><i class="fas fa-check"></i> <strong>Consider Professional Guidance:</strong> The nuances of the TEF Canada exam often require specialized instruction.</li>
+                            <!-- Table of Contents -->
+                            <div class="table-of-contents mb-xl">
+                                <h3><i class="fas fa-list"></i> Table of Contents</h3>
+                                <ul>
+                                    <li><a href="#understanding-tef">Understanding the TEF Canada Exam</a></li>
+                                    <li><a href="#why-crucial">Why TEF Canada is Crucial for Immigration</a></li>
+                                    <li><a href="#strategic-preparation">Strategic Preparation Guide</a></li>
+                                    <li><a href="#listening-section">Compréhension orale (Listening)</a></li>
+                                    <li><a href="#reading-section">Compréhension écrite (Reading)</a></li>
+                                    <li><a href="#speaking-section">Expression orale (Speaking)</a></li>
+                                    <li><a href="#writing-section">Expression écrite (Writing)</a></li>
+                                    <li><a href="#resources-support">Choosing Resources & Support</a></li>
+                                    <li><a href="#test-day-tips">Test Day Tips</a></li>
+                                    <li><a href="#after-exam">After the Exam</a></li>
                                 </ul>
+                            </div>
 
-                                <div class="cta-box mt-lg mb-lg">
-                                    <h4>Ready to Start Your TEF Canada Journey?</h4>
-                                    <p>At <strong>FRENCH.GTA</strong>, we focus exclusively on TEF Canada preparation with experienced instructors and proven strategies.</p>
-                                    <div class="cta-buttons">
-                                        <a href="../services.html#plans" class="cta-button cta-primary">
-                                            <i class="fas fa-graduation-cap"></i> View TEF Courses
-                                        </a>
-                                        <a href="../demo-registration.html" class="cta-button cta-secondary">
-                                            <i class="fas fa-calendar"></i> Book Free Demo
-                                        </a>
-                                    </div>
-                                </div>
-                            </section>
+                            <!-- Post Content -->
+                            <div class="post-content">
+                                <p class="text-fluid-lg">For many aspiring immigrants, the Express Entry system or Provincial Nominee Programs (PNPs) are the primary pathways to Canadian residency. A key component to significantly boosting your profile and increasing your chances of success is proving your French language proficiency through the <strong>TEF Canada (Test d'Évaluation de Français adapté au Canada)</strong>.</p>
 
-                            <!-- Listening Section -->
-                            <section id="listening-section" class="content-section mb-xl">
-                                <h2 class="text-fluid-3xl mb-lg"><i class="fas fa-headphones"></i> 1. Compréhension orale (Listening)</h2>
-                                
-                                <div class="preparation-tips">
-                                    <h4>Key Strategies:</h4>
-                                    <ul>
-                                        <li><strong>Familiarize Yourself with Accents:</strong> Listen to a variety of French audio content – news (RFI, Radio-Canada), podcasts, TV shows, and movies.</li>
-                                        <li><strong>Active Listening:</strong> Don't just hear; listen for keywords, context, intonation, and the speaker's intention.</li>
-                                        <li><strong>Practice Note-Taking:</strong> Jot down key points, names, numbers, and ideas for longer segments.</li>
-                                        <li><strong>Understand Question Types:</strong> Practice with sample TEF listening questions to get used to the format.</li>
-                                    </ul>
-                                </div>
+                                <p>This comprehensive guide will walk you through everything you need to know about the TEF Canada exam, why it's crucial for your immigration goals, and how to strategically prepare to ace it.</p>
 
-                                <div class="expert-insight">
-                                    <div class="insight-header">
-                                        <i class="fas fa-user-graduate"></i>
-                                        <h4>Expert Insight from FRENCH.GTA</h4>
-                                    </div>
-                                    <p>We incorporate a variety of authentic audio materials in our sessions to help you master different accents and contexts you'll encounter in the TEF Canada exam.</p>
-                                </div>
-                            </section>
+                                <!-- Understanding TEF Canada -->
+                                <section id="understanding-tef" class="content-section mb-xl">
+                                    <h2 class="text-fluid-4xl mb-lg">Understanding the TEF Canada Exam</h2>
+                                    
+                                    <h3 class="text-fluid-2xl mb-md">What is TEF Canada?</h3>
+                                    <p>The TEF Canada is a French language proficiency test recognized by Immigration, Refugees and Citizenship Canada (IRCC) for economic immigration programs and Canadian citizenship applications. It assesses your ability to understand and use French in various real-life situations.</p>
 
-                            <!-- Reading Section -->
-                            <section id="reading-section" class="content-section mb-xl">
-                                <h2 class="text-fluid-3xl mb-lg"><i class="fas fa-book-open"></i> 2. Compréhension écrite (Reading)</h2>
-                                
-                                <div class="preparation-tips">
-                                    <h4>Key Strategies:</h4>
-                                    <ul>
-                                        <li><strong>Expand Your Vocabulary:</strong> Read widely in French – newspapers (Le Monde, La Presse), magazines, official documents, and short stories.</li>
-                                        <li><strong>Master Reading Techniques:</strong> Practice skimming for main ideas and scanning for specific information.</li>
-                                        <li><strong>Understand Implied Meanings:</strong> Some questions test your ability to understand information that isn't explicitly stated.</li>
-                                        <li><strong>Time Management:</strong> Learn to pace yourself through the passages and questions.</li>
-                                    </ul>
-                                </div>
+                                    <h3 class="text-fluid-2xl mb-md">Who Needs to Take It?</h3>
+                                    <p>Primarily, candidates applying for permanent residency through <strong>Express Entry</strong> (including Federal Skilled Worker Program, Federal Skilled Trades Program, and Canadian Experience Class) can benefit immensely from TEF Canada scores. Some PNPs also reward or require French proficiency.</p>
 
-                                <div class="expert-insight">
-                                    <div class="insight-header">
-                                        <i class="fas fa-user-graduate"></i>
-                                        <h4>Expert Insight from FRENCH.GTA</h4>
-                                    </div>
-                                    <p>Working through targeted exercises and mock tests, like those we use in our curriculum, can help improve both speed and comprehension for the reading section.</p>
-                                </div>
-                            </section>
-
-                            <!-- Speaking Section -->
-                            <section id="speaking-section" class="content-section mb-xl">
-                                <h2 class="text-fluid-3xl mb-lg"><i class="fas fa-microphone"></i> 3. Expression orale (Speaking)</h2>
-                                
-                                <div class="preparation-tips">
-                                    <h4>Key Strategies:</h4>
-                                    <ul>
-                                        <li><strong>Know the Format:</strong> Understand the requirements for both Section A (formal inquiry) and Section B (persuasion).</li>
-                                        <li><strong>Structure Your Responses:</strong> For Section A, be polite, clear, and concise. For Section B, organize your arguments logically.</li>
-                                        <li><strong>Practice Fluency & Pronunciation:</strong> Speak French as much as possible. Record yourself and listen back.</li>
-                                        <li><strong>Use Appropriate Vocabulary:</strong> Adapt your language to the situation (formal for Section A, persuasive for Section B).</li>
-                                        <li><strong>Mock Tests are Crucial:</strong> Simulate exam conditions with a timer and get feedback on your performance.</li>
-                                    </ul>
-                                </div>
-
-                                <div class="expert-insight">
-                                    <div class="insight-header">
-                                        <i class="fas fa-user-graduate"></i>
-                                        <h4>Expert Insight from FRENCH.GTA</h4>
-                                    </div>
-                                    <p>Our instructors provide critical one-on-one feedback, helping you identify areas for improvement and build confidence for both Section A and Section B.</p>
-                                </div>
-                            </section>
-
-                            <!-- Writing Section -->
-                            <section id="writing-section" class="content-section mb-xl">
-                                <h2 class="text-fluid-3xl mb-lg"><i class="fas fa-pen"></i> 4. Expression écrite (Writing)</h2>
-                                
-                                <div class="preparation-tips">
-                                    <h4>Key Strategies:</h4>
-                                    <ul>
-                                        <li><strong>Master French Grammar & Syntax:</strong> Review verb conjugations, tenses, sentence structure, and agreement rules.</li>
-                                        <li><strong>Understand Task Requirements:</strong> For Section A (fait divers), focus on narrative structure. For Section B (opinion piece), develop a clear thesis.</li>
-                                        <li><strong>Practice Writing Different Text Types:</strong> Write regularly and get your work corrected by a proficient French speaker.</li>
-                                        <li><strong>Pay Attention to Word Count:</strong> Stay within the recommended word limits.</li>
-                                        <li><strong>Proofread Carefully:</strong> Leave time to review your writing for errors.</li>
-                                    </ul>
-                                </div>
-
-                                <div class="expert-insight">
-                                    <div class="insight-header">
-                                        <i class="fas fa-user-graduate"></i>
-                                        <h4>Expert Insight from FRENCH.GTA</h4>
-                                    </div>
-                                    <p>We offer detailed correction and guidance on written tasks, focusing on grammar, structure, vocabulary, and adherence to TEF Canada requirements.</p>
-                                </div>
-                            </section>
-
-                            <!-- Resources and Support -->
-                            <section id="resources-support" class="content-section mb-xl">
-                                <h2 class="text-fluid-4xl mb-lg">Choosing the Right Resources and Support</h2>
-                                
-                                <div class="resources-grid grid-lg-2 grid-1">
-                                    <div class="resource-category">
-                                        <h3><i class="fas fa-book"></i> Official Materials</h3>
-                                        <p>The Chamber of Commerce and Industry of Paris Île-de-France (CCIP), the creators of TEF, offers official preparation guides and sample tests.</p>
+                                    <div class="pro-tip-box mb-lg">
+                                        <div class="pro-tip-header">
+                                            <i class="fas fa-lightbulb"></i>
+                                            <h4>Pro Tip</h4>
+                                        </div>
+                                        <p>Even if French isn't required for your immigration stream, strong TEF Canada scores can add up to <strong>50-74 additional CRS points</strong> to your Express Entry profile!</p>
                                     </div>
 
-                                    <div class="resource-category">
-                                        <h3><i class="fas fa-school"></i> Specialized Training</h3>
-                                        <p>Look for proven experience in TEF Canada preparation. General French classes may not be enough for exam-specific success.</p>
+                                    <h3 class="text-fluid-2xl mb-md">Exam Structure</h3>
+                                    <p>The TEF Canada exam consists of four mandatory sections:</p>
+
+                                    <div class="exam-sections grid-lg-2 grid-1 mb-lg">
+                                        <div class="exam-section-card">
+                                            <div class="section-header">
+                                                <i class="fas fa-headphones"></i>
+                                                <h4>Compréhension orale (Listening)</h4>
+                                            </div>
+                                            <ul>
+                                                <li><strong>Duration:</strong> 40 minutes</li>
+                                                <li><strong>Questions:</strong> 40 multiple-choice</li>
+                                                <li><strong>Assesses:</strong> Understanding spoken French in various contexts</li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="exam-section-card">
+                                            <div class="section-header">
+                                                <i class="fas fa-book-open"></i>
+                                                <h4>Compréhension écrite (Reading)</h4>
+                                            </div>
+                                            <ul>
+                                                <li><strong>Duration:</strong> 60 minutes</li>
+                                                <li><strong>Questions:</strong> 40 multiple-choice</li>
+                                                <li><strong>Assesses:</strong> Understanding written French texts</li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="exam-section-card">
+                                            <div class="section-header">
+                                                <i class="fas fa-microphone"></i>
+                                                <h4>Expression orale (Speaking)</h4>
+                                            </div>
+                                            <ul>
+                                                <li><strong>Duration:</strong> 15 minutes</li>
+                                                <li><strong>Tasks:</strong> 2 speaking tasks</li>
+                                                <li><strong>Section A:</strong> Formal inquiry (5 mins)</li>
+                                                <li><strong>Section B:</strong> Persuasive argument (10 mins)</li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="exam-section-card">
+                                            <div class="section-header">
+                                                <i class="fas fa-pen"></i>
+                                                <h4>Expression écrite (Writing)</h4>
+                                            </div>
+                                            <ul>
+                                                <li><strong>Duration:</strong> 60 minutes</li>
+                                                <li><strong>Tasks:</strong> 2 writing tasks</li>
+                                                <li><strong>Section A:</strong> News story (80-150 words)</li>
+                                                <li><strong>Section B:</strong> Opinion letter (200 words)</li>
+                                            </ul>
+                                        </div>
                                     </div>
 
-                                    <div class="resource-category">
-                                        <h3><i class="fas fa-laptop"></i> Online Platforms</h3>
-                                        <p>Websites like TV5Monde, RFI Savoirs, and apps like Duolingo (for basics), Anki (for vocabulary) can supplement your learning.</p>
-                                    </div>
+                                    <h3 class="text-fluid-2xl mb-md">Scoring and CLB Equivalence</h3>
+                                    <p>Each section is scored out of <strong>699 points</strong>. These scores are then converted to Canadian Language Benchmark (CLB) levels. For immigration purposes, achieving a <strong>CLB level 7 or higher</strong> in all French abilities can grant you significant additional points in the Comprehensive Ranking System (CRS) for Express Entry.</p>
+                                </section>
 
-                                    <div class="resource-category">
-                                        <h3><i class="fas fa-comments"></i> Language Exchange</h3>
-                                        <p>Practice speaking with native French speakers to improve fluency and confidence.</p>
-                                    </div>
-                                </div>
+                                <!-- Why TEF Canada is Crucial -->
+                                <section id="why-crucial" class="content-section mb-xl">
+                                    <h2 class="text-fluid-4xl mb-lg">Why TEF Canada is Crucial for Your Immigration Goals</h2>
+                                    
+                                    <div class="benefits-grid grid-lg-2 grid-1">
+                                        <div class="benefit-card">
+                                            <i class="fas fa-chart-line"></i>
+                                            <h3>Boost Your CRS Score</h3>
+                                            <p>Strong French skills (CLB 7+) can add up to <strong>50-74 additional CRS points</strong> if French is your second language, or even more if it's your primary language in certain scenarios.</p>
+                                        </div>
 
-                                <div class="highlight-box mt-lg">
-                                    <h3>Why Choose FRENCH.GTA for TEF Canada Preparation?</h3>
-                                    <p>As a specialized TEF-only institute, <strong>FRENCH.GTA</strong> is built on the principle of focused, expert preparation. We pride ourselves on:</p>
-                                    <ul>
-                                        <li><strong>Instructor Quality:</strong> Experienced teachers who understand the TEF Canada exam inside-out</li>
-                                        <li><strong>Specialized Curriculum:</strong> Designed exclusively for TEF Canada success</li>
-                                        <li><strong>Small Group Coaching:</strong> Typically 1:3 student-to-instructor ratio</li>
-                                        <li><strong>Personalized Attention:</strong> One-on-one sessions available</li>
-                                        <li><strong>Proven Results:</strong> Track record of student success</li>
-                                    </ul>
-                                </div>
-                            </section>
+                                        <div class="benefit-card">
+                                            <i class="fas fa-door-open"></i>
+                                            <h3>Unlock Francophone Streams</h3>
+                                            <p>Canada has specific immigration streams and draws for French-speaking candidates, such as some PNPs and Francophone Mobility streams.</p>
+                                        </div>
 
-                            <!-- Test Day Tips -->
-                            <section id="test-day-tips" class="content-section mb-xl">
-                                <h2 class="text-fluid-4xl mb-lg">Test Day Tips</h2>
-                                
-                                <div class="tips-grid grid-lg-2 grid-1">
-                                    <div class="tip-card">
-                                        <i class="fas fa-bed"></i>
-                                        <h4>Get Enough Rest</h4>
-                                        <p>Be well-rested before the exam to ensure optimal performance.</p>
-                                    </div>
+                                        <div class="benefit-card">
+                                            <i class="fas fa-envelope"></i>
+                                            <h3>Increased ITA Chances</h3>
+                                            <p>A higher CRS score directly translates to a better chance of receiving an Invitation to Apply (ITA) for permanent residence.</p>
+                                        </div>
 
-                                    <div class="tip-card">
-                                        <i class="fas fa-clock"></i>
-                                        <h4>Arrive Early</h4>
-                                        <p>Familiarize yourself with the test center location and settle in comfortably.</p>
-                                    </div>
-
-                                    <div class="tip-card">
-                                        <i class="fas fa-list-check"></i>
-                                        <h4>Read Instructions Carefully</h4>
-                                        <p>Understand what is required for each section and question before starting.</p>
-                                    </div>
-
-                                    <div class="tip-card">
-                                        <i class="fas fa-stopwatch"></i>
-                                        <h4>Manage Your Time</h4>
-                                        <p>Don't spend too much time on one question. Move on and come back if you have time.</p>
-                                    </div>
-
-                                    <div class="tip-card">
-                                        <i class="fas fa-heart"></i>
-                                        <h4>Stay Calm</h4>
-                                        <p>If you feel anxious, take a few deep breaths and refocus.</p>
-                                    </div>
-
-                                    <div class="tip-card">
-                                        <i class="fas fa-eye"></i>
-                                        <h4>Stay Focused</h4>
-                                        <p>Concentrate on each task individually without worrying about other sections.</p>
-                                    </div>
-                                </div>
-                            </section>
-
-                            <!-- After the Exam -->
-                            <section id="after-exam" class="content-section mb-xl">
-                                <h2 class="text-fluid-4xl mb-lg">After the Exam</h2>
-                                
-                                <h3 class="text-fluid-2xl mb-md">Understanding Your Results</h3>
-                                <p>Your certificate will show your scores for each section and the corresponding CLB levels. These are the scores you'll use for your immigration applications.</p>
-
-                                <h3 class="text-fluid-2xl mb-md">Using Your Results</h3>
-                                <p>Enter your TEF Canada results into your Express Entry profile or other immigration applications to boost your CRS score.</p>
-
-                                <h3 class="text-fluid-2xl mb-md">Retaking the Exam</h3>
-                                <p>If you don't achieve your desired score, you can retake the TEF Canada. There's usually a waiting period (e.g., 30 days) between attempts. Use the experience to identify areas for improvement.</p>
-
-                                <div class="support-offer">
-                                    <h4>Need Help Improving Your Score?</h4>
-                                    <p>Our team at <strong>FRENCH.GTA</strong> can help you analyze your results and create a targeted improvement plan for your next attempt.</p>
-                                    <a href="../services.html" class="cta-button cta-primary">Get Personalized Support</a>
-                                </div>
-                            </section>
-
-                            <!-- Conclusion -->
-                            <section class="content-section mb-xl">
-                                <h2 class="text-fluid-4xl mb-lg">Conclusion</h2>
-                                <p>Preparing for the TEF Canada exam requires dedication, strategic planning, and consistent effort. However, the rewards – significantly enhanced prospects for Canadian immigration – are well worth it. By understanding the exam format, focusing on all four skills, utilizing the right resources, and practicing diligently, you can ace the TEF Canada and take a giant leap towards achieving your Canadian dream.</p>
-
-                                <p><strong>Remember, you don't have to do it alone; expert support can make all the difference. Bonne chance!</strong></p>
-                            </section>
-
-                            <!-- Call-to-Action Section -->
-                            <section class="final-cta-section section-padding-lg">
-                                <div class="cta-container text-center">
-                                    <h2 class="text-fluid-4xl mb-lg">Ready to Ace Your TEF Canada Exam with Expert Guidance?</h2>
-                                    <p class="text-fluid-lg mb-xl">At <strong>FRENCH.GTA</strong>, we are committed to helping you achieve your Canadian immigration goals by mastering the TEF Canada exam. Our specialized courses, experienced instructors, and personalized approach are designed for your success.</p>
-
-                                    <div class="cta-options grid-lg-3 grid-1 mb-xl">
-                                        <div class="cta-option">
+                                        <div class="benefit-card">
                                             <i class="fas fa-users"></i>
-                                            <h3>Join Our Classes</h3>
-                                            <p>Enroll in our focused TEF Canada preparation courses (small groups or one-on-one).</p>
-                                            <a href="../services.html#plans" class="cta-button cta-primary">View Courses</a>
+                                            <h3>Better Integration</h3>
+                                            <p>Demonstrating French proficiency shows your commitment to integrating into Canadian society, especially in bilingual communities.</p>
                                         </div>
+                                    </div>
+                                </section>
 
-                                        <div class="cta-option">
-                                            <i class="fas fa-calendar-check"></i>
-                                            <h3>Get a Free Consultation</h3>
-                                            <p>Book a free demo class to discuss your needs and goals with our experts.</p>
-                                            <a href="../demo-registration.html" class="cta-button cta-secondary">Book Free Demo</a>
-                                        </div>
+                                <!-- Strategic Preparation -->
+                                <section id="strategic-preparation" class="content-section mb-xl">
+                                    <h2 class="text-fluid-4xl mb-lg">Strategic Preparation for TEF Canada – Section by Section</h2>
+                                    
+                                    <h3 class="text-fluid-2xl mb-md">General Preparation Tips</h3>
+                                    <ul class="preparation-checklist">
+                                        <li><i class="fas fa-check"></i> <strong>Assess Your Current Level:</strong> Be honest about your current French proficiency. Take an online placement test or consult a language professional.</li>
+                                        <li><i class="fas fa-check"></i> <strong>Set Clear Goals & Timeline:</strong> Determine your target CLB level and create a realistic study schedule. Consistency is key.</li>
+                                        <li><i class="fas fa-check"></i> <strong>Develop a Study Plan:</strong> Allocate specific time for each section. Don't neglect any of the four skills.</li>
+                                        <li><i class="fas fa-check"></i> <strong>Focus on Canadian French:</strong> While the TEF Canada tests general French, being familiar with Canadian accents and vocabulary can be beneficial.</li>
+                                        <li><i class="fas fa-check"></i> <strong>Consider Professional Guidance:</strong> The nuances of the TEF Canada exam often require specialized instruction.</li>
+                                    </ul>
 
-                                        <div class="cta-option">
-                                            <i class="fas fa-phone"></i>
-                                            <h3>Connect With Us</h3>
-                                            <p>Message us or call us directly to speak with our team about your TEF preparation.</p>
-                                            <a href="https://wa.me/+13653062049?text=Hi%20FRENCH.GTA%2C%20I'm%20interested%20in%20TEF%20Canada%20preparation!" target="_blank" class="cta-button cta-primary">
-                                                <i class="fab fa-whatsapp"></i> WhatsApp Us
+                                    <div class="cta-box mt-lg mb-lg">
+                                        <h4>Ready to Start Your TEF Canada Journey?</h4>
+                                        <p>At <strong>FRENCH.GTA</strong>, we focus exclusively on TEF Canada preparation with experienced instructors and proven strategies.</p>
+                                        <div class="cta-buttons">
+                                            <a href="../services.html#plans" class="cta-button cta-primary">
+                                                <i class="fas fa-graduation-cap"></i> View TEF Courses
+                                            </a>
+                                            <a href="../demo-registration.html" class="cta-button cta-secondary">
+                                                <i class="fas fa-calendar"></i> Book Free Demo
                                             </a>
                                         </div>
                                     </div>
+                                </section>
 
-                                    <p class="text-fluid-xl"><strong>Let FRENCH.GTA be your partner in success!</strong></p>
-                                </div>
-                            </section>
+                                <!-- Listening Section -->
+                                <section id="listening-section" class="content-section mb-xl">
+                                    <h2 class="text-fluid-3xl mb-lg"><i class="fas fa-headphones"></i> 1. Compréhension orale (Listening)</h2>
+                                    
+                                    <div class="preparation-tips">
+                                        <h4>Key Strategies:</h4>
+                                        <ul>
+                                            <li><strong>Familiarize Yourself with Accents:</strong> Listen to a variety of French audio content – news (RFI, Radio-Canada), podcasts, TV shows, and movies.</li>
+                                            <li><strong>Active Listening:</strong> Don't just hear; listen for keywords, context, intonation, and the speaker's intention.</li>
+                                            <li><strong>Practice Note-Taking:</strong> Jot down key points, names, numbers, and ideas for longer segments.</li>
+                                            <li><strong>Understand Question Types:</strong> Practice with sample TEF listening questions to get used to the format.</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="expert-insight">
+                                        <div class="insight-header">
+                                            <i class="fas fa-user-graduate"></i>
+                                            <h4>Expert Insight from FRENCH.GTA</h4>
+                                        </div>
+                                        <p>We incorporate a variety of authentic audio materials in our sessions to help you master different accents and contexts you'll encounter in the TEF Canada exam.</p>
+                                    </div>
+                                </section>
+
+                                <!-- Reading Section -->
+                                <section id="reading-section" class="content-section mb-xl">
+                                    <h2 class="text-fluid-3xl mb-lg"><i class="fas fa-book-open"></i> 2. Compréhension écrite (Reading)</h2>
+                                    
+                                    <div class="preparation-tips">
+                                        <h4>Key Strategies:</h4>
+                                        <ul>
+                                            <li><strong>Expand Your Vocabulary:</strong> Read widely in French – newspapers (Le Monde, La Presse), magazines, official documents, and short stories.</li>
+                                            <li><strong>Master Reading Techniques:</strong> Practice skimming for main ideas and scanning for specific information.</li>
+                                            <li><strong>Understand Implied Meanings:</strong> Some questions test your ability to understand information that isn't explicitly stated.</li>
+                                            <li><strong>Time Management:</strong> Learn to pace yourself through the passages and questions.</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="expert-insight">
+                                        <div class="insight-header">
+                                            <i class="fas fa-user-graduate"></i>
+                                            <h4>Expert Insight from FRENCH.GTA</h4>
+                                        </div>
+                                        <p>Working through targeted exercises and mock tests, like those we use in our curriculum, can help improve both speed and comprehension for the reading section.</p>
+                                    </div>
+                                </section>
+
+                                <!-- Speaking Section -->
+                                <section id="speaking-section" class="content-section mb-xl">
+                                    <h2 class="text-fluid-3xl mb-lg"><i class="fas fa-microphone"></i> 3. Expression orale (Speaking)</h2>
+                                    
+                                    <div class="preparation-tips">
+                                        <h4>Key Strategies:</h4>
+                                        <ul>
+                                            <li><strong>Know the Format:</strong> Understand the requirements for both Section A (formal inquiry) and Section B (persuasion).</li>
+                                            <li><strong>Structure Your Responses:</strong> For Section A, be polite, clear, and concise. For Section B, organize your arguments logically.</li>
+                                            <li><strong>Practice Fluency & Pronunciation:</strong> Speak French as much as possible. Record yourself and listen back.</li>
+                                            <li><strong>Use Appropriate Vocabulary:</strong> Adapt your language to the situation (formal for Section A, persuasive for Section B).</li>
+                                            <li><strong>Mock Tests are Crucial:</strong> Simulate exam conditions with a timer and get feedback on your performance.</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="expert-insight">
+                                        <div class="insight-header">
+                                            <i class="fas fa-user-graduate"></i>
+                                            <h4>Expert Insight from FRENCH.GTA</h4>
+                                        </div>
+                                        <p>Our instructors provide critical one-on-one feedback, helping you identify areas for improvement and build confidence for both Section A and Section B.</p>
+                                    </div>
+                                </section>
+
+                                <!-- Writing Section -->
+                                <section id="writing-section" class="content-section mb-xl">
+                                    <h2 class="text-fluid-3xl mb-lg"><i class="fas fa-pen"></i> 4. Expression écrite (Writing)</h2>
+                                    
+                                    <div class="preparation-tips">
+                                        <h4>Key Strategies:</h4>
+                                        <ul>
+                                            <li><strong>Master French Grammar & Syntax:</strong> Review verb conjugations, tenses, sentence structure, and agreement rules.</li>
+                                            <li><strong>Understand Task Requirements:</strong> For Section A (fait divers), focus on narrative structure. For Section B (opinion piece), develop a clear thesis.</li>
+                                            <li><strong>Practice Writing Different Text Types:</strong> Write regularly and get your work corrected by a proficient French speaker.</li>
+                                            <li><strong>Pay Attention to Word Count:</strong> Stay within the recommended word limits.</li>
+                                            <li><strong>Proofread Carefully:</strong> Leave time to review your writing for errors.</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="expert-insight">
+                                        <div class="insight-header">
+                                            <i class="fas fa-user-graduate"></i>
+                                            <h4>Expert Insight from FRENCH.GTA</h4>
+                                        </div>
+                                        <p>We offer detailed correction and guidance on written tasks, focusing on grammar, structure, vocabulary, and adherence to TEF Canada requirements.</p>
+                                    </div>
+                                </section>
+
+                                <!-- Resources and Support -->
+                                <section id="resources-support" class="content-section mb-xl">
+                                    <h2 class="text-fluid-4xl mb-lg">Choosing the Right Resources and Support</h2>
+                                    
+                                    <div class="resources-grid grid-lg-2 grid-1">
+                                        <div class="resource-category">
+                                            <h3><i class="fas fa-book"></i> Official Materials</h3>
+                                            <p>The Chamber of Commerce and Industry of Paris Île-de-France (CCIP), the creators of TEF, offers official preparation guides and sample tests.</p>
+                                        </div>
+
+                                        <div class="resource-category">
+                                            <h3><i class="fas fa-school"></i> Specialized Training</h3>
+                                            <p>Look for proven experience in TEF Canada preparation. General French classes may not be enough for exam-specific success.</p>
+                                        </div>
+
+                                        <div class="resource-category">
+                                            <h3><i class="fas fa-laptop"></i> Online Platforms</h3>
+                                            <p>Websites like TV5Monde, RFI Savoirs, and apps like Duolingo (for basics), Anki (for vocabulary) can supplement your learning.</p>
+                                        </div>
+
+                                        <div class="resource-category">
+                                            <h3><i class="fas fa-comments"></i> Language Exchange</h3>
+                                            <p>Practice speaking with native French speakers to improve fluency and confidence.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="highlight-box mt-lg">
+                                        <h3>Why Choose FRENCH.GTA for TEF Canada Preparation?</h3>
+                                        <p>As a specialized TEF-only institute, <strong>FRENCH.GTA</strong> is built on the principle of focused, expert preparation. We pride ourselves on:</p>
+                                        <ul>
+                                            <li><strong>Instructor Quality:</strong> Experienced teachers who understand the TEF Canada exam inside-out</li>
+                                            <li><strong>Specialized Curriculum:</strong> Designed exclusively for TEF Canada success</li>
+                                            <li><strong>Small Group Coaching:</strong> Typically 1:3 student-to-instructor ratio</li>
+                                            <li><strong>Personalized Attention:</strong> One-on-one sessions available</li>
+                                            <li><strong>Proven Results:</strong> Track record of student success</li>
+                                        </ul>
+                                    </div>
+                                </section>
+
+                                <!-- Test Day Tips -->
+                                <section id="test-day-tips" class="content-section mb-xl">
+                                    <h2 class="text-fluid-4xl mb-lg">Test Day Tips</h2>
+                                    
+                                    <div class="tips-grid grid-lg-2 grid-1">
+                                        <div class="tip-card">
+                                            <i class="fas fa-bed"></i>
+                                            <h4>Get Enough Rest</h4>
+                                            <p>Be well-rested before the exam to ensure optimal performance.</p>
+                                        </div>
+
+                                        <div class="tip-card">
+                                            <i class="fas fa-clock"></i>
+                                            <h4>Arrive Early</h4>
+                                            <p>Familiarize yourself with the test center location and settle in comfortably.</p>
+                                        </div>
+
+                                        <div class="tip-card">
+                                            <i class="fas fa-list-check"></i>
+                                            <h4>Read Instructions Carefully</h4>
+                                            <p>Understand what is required for each section and question before starting.</p>
+                                        </div>
+
+                                        <div class="tip-card">
+                                            <i class="fas fa-stopwatch"></i>
+                                            <h4>Manage Your Time</h4>
+                                            <p>Don't spend too much time on one question. Move on and come back if you have time.</p>
+                                        </div>
+
+                                        <div class="tip-card">
+                                            <i class="fas fa-heart"></i>
+                                            <h4>Stay Calm</h4>
+                                            <p>If you feel anxious, take a few deep breaths and refocus.</p>
+                                        </div>
+
+                                        <div class="tip-card">
+                                            <i class="fas fa-eye"></i>
+                                            <h4>Stay Focused</h4>
+                                            <p>Concentrate on each task individually without worrying about other sections.</p>
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <!-- After the Exam -->
+                                <section id="after-exam" class="content-section mb-xl">
+                                    <h2 class="text-fluid-4xl mb-lg">After the Exam</h2>
+                                    
+                                    <h3 class="text-fluid-2xl mb-md">Understanding Your Results</h3>
+                                    <p>Your certificate will show your scores for each section and the corresponding CLB levels. These are the scores you'll use for your immigration applications.</p>
+
+                                    <h3 class="text-fluid-2xl mb-md">Using Your Results</h3>
+                                    <p>Enter your TEF Canada results into your Express Entry profile or other immigration applications to boost your CRS score.</p>
+
+                                    <h3 class="text-fluid-2xl mb-md">Retaking the Exam</h3>
+                                    <p>If you don't achieve your desired score, you can retake the TEF Canada. There's usually a waiting period (e.g., 30 days) between attempts. Use the experience to identify areas for improvement.</p>
+
+                                    <div class="support-offer">
+                                        <h4>Need Help Improving Your Score?</h4>
+                                        <p>Our team at <strong>FRENCH.GTA</strong> can help you analyze your results and create a targeted improvement plan for your next attempt.</p>
+                                        <a href="../services.html" class="cta-button cta-primary">Get Personalized Support</a>
+                                    </div>
+                                </section>
+
+                                <!-- Conclusion -->
+                                <section class="content-section mb-xl">
+                                    <h2 class="text-fluid-4xl mb-lg">Conclusion</h2>
+                                    <p>Preparing for the TEF Canada exam requires dedication, strategic planning, and consistent effort. However, the rewards – significantly enhanced prospects for Canadian immigration – are well worth it. By understanding the exam format, focusing on all four skills, utilizing the right resources, and practicing diligently, you can ace the TEF Canada and take a giant leap towards achieving your Canadian dream.</p>
+
+                                    <p><strong>Remember, you don't have to do it alone; expert support can make all the difference. Bonne chance!</strong></p>
+                                </section>
+
+                                <!-- Call-to-Action Section -->
+                                <section class="final-cta-section section-padding-lg">
+                                    <div class="cta-container text-center">
+                                        <h2 class="text-fluid-4xl mb-lg">Ready to Ace Your TEF Canada Exam with Expert Guidance?</h2>
+                                        <p class="text-fluid-lg mb-xl">At <strong>FRENCH.GTA</strong>, we are committed to helping you achieve your Canadian immigration goals by mastering the TEF Canada exam. Our specialized courses, experienced instructors, and personalized approach are designed for your success.</p>
+
+                                        <div class="cta-options grid-lg-3 grid-1 mb-xl">
+                                            <div class="cta-option">
+                                                <i class="fas fa-users"></i>
+                                                <h3>Join Our Classes</h3>
+                                                <p>Enroll in our focused TEF Canada preparation courses (small groups or one-on-one).</p>
+                                                <a href="../services.html#plans" class="cta-button cta-primary">View Courses</a>
+                                            </div>
+
+                                            <div class="cta-option">
+                                                <i class="fas fa-calendar-check"></i>
+                                                <h3>Get a Free Consultation</h3>
+                                                <p>Book a free demo class to discuss your needs and goals with our experts.</p>
+                                                <a href="../demo-registration.html" class="cta-button cta-secondary">Book Free Demo</a>
+                                            </div>
+
+                                            <div class="cta-option">
+                                                <i class="fas fa-phone"></i>
+                                                <h3>Connect With Us</h3>
+                                                <p>Message us or call us directly to speak with our team about your TEF preparation.</p>
+                                                <a href="https://wa.me/+13653062049?text=Hi%20FRENCH.GTA%2C%20I'm%20interested%20in%20TEF%20Canada%20preparation!" target="_blank" class="cta-button cta-primary">
+                                                    <i class="fab fa-whatsapp"></i> WhatsApp Us
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <p class="text-fluid-xl"><strong>Let FRENCH.GTA be your partner in success!</strong></p>
+                                    </div>
+                                </section>
+                            </div>
                         </div>
+
+                        <!-- Sidebar -->
+                        <aside class="blog-sidebar">
+                            <!-- Author Info -->
+                            <div class="sidebar-widget author-widget mb-xl">
+                                <h3>About FRENCH.GTA</h3>
+                                <div class="author-info">
+                                    <img src="../img/certified_inst.jpeg" alt="FRENCH.GTA Expert Instructors" class="author-avatar">
+                                    <p>Expert French language training institute specializing in TEF Canada preparation and Canadian immigration success.</p>
+                                    <div class="author-social">
+                                        <a href="../services.html" class="social-link">
+                                            <i class="fas fa-graduation-cap"></i> Our Courses
+                                        </a>
+                                        <a href="../testimonials.html" class="social-link">
+                                            <i class="fas fa-star"></i> Success Stories
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Related Posts -->
+                            <div class="sidebar-widget related-posts mb-xl">
+                                <h3>Related Articles</h3>
+                                <div class="related-post-item">
+                                    <a href="../blog.html">
+                                        <h4>French Immigration Guide 2024</h4>
+                                        <span class="post-date">Coming Soon</span>
+                                    </a>
+                                </div>
+                                <div class="related-post-item">
+                                    <a href="../blog.html">
+                                        <h4>Express Entry Success Tips</h4>
+                                        <span class="post-date">Coming Soon</span>
+                                    </a>
+                                </div>
+                                <div class="related-post-item">
+                                    <a href="../blog.html">
+                                        <h4>Canadian French vs European French</h4>
+                                        <span class="post-date">Coming Soon</span>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Newsletter Signup -->
+                            <div class="sidebar-widget newsletter-widget">
+                                <h3>Stay Updated</h3>
+                                <p>Get the latest TEF preparation tips and Canadian immigration updates.</p>
+                                <form class="newsletter-form">
+                                    <input type="email" placeholder="Your email address" required>
+                                    <button type="submit" class="cta-button cta-primary">Subscribe</button>
+                                </form>
+                            </div>
+                        </aside>
                     </div>
-
-                    <!-- Sidebar -->
-                    <aside class="blog-sidebar">
-                        <!-- Author Info -->
-                        <div class="sidebar-widget author-widget mb-xl">
-                            <h3>About FRENCH.GTA</h3>
-                            <div class="author-info">
-                                <img src="../img/certified_inst.jpeg" alt="FRENCH.GTA Expert Instructors" class="author-avatar">
-                                <p>Expert French language training institute specializing in TEF Canada preparation and Canadian immigration success.</p>
-                                <div class="author-social">
-                                    <a href="../services.html" class="social-link">
-                                        <i class="fas fa-graduation-cap"></i> Our Courses
-                                    </a>
-                                    <a href="../testimonials.html" class="social-link">
-                                        <i class="fas fa-star"></i> Success Stories
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Related Posts -->
-                        <div class="sidebar-widget related-posts mb-xl">
-                            <h3>Related Articles</h3>
-                            <div class="related-post-item">
-                                <a href="../blog.html">
-                                    <h4>French Immigration Guide 2024</h4>
-                                    <span class="post-date">Coming Soon</span>
-                                </a>
-                            </div>
-                            <div class="related-post-item">
-                                <a href="../blog.html">
-                                    <h4>Express Entry Success Tips</h4>
-                                    <span class="post-date">Coming Soon</span>
-                                </a>
-                            </div>
-                            <div class="related-post-item">
-                                <a href="../blog.html">
-                                    <h4>Canadian French vs European French</h4>
-                                    <span class="post-date">Coming Soon</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <!-- Newsletter Signup -->
-                        <div class="sidebar-widget newsletter-widget">
-                            <h3>Stay Updated</h3>
-                            <p>Get the latest TEF preparation tips and Canadian immigration updates.</p>
-                            <form class="newsletter-form">
-                                <input type="email" placeholder="Your email address" required>
-                                <button type="submit" class="cta-button cta-primary">Subscribe</button>
-                            </form>
-                        </div>
-                    </aside>
                 </div>
-            </div>
-        </article>
-    </main>
-
-    <!-- Footer Placeholder -->
-    <div id="footer-placeholder"></div>
-
-    <!-- Load Scripts -->
-    <script src="../script.js"></script>
+            </article>
+        </main>
+    </div>
 </body>
 </html> 
